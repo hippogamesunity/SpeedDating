@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Assets.Scripts.Common;
 using UnityEngine;
 
@@ -6,27 +7,35 @@ namespace Assets.Scripts
 {
     public class Character : GameButton
     {
-        public string Id;
-        public Vector3 Position;
-        public Table Table;
+        public UISprite Image;
+        public UILabel Name;
+
+        [HideInInspector] public CharacterName CharacterName;
+        [HideInInspector] public Vector3 Position;
+        [HideInInspector] public Table Table;
+        [HideInInspector] public bool Busy;
 
         private Vector3 _delta;
 
-        public new void Awake()
+        public void Initialize(CharacterName id)
         {
-            base.Awake();
+            CharacterName = id;
+            Image.spriteName = Convert.ToString(CharacterName);
+            Name.SetText(Convert.ToString(CharacterName));
 
             Position = transform.localPosition;
 
             var tables = FindObjectsOfType<Table>().ToList();
 
             tables.Sort((a, b) => Vector2.Distance(transform.position, a.transform.position).CompareTo(Vector2.Distance(transform.position, b.transform.position)));
-
             Table = tables[0];
+            Flip();
         }
 
         public void Update()
         {
+            if (Busy) return;
+
             if (_down)
             {
                 transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _delta;
@@ -35,12 +44,20 @@ namespace Assets.Scripts
 
         protected override void OnPress(bool down)
         {
+            if (Busy) return;
+
             base.OnPress(down);
 
             _delta = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-            if (!down)
+            if (down)
             {
+                Image.depth = 50;
+            }
+            else
+            {
+                Image.depth = 0;
+
                 var buttons = FindObjectsOfType<Character>().ToList();
 
                 buttons.Remove(this);
@@ -72,8 +89,18 @@ namespace Assets.Scripts
 
                     Table.Refresh();
                     nearest.Table.Refresh();
+                    
+                    Flip();
+                    nearest.Flip();
                 }
             }
+        }
+
+        private void Flip()
+        {
+            Image.flip = Table.transform.position.x > Position.x
+                ? UIBasicSprite.Flip.Horizontally
+                : UIBasicSprite.Flip.Nothing;
         }
     }
 }
