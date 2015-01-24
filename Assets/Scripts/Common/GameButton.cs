@@ -25,19 +25,7 @@ namespace Assets.Scripts.Common
             PickColor();
         }
 
-        private bool _down;
-
-        public void Update()
-        {
-            if (_down)
-            {
-                if (!collider2D.bounds.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
-                {
-                    Tween(false);
-                    _down = false;
-                }
-            }
-        }
+        protected bool _down;
 
         public bool Enabled
         {
