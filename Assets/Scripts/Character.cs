@@ -45,7 +45,7 @@ namespace Assets.Scripts
 
                 buttons.Remove(this);
 
-                var nearest = buttons.FirstOrDefault(i => Vector2.Distance(transform.localPosition, i.transform.localPosition) < 60);
+                var nearest = buttons.FirstOrDefault(i => Vector2.Distance(transform.parent.localPosition + transform.localPosition, i.transform.parent.localPosition + i.transform.localPosition) < 60);
 
                 if (nearest == null)
                 {
@@ -53,6 +53,10 @@ namespace Assets.Scripts
                 }
                 else
                 {
+                    var transformParent = nearest.transform.parent;
+                    nearest.transform.parent = transform.parent;
+                    transform.parent = transformParent;
+
                     TweenPosition.Begin(gameObject, 0.5f, nearest.Position);
                     TweenPosition.Begin(nearest.gameObject, 0.5f, Position);
 
