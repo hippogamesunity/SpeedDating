@@ -13,6 +13,8 @@ namespace Assets.Scripts
         public UISprite Interest;
 
         [HideInInspector] public CharacterName CharacterName;
+        [HideInInspector] public bool Male;
+        [HideInInspector] public bool Gay;
         [HideInInspector] public List<CharacterInterest> CharacterInterests;
         [HideInInspector] public Vector3 Position;
         [HideInInspector] public Table Table;
@@ -25,7 +27,8 @@ namespace Assets.Scripts
         {
             CharacterInterests = Game.Interests[id];
             CharacterName = id;
-            Image.spriteName = string.Format("{0}{1}", (int) CharacterName >= 5 ? "m" : "f", (int) CharacterName >= 5 ? (int) CharacterName + 1 - 5 : (int) CharacterName + 1); // TODO:
+            Male = (int) CharacterName >= 5;
+            Image.spriteName = string.Format("{0}{1}", Male ? "m" : "f", Male ? (int) CharacterName + 1 - 5 : (int) CharacterName + 1); // TODO:
             Name.SetText(Convert.ToString(CharacterName));
 
             Position = transform.localPosition;
@@ -50,6 +53,8 @@ namespace Assets.Scripts
 
         public void InterestsLoop()
         {
+            if (this == null) return; // TODO:
+
             var duration = 2 + CRandom.GetRandom(200) / 100f;
 
             if (CharacterInterests.Count == 0)
@@ -60,10 +65,37 @@ namespace Assets.Scripts
             {
                 Interest.spriteName = Convert.ToString(CharacterInterests[(int) CRandom.GetRandom(0, CharacterInterests.Count)]);
                 TweenAlpha.Begin(Interest.gameObject, 0.4f, 0.8f);
-                TaskScheduler.CreateTask(() => TweenAlpha.Begin(Interest.gameObject, 0.4f, 0), duration);
+                TaskScheduler.CreateTask(() =>
+                {
+                    if (this == null) return;
+
+                    TweenAlpha.Begin(Interest.gameObject, 0.4f, 0);
+                }, duration);
             }
 
             TaskScheduler.CreateTask(InterestsLoop, duration + 1 + CRandom.GetRandom(200) / 100f);
+        }
+
+        public int Sympathy
+        {
+            set
+            {
+                var baseSprite = string.Format("{0}{1}", Male ? "m" : "f", Male ? (int) CharacterName + 1 - 5 : (int) CharacterName + 1);
+
+                switch (value)
+                {
+                    case 0:
+                        Image.spriteName = string.Format("{0}no", baseSprite);
+                        break;
+                    case 1:
+                        Image.spriteName = baseSprite;
+                        break;
+                    case 2:
+                    case 3:
+                        Image.spriteName = string.Format("{0}yes", baseSprite);
+                        break;
+                }
+            }
         }
 
         protected override void OnPress(bool down)

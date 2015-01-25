@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Common;
+using Assets.Scripts.Views;
 using UnityEngine;
 using Random = System.Random;
 
@@ -26,10 +27,39 @@ namespace Assets.Scripts
             { CharacterName.Robert, new List<CharacterInterest> { CharacterInterest.Games, CharacterInterest.Sport, CharacterInterest.Drink } },
             { CharacterName.Steven, new List<CharacterInterest> { CharacterInterest.Drink, CharacterInterest.Games, CharacterInterest.Cars } }
         };
+        public static int Level;
         private DateTime _timeout;
 
         public void Start()
         {
+            GetComponent<Menu>().Open();
+        }
+
+        public void ShowLevels()
+        {
+            GetComponent<Levels>().Open();
+        }
+
+        public void StartGame(object level)
+        {
+            Level = (int) level;
+            GetComponent<Views.Game>().Open(BeginGame);
+        }
+
+        public void CompleteGame()
+        {
+            GetComponent<Score>().Open();
+        }
+
+        public void BeginGame()
+        {
+            GetComponent<Views.Game>().Open();
+
+            foreach (var table in FindObjectsOfType<Table>())
+            {
+                Destroy(table.gameObject);
+            }
+
             _timeout = DateTime.Now.AddSeconds(TimeoutSeconds);
 
             var boys = new List<CharacterName>
@@ -85,10 +115,20 @@ namespace Assets.Scripts
 
         public void Update()
         {
-            var timespan = _timeout - DateTime.Now;
+            if (ViewBase.Current is Views.Game)
+            {
+                var timespan = _timeout - DateTime.Now;
 
-            Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
-            TimerProgress.fillAmount = (float) timespan.TotalSeconds / TimeoutSeconds;
+                if (timespan.TotalSeconds > 0)
+                {
+                    Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
+                    TimerProgress.fillAmount = (float) timespan.TotalSeconds/TimeoutSeconds;
+                }
+                else
+                {
+                    GetComponent<Score>().Open();
+                }
+            }
         }
     }
 }
