@@ -14,6 +14,7 @@ namespace Assets.Scripts
         public int TimeoutSeconds;
         public UILabel Timer;
         public UISprite TimerProgress;
+        public UITexture Background;
         public static readonly Dictionary<CharacterName, List<CharacterInterest>> Interests = new Dictionary<CharacterName, List<CharacterInterest>>
         {
             { CharacterName.Alice, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Flowers, CharacterInterest.Clothing } },
@@ -42,7 +43,7 @@ namespace Assets.Scripts
 
         public void StartGame(object level)
         {
-            Level = (int) level;
+            Level = int.Parse(level.ToString());
             GetComponent<Views.Game>().Open(BeginGame);
         }
 
@@ -82,20 +83,22 @@ namespace Assets.Scripts
             {
                 new Vector2(-320, 80),
                 new Vector2(320, 80),
-                new Vector2(-440, -260),
                 new Vector2(0, -120),
+                new Vector2(-440, -260),
                 new Vector2(440, -260)
             };
 
-            var random = new Random();
+            //var random = new Random();
 
-            boys = boys.OrderBy(item => random.Next()).ToList();
-            girls = girls.OrderBy(item => random.Next()).ToList();
+            //boys = boys.OrderBy(item => random.Next()).ToList();
+            //girls = girls.OrderBy(item => random.Next()).ToList();
 
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i < (Level == 0 ? 3 : 5); i++)
             {
-                var instance = PrefabsHelper.Instantiate("Table", GameTransform);
+                var instance = PrefabsHelper.Instantiate(Level == 0 ? "BurgerKingTable" : "RestaurantTable", GameTransform);
                 var characters = instance.GetComponentsInChildren<Character>();
+
+                Background.mainTexture = Resources.Load<Texture2D>(Level == 0 ? "Images/Background/BurgerKing" : "Images/Background/Restaurant");
 
                 if (CRandom.Chance(0.5f))
                 {
