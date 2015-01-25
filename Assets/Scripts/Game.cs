@@ -12,9 +12,22 @@ namespace Assets.Scripts
         public Transform GameTransform;
         public int TimeoutSeconds;
         public UILabel Timer;
-
+        public UISprite TimerProgress;
+        public static readonly Dictionary<CharacterName, List<CharacterInterest>> Interests = new Dictionary<CharacterName, List<CharacterInterest>>
+        {
+            { CharacterName.Alice, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Flowers, CharacterInterest.Clothing } },
+            { CharacterName.Jessica, new List<CharacterInterest> { CharacterInterest.Cars, CharacterInterest.Photo, CharacterInterest.Sport } },
+            { CharacterName.Judy, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Cars, CharacterInterest.Drink, CharacterInterest.Money } },
+            { CharacterName.Lisa, new List<CharacterInterest> { CharacterInterest.Food, CharacterInterest.Drink, CharacterInterest.Photo } },
+            { CharacterName.Mary, new List<CharacterInterest> { CharacterInterest.Games, CharacterInterest.Animals,CharacterInterest.Games } },
+            { CharacterName.David, new List<CharacterInterest> { CharacterInterest.Flowers, CharacterInterest.Sport, CharacterInterest.Money } },
+            { CharacterName.James, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Cars, CharacterInterest.Clothing } },
+            { CharacterName.Michael, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Cars, CharacterInterest.Animals } },
+            { CharacterName.Robert, new List<CharacterInterest> { CharacterInterest.Games, CharacterInterest.Sport, CharacterInterest.Drink } },
+            { CharacterName.Steven, new List<CharacterInterest> { CharacterInterest.Drink, CharacterInterest.Games, CharacterInterest.Cars } }
+        };
         private DateTime _timeout;
-        
+
         public void Start()
         {
             _timeout = DateTime.Now.AddSeconds(TimeoutSeconds);
@@ -37,11 +50,11 @@ namespace Assets.Scripts
             };
             var positions = new List<Vector2>
             {
-                new Vector2(-200, 200),
-                new Vector2(200, 200),
-                new Vector2(-400, -160),
-                new Vector2(0, -160),
-                new Vector2(400, -160)
+                new Vector2(-320, 80),
+                new Vector2(320, 80),
+                new Vector2(-440, -260),
+                new Vector2(0, -120),
+                new Vector2(440, -260)
             };
 
             var random = new Random();
@@ -66,6 +79,7 @@ namespace Assets.Scripts
                 }
 
                 instance.transform.localPosition = positions[i];
+                instance.transform.localScale = 0.75f * Vector3.one;
             }
         }
 
@@ -73,7 +87,8 @@ namespace Assets.Scripts
         {
             var timespan = _timeout - DateTime.Now;
 
-            Timer.SetText(string.Format("{0:D2}:{1:D2}", timespan.Minutes, timespan.Seconds));
+            Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
+            TimerProgress.fillAmount = (float) timespan.TotalSeconds / TimeoutSeconds;
         }
     }
 }

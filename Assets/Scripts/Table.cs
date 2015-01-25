@@ -9,6 +9,7 @@ namespace Assets.Scripts
         public UISprite[] Hearts;
         public UISprite Progress;
 
+        private const float TweenTime = 0.4f;
         private readonly int[,] _sympathy =
         {
             {-1, 0, 0, 0, 0, 1, 1, 0, 0, 3},
@@ -37,26 +38,31 @@ namespace Assets.Scripts
 
             for (var i = 0; i < 3; i++)
             {
-                Hearts[i].enabled = false;
+                TweenAlpha.Begin(Hearts[i].gameObject, TweenTime, 0);
             }
 
-            Progress.enabled = true;
-            Progress.transform.localScale = new Vector2(0, 1);
+            TaskScheduler.CreateTask(() =>
+            {
+                const float delay = 2;
 
-            const float delay = 2;
-
-            TweenScale.Begin(Progress.gameObject, delay, Vector2.one);
-            TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), delay);
+                Progress.transform.localScale = new Vector2(0, 1);
+                TweenAlpha.Begin(Progress.gameObject, TweenTime, 1);
+                TweenScale.Begin(Progress.gameObject, delay, Vector2.one);
+                TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), delay);
+            }, TweenTime);
         }
 
         private void ShowSympathy(Character character1, Character character2, int sympathy)
         {
-            Progress.enabled = false;
+            TweenAlpha.Begin(Progress.gameObject, TweenTime, 0);
 
-            for (var i = 0; i < 3; i++)
+            TaskScheduler.CreateTask(() =>
             {
-                Hearts[i].enabled = sympathy >= i + 1;
-            }
+                for (var i = 0; i < 3; i++)
+                {
+                    TweenAlpha.Begin(Hearts[i].gameObject, TweenTime, sympathy >= i + 1 ? 1 : 0);
+                }
+            }, TweenTime);
 
             character1.Busy = character2.Busy = false;
         }
