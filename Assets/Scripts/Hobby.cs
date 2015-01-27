@@ -1,0 +1,31 @@
+﻿namespace Assets.Scripts
+{
+    public enum Hobby
+    {
+        Animals,
+        Archery,
+        Beauty,
+        Books,
+        Bicycle,
+        Cars,
+        Dancing,
+        Drink,
+        Fashion,
+        Fishing,
+        Flowers,
+        Food,
+        Football,
+        Games,
+        Gay,
+        Jewelry,
+        Money,
+        Music,
+        Photo,
+        Pictures,
+        Running,
+        Sex,
+        Singing,
+        TV,
+        Work
+    }
+}

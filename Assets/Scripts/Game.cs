@@ -4,36 +4,24 @@ using System.Linq;
 using Assets.Scripts.Common;
 using Assets.Scripts.Views;
 using UnityEngine;
-using Random = System.Random;
 
 namespace Assets.Scripts
 {
-    public class Game : Script
+    public partial class Game : Script
     {
         public Transform GameTransform;
-        public int TimeoutSeconds;
         public UILabel Timer;
         public UISprite TimerProgress;
         public UITexture Background;
-        public static readonly Dictionary<CharacterName, List<CharacterInterest>> Interests = new Dictionary<CharacterName, List<CharacterInterest>>
-        {
-            { CharacterName.Alice, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Flowers, CharacterInterest.Clothing } },
-            { CharacterName.Jessica, new List<CharacterInterest> { CharacterInterest.Cars, CharacterInterest.Photo, CharacterInterest.Sport } },
-            { CharacterName.Judy, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Cars, CharacterInterest.Drink, CharacterInterest.Money } },
-            { CharacterName.Lisa, new List<CharacterInterest> { CharacterInterest.Food, CharacterInterest.Drink, CharacterInterest.Photo } },
-            { CharacterName.Mary, new List<CharacterInterest> { CharacterInterest.Games, CharacterInterest.Animals,CharacterInterest.Games } },
-            { CharacterName.David, new List<CharacterInterest> { CharacterInterest.Flowers, CharacterInterest.Sport, CharacterInterest.Money } },
-            { CharacterName.James, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Cars, CharacterInterest.Clothing } },
-            { CharacterName.Michael, new List<CharacterInterest> { CharacterInterest.Books, CharacterInterest.Cars, CharacterInterest.Animals } },
-            { CharacterName.Robert, new List<CharacterInterest> { CharacterInterest.Games, CharacterInterest.Sport, CharacterInterest.Drink } },
-            { CharacterName.Steven, new List<CharacterInterest> { CharacterInterest.Drink, CharacterInterest.Games, CharacterInterest.Cars } }
-        };
+        public UILabel Current;
+        public UILabel Target;
         public static int Level;
         private DateTime _timeout;
 
         public void Start()
         {
             GetComponent<Menu>().Open();
+            //StartGame(3);
         }
 
         public void ShowLevels()
@@ -49,7 +37,11 @@ namespace Assets.Scripts
 
         public void CompleteGame()
         {
-            GetComponent<Score>().Open();
+            var level = GameData.Levels[Level];
+            var scores = GetComponent<Score>();
+
+            scores.Set(CalcScore(), level.Target, level.Time, (int) (_timeout - DateTime.Now).TotalSeconds);
+            scores.Open();
         }
 
         public void BeginGame()
@@ -60,59 +52,29 @@ namespace Assets.Scripts
             {
                 Destroy(table.gameObject);
             }
+            
+            GameData.Shuffle();
 
-            _timeout = DateTime.Now.AddSeconds(TimeoutSeconds);
+            var level = GameData.Levels[Level];
+            var target = 0;
+            var tables = level.Generator ? GenerateLevel(level.TableNumber, out target, level.Target) : InitializeLevel(level);
 
-            var boys = new List<CharacterName>
+            Target.SetText(Convert.ToString(level.Generator ? target : level.Target));
+
+            _timeout = DateTime.Now.AddSeconds(level.Time);
+
+            for (var i = 0; i < level.TableNumber; i++)
             {
-                CharacterName.David,
-                CharacterName.James,
-                CharacterName.Michael,
-                CharacterName.Robert,
-                CharacterName.Steven
-            };
-            var girls = new List<CharacterName>
-            {
-                CharacterName.Alice,
-                CharacterName.Jessica,
-                CharacterName.Judy,
-                CharacterName.Lisa,
-                CharacterName.Mary
-            };
-            var positions = new List<Vector2>
-            {
-                new Vector2(-320, 80),
-                new Vector2(320, 80),
-                new Vector2(0, -120),
-                new Vector2(-440, -260),
-                new Vector2(440, -260)
-            };
+                var table = PrefabsHelper.Instantiate(level.TableName, GameTransform);
+                var characters = table.GetComponentsInChildren<Character>();
 
-            //var random = new Random();
+                Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + level.Background);
 
-            //boys = boys.OrderBy(item => random.Next()).ToList();
-            //girls = girls.OrderBy(item => random.Next()).ToList();
+                characters[0].Initialize(tables[i][0]);
+                characters[1].Initialize(tables[i][1]);
 
-            for (var i = 0; i < (Level == 0 ? 3 : 5); i++)
-            {
-                var instance = PrefabsHelper.Instantiate(Level == 0 ? "BurgerKingTable" : "RestaurantTable", GameTransform);
-                var characters = instance.GetComponentsInChildren<Character>();
-
-                Background.mainTexture = Resources.Load<Texture2D>(Level == 0 ? "Images/Background/BurgerKing" : "Images/Background/Restaurant");
-
-                if (CRandom.Chance(0.5f))
-                {
-                    characters[0].Initialize(boys[i]);
-                    characters[1].Initialize(girls[i]);
-                }
-                else
-                {
-                    characters[1].Initialize(boys[i]);
-                    characters[0].Initialize(girls[i]);
-                }
-
-                instance.transform.localPosition = positions[i];
-                instance.transform.localScale = 0.75f * Vector3.one;
+                table.transform.localPosition = level.TablePositions[i];
+                table.transform.localScale = level.TableScale * Vector3.one;
             }
         }
 
@@ -125,13 +87,89 @@ namespace Assets.Scripts
                 if (timespan.TotalSeconds > 0)
                 {
                     Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
-                    TimerProgress.fillAmount = (float) timespan.TotalSeconds/TimeoutSeconds;
+                    TimerProgress.fillAmount = (float) timespan.TotalSeconds / GameData.Levels[Level].Time;
+
+                    if (TimerProgress.fillAmount >= 0.5)
+                    {
+                        TimerProgress.color = Color.green;
+                    }
+                    else if (TimerProgress.fillAmount >= 0.25)
+                    {
+                        TimerProgress.color = Color.yellow;
+                    }
+                    else
+                    {
+                        TimerProgress.color = Color.red;
+                    }
                 }
                 else
                 {
                     GetComponent<Score>().Open();
                 }
             }
+        }
+
+        public static int CalcScore(List<List<Person>> tables)
+        {
+            var score = 0;
+
+            foreach (var table in tables)
+            {
+                score += Table.GetSympathy(table[0], table[1]);
+            }
+
+            return score;
+        }
+
+        public static int CalcScore()
+        {
+            var tables = FindObjectsOfType<Table>().Select(i => i.GetComponentsInChildren<Character>().Select(j => j.Person).ToList()).ToList();
+
+            return CalcScore(tables);
+        }
+
+        public void RefreshScore()
+        {
+            var busy = FindObjectsOfType<Character>().Any(i => i.Busy);
+
+            Current.SetText(busy ? "?" : Convert.ToString(CalcScore()));
+        }
+
+        private static List<List<Person>> InitializeLevel(Level level)
+        {
+            GameData.Shuffle();
+
+            var tables = new List<List<Person>>();
+
+            for (var i = 0; i < level.TableNumber; i++)
+            {
+                var boy = new Person
+                {
+                    Name = GameData.GetNextMaleName(),
+                    Image = GameData.GetNextMaleImage(),
+                    Male = true,
+                    Gay = level.MaleHobbies[i].Contains(Hobby.Gay),
+                    Hobbies = level.MaleHobbies[i]
+                };
+                var girl = new Person
+                {
+                    Name = GameData.GetNextFemaleName(),
+                    Image = GameData.GeNextFemaleImage(),
+                    Male = false,
+                    Gay = level.MaleHobbies[i].Contains(Hobby.Gay),
+                    Hobbies = level.FemaleHobbies[i]
+                };
+
+                tables.Add(CRandom.Chance(0.5f) ? new List<Person> { boy, girl } : new List<Person> { girl, boy });
+            }
+
+            List<List<Person>> worst;
+            List<List<Person>> best;
+            int max;
+
+            Analize(tables, out worst, out best, out max);
+
+            return worst;
         }
     }
 }

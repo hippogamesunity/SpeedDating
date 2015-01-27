@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Common;
 using UnityEngine;
@@ -11,26 +10,23 @@ namespace Assets.Scripts
         public UISprite Image;
         public UILabel Name;
         public UISprite Interest;
+        public Hobby[] HobbiesDebug;
 
-        [HideInInspector] public CharacterName CharacterName;
-        [HideInInspector] public bool Male;
-        [HideInInspector] public bool Gay;
-        [HideInInspector] public List<CharacterInterest> CharacterInterests;
+        [HideInInspector] public Person Person;
         [HideInInspector] public Vector3 Position;
         [HideInInspector] public Table Table;
         [HideInInspector] public bool Busy;
 
         private Vector3 _delta;
 
-
-        public void Initialize(CharacterName id)
+        public void Initialize(Person person)
         {
-            CharacterInterests = Game.Interests[id];
-            CharacterName = id;
-            Male = (int) CharacterName >= 5;
-            Image.spriteName = string.Format("{0}{1}", Male ? "m" : "f", Male ? (int) CharacterName + 1 - 5 : (int) CharacterName + 1); // TODO:
-            Name.SetText(Convert.ToString(CharacterName));
+            Person = person;
 
+            HobbiesDebug = person.Hobbies.ToArray();
+
+            Name.SetText(person.Name);
+            Image.spriteName = person.Image;
             Position = transform.localPosition;
 
             var tables = FindObjectsOfType<Table>().ToList();
@@ -57,13 +53,13 @@ namespace Assets.Scripts
 
             var duration = 2 + CRandom.GetRandom(200) / 100f;
 
-            if (CharacterInterests.Count == 0)
+            if (Person.Hobbies.Count == 0)
             {
                 Interest.enabled = false;
             }
             else
             {
-                Interest.spriteName = Convert.ToString(CharacterInterests[(int) CRandom.GetRandom(0, CharacterInterests.Count)]);
+                Interest.spriteName = Convert.ToString(Person.Hobbies[CRandom.GetRandom(0, Person.Hobbies.Count)]);
                 TweenAlpha.Begin(Interest.gameObject, 0.4f, 0.8f);
                 TaskScheduler.CreateTask(() =>
                 {
@@ -73,26 +69,23 @@ namespace Assets.Scripts
                 }, duration);
             }
 
-            TaskScheduler.CreateTask(InterestsLoop, duration + 1 + CRandom.GetRandom(200) / 100f);
+            TaskScheduler.CreateTask(InterestsLoop, duration + 1);
         }
 
         public int Sympathy
         {
             set
             {
-                var baseSprite = string.Format("{0}{1}", Male ? "m" : "f", Male ? (int) CharacterName + 1 - 5 : (int) CharacterName + 1);
-
                 switch (value)
                 {
                     case 0:
-                        Image.spriteName = string.Format("{0}no", baseSprite);
+                        Image.spriteName = Person.Image + "no";
                         break;
                     case 1:
-                        Image.spriteName = baseSprite;
+                        Image.spriteName = Person.Image;
                         break;
-                    case 2:
-                    case 3:
-                        Image.spriteName = string.Format("{0}yes", baseSprite);
+                    default:
+                        Image.spriteName = Person.Image + "yes";
                         break;
                 }
             }
@@ -118,7 +111,8 @@ namespace Assets.Scripts
 
                 buttons.Remove(this);
 
-                var nearest = buttons.FirstOrDefault(i => Vector2.Distance(transform.parent.localPosition / 0.75f + transform.localPosition, i.transform.parent.localPosition / 0.75f + i.transform.localPosition) < 100);
+                var nearest = buttons.FirstOrDefault(i => Vector2.Distance(transform.parent.localPosition / transform.parent.localScale.x
+                    + transform.localPosition, i.transform.parent.localPosition / transform.parent.localScale.x + i.transform.localPosition) < 100);
 
                 if (nearest == null)
                 {

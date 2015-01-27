@@ -23,12 +23,12 @@ namespace Assets.Scripts.Common
 	        return val;
 	    }
 
-        public static long GetRandom(long maxValue)
+        public static int GetRandom(int maxValue)
         {
             return GetRandom() % maxValue;
         }
 
-        public static long GetRandom(long minValue, long maxValue)
+        public static int GetRandom(int minValue, int maxValue)
         {
             if (maxValue < minValue)
             {

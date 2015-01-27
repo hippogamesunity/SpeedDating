@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using Assets.Scripts.Common;
 using UnityEngine;
@@ -9,51 +9,8 @@ namespace Assets.Scripts
     {
         public UISprite[] Hearts;
         public UISprite Progress;
-
+        public UISprite ProgressTrack;
         private const float TweenTime = 0.4f;
-
-        private readonly List<int[,]> _sympathies = new List<int[,]>
-        {
-            new[,]
-            {
-                {-1, 0, 0, 0, 0, 1, 2, 3, 0, 0},
-                {0, -1, 0, 0, 0, 2, 3, 1, 0, 0},
-                {0, 0, -1, 0, 0, 3, 2, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 2, 3, 0, 0, -1, 0, 0, 0, 0},
-                {2, 3, 2, 0, 0, 0, -1, 0, 0, 0},
-                {3, 1, 1, 0, 0, 0, 0, -1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            },
-            new[,]
-            {
-                {-1, 0, 0, 0, 0, 1, 1, 0, 0, 3},
-                {0, -1, 0, 0, 0, 1, 0, 1, 0, 0},
-                {0, 0, -1, 0, 0, 2, 2, 2, 1, 0},
-                {0, 0, 0, -1, 0, 3, 3, 0, 2, 1},
-                {0, 0, 0, 0, -1, 1, 3, 2, 0, 2},
-                {1, 1, 2, 3, 1, -1, 0, 0, 2, 0},
-                {1, 0, 2, 3, 3, 0, -1, 2, 1, 1},
-                {0, 1, 2, 0, 2, 0, 2, -1, 0, 1},
-                {0, 0, 1, 2, 0, 2, 1, 0, -1, 0},
-                {3, 0, 0, 1, 2, 0, 1, 1, 0, -1}
-            },
-            new[,]
-            {
-                {-1, 0, 0, 0, 0, 1, 1, 0, 0, 3},
-                {0, -1, 0, 0, 0, 1, 0, 1, 0, 0},
-                {0, 0, -1, 0, 0, 2, 2, 2, 1, 0},
-                {0, 0, 0, -1, 0, 3, 3, 0, 2, 3},
-                {0, 0, 0, 0, -1, 1, 3, 2, 0, 2},
-                {1, 1, 2, 3, 1, -1, 0, 0, 2, 0},
-                {1, 0, 2, 3, 3, 0, -1, 2, 1, 1},
-                {0, 1, 2, 0, 2, 0, 2, -1, 0, 1},
-                {0, 0, 1, 2, 0, 2, 1, 0, -1, 0},
-                {3, 0, 0, 1, 2, 0, 1, 3, 0, -1}
-            }
-        };
 
         public void Start()
         {
@@ -63,7 +20,7 @@ namespace Assets.Scripts
         public void Refresh()
         {
             var characters = FindObjectsOfType<Character>().Where(i => i.Table == this).ToList();
-            var sympathy = _sympathies[Game.Level][(int) characters[0].CharacterName, (int) characters[1].CharacterName]; // TODO:
+            var sympathy = GetSympathy(characters[0].Person, characters[1].Person);
 
             characters[0].Busy = characters[1].Busy = true;
             characters[0].Sympathy = characters[1].Sympathy = 1;
@@ -79,6 +36,7 @@ namespace Assets.Scripts
 
                 Progress.transform.localScale = new Vector2(0, 1);
                 TweenAlpha.Begin(Progress.gameObject, TweenTime, 0.75f);
+                TweenAlpha.Begin(ProgressTrack.gameObject, TweenTime, 0.75f);
                 TweenScale.Begin(Progress.gameObject, delay, Vector2.one);
                 TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), delay);
             }, TweenTime);
@@ -87,6 +45,7 @@ namespace Assets.Scripts
         private void ShowSympathy(Character character1, Character character2, int sympathy)
         {
             TweenAlpha.Begin(Progress.gameObject, TweenTime, 0);
+            TweenAlpha.Begin(ProgressTrack.gameObject, TweenTime, 0);
 
             TaskScheduler.CreateTask(() =>
             {
@@ -99,6 +58,27 @@ namespace Assets.Scripts
             }, TweenTime);
 
             character1.Busy = character2.Busy = false;
+            Find<Game>().RefreshScore();
+        }
+
+        public static int GetSympathy(Person p1, Person p2)
+        {
+            var count = 0;
+
+            if (p1.Male == p2.Male && (!p1.Gay || !p2.Gay))
+            {
+                return 0;
+            }
+
+            foreach (var hobby in GameData.Hobbies)
+            {
+                if (p1.Hobbies.Contains(hobby) && p2.Hobbies.Contains(hobby))
+                {
+                    count++;
+                }
+            }
+
+            return Math.Min(count, 3);
         }
     }
 }

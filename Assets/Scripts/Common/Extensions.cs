@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -69,6 +71,11 @@ namespace Assets.Scripts.Common
         public static T ToEnum<T>(this string value)
         {
             return (T) Enum.Parse(typeof(T), value);
+        }
+
+        public static List<T> Shuffle<T>(this IEnumerable<T> source)
+        {
+            return source.OrderBy(i => CRandom.GetRandom(100000)).ToList();
         }
     }
 }
