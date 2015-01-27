@@ -222,7 +222,47 @@ namespace Assets.Scripts
             
             #endregion
 
-            #region Level#8
+            #region Level#8 Hard
+
+            new Level
+            {
+                TableNumber = 6,
+                Time = 120,
+                Target = 11,
+                TablePositions = new List<Vector2>
+                {
+                    new Vector2(-180, 100), new Vector2(180, 100),
+                    new Vector2(-520, -60), new Vector2(520, -60),
+                    new Vector2(-240, -260), new Vector2(240, -260)
+                },
+                MaleHobbies = new List<List<Hobby>>
+                {
+                    new List<Hobby> { Hobby.Music, Hobby.Fishing, Hobby.Photo, Hobby.Jewelry, Hobby.Food, Hobby.Singing },
+                    new List<Hobby> { Hobby.Sex, Hobby.Flowers, Hobby.Dancing, Hobby.Cars },
+                    new List<Hobby> { Hobby.Photo, Hobby.Music, Hobby.Animals, Hobby.Jewelry, Hobby.Dancing, Hobby.Fashion },
+                    new List<Hobby> { Hobby.Bicycle, Hobby.Games, Hobby.Sex },
+                    new List<Hobby> { Hobby.Dancing, Hobby.Fishing, Hobby.Flowers, Hobby.Fashion },
+                    new List<Hobby> { Hobby.Cars, Hobby.TV, Hobby.Food, Hobby.Photo, Hobby.Dancing }
+                },
+                FemaleHobbies = new List<List<Hobby>>
+                {
+                    new List<Hobby> { Hobby.Games, Hobby.Books, Hobby.Beauty, Hobby.Sex, Hobby.Photo },
+                    new List<Hobby> { Hobby.Games, Hobby.TV, Hobby.Food, Hobby.Beauty, Hobby.Fashion, Hobby.Running },
+                    new List<Hobby> { Hobby.Pictures, Hobby.Beauty, Hobby.Flowers, Hobby.Sex },
+                    new List<Hobby> { Hobby.Singing, Hobby.Pictures, Hobby.Animals, Hobby.Drink },
+                    new List<Hobby> { Hobby.Cars, Hobby.Music, Hobby.Money, Hobby.Food, Hobby.Flowers, Hobby.Dancing, Hobby.Work, Hobby.Fashion },
+                    new List<Hobby> { Hobby.Cars, Hobby.Animals, Hobby.Flowers },
+                },
+                Formation = new List<List<int>>
+                {
+                    new List<int> { 0, 5 }, new List<int> { 1, 1 }, new List<int> { 2, 2 },
+                    new List<int> { 3, 4 }, new List<int> { 4, 0 }, new List<int> { 5, 3 }, 
+                }
+            },
+            
+            #endregion
+
+            #region Level#9 Hard
 
             new Level
             {
@@ -252,31 +292,58 @@ namespace Assets.Scripts
                     new List<Hobby> { Hobby.Running, Hobby.Flowers, Hobby.Work, Hobby.Archery, Hobby.Sex, Hobby.Jewelry },
                     new List<Hobby> { Hobby.Beauty, Hobby.Dancing, Hobby.Music, Hobby.Games, Hobby.Money, Hobby.Photo, Hobby.Jewelry, Hobby.TV },
                     new List<Hobby> { Hobby.Jewelry, Hobby.Pictures, Hobby.Bicycle, Hobby.Music, Hobby.Dancing, Hobby.Cars }
+                },
+                Formation = new List<List<int>>
+                {
+                    new List<int> { 0, 4 }, new List<int> { 1, 1 }, new List<int> { 2, 5 },
+                    new List<int> { 3, 3 }, new List<int> { 4, 0 }, new List<int> { 5, 2 }, 
                 }
             },
             
             #endregion
 
-            //#region Level#7
+            #region Level#10 Hard
 
-            //new Level
-            //{
-            //    Number = 7,
-            //    TableNumber = 7,
-            //    Time = 300,
-            //    TablePositions = new List<Vector2>
-            //    {
-            //        new Vector2(-240, 100), new Vector2(240, 100),
-            //        new Vector2(-520, -60), new Vector2(0, -60), new Vector2(520, -60),
-            //        new Vector2(-280, -260), new Vector2(280, -260)
-            //    },
-            //    Generator = true,
-            //    TableScale = 0.65f,
-            //    MaleHobbies = new List<List<Hobby>>(),
-            //    FemaleHobbies = new List<List<Hobby>>()
-            //}
+            new Level
+            {
+                TableNumber = 7,
+                Time = 180,
+                Target = 13,
+                TablePositions = new List<Vector2>
+                {
+                    new Vector2(-240, 100), new Vector2(240, 100),
+                    new Vector2(-520, -60), new Vector2(0, -60), new Vector2(520, -60),
+                    new Vector2(-280, -260), new Vector2(280, -260)
+                },
+                TableScale = 0.65f,
+                MaleHobbies = new List<List<Hobby>>
+                {
+                    new List<Hobby> { Hobby.Sex, Hobby.Work, Hobby.Bicycle, Hobby.Cars },
+                    new List<Hobby> { Hobby.Fishing, Hobby.Singing, Hobby.Work, Hobby.Sex, Hobby.Football },
+                    new List<Hobby> { Hobby.TV, Hobby.Football, Hobby.Games, Hobby.Jewelry, Hobby.Fashion },
+                    new List<Hobby> { Hobby.Photo, Hobby.Pictures, Hobby.Money, Hobby.Jewelry },
+                    new List<Hobby> { Hobby.Books, Hobby.Pictures, Hobby.Cars, Hobby.Fashion },
+                    new List<Hobby> { Hobby.Football, Hobby.Music, Hobby.Fashion, Hobby.Drink, Hobby.Singing, Hobby.Books },
+                    new List<Hobby> { Hobby.Food, Hobby.Sex, Hobby.Pictures, Hobby.Running, Hobby.Archery, Hobby.Music, Hobby.Books, Hobby.Jewelry }
+                },
+                FemaleHobbies = new List<List<Hobby>>
+                {
+                    new List<Hobby> { Hobby.Games, Hobby.Photo, Hobby.Sex, Hobby.Drink },
+                    new List<Hobby> { Hobby.TV, Hobby.Bicycle, Hobby.Cars, Hobby.Flowers, Hobby.Dancing, Hobby.Books },
+                    new List<Hobby> { Hobby.Money, Hobby.TV, Hobby.Food, Hobby.Pictures, Hobby.Work, Hobby.Beauty },
+                    new List<Hobby> { Hobby.Running, Hobby.Fishing, Hobby.TV },
+                    new List<Hobby> { Hobby.Fishing, Hobby.Drink, Hobby.Games, Hobby.Football, Hobby.Pictures, Hobby.Beauty, Hobby.TV },
+                    new List<Hobby> { Hobby.Running, Hobby.Pictures, Hobby.Animals, Hobby.Games },
+                    new List<Hobby> { Hobby.Money, Hobby.Fashion, Hobby.Football, Hobby.Photo, Hobby.Cars, Hobby.TV },
+                },
+                Formation = new List<List<int>>
+                {
+                    new List<int> { 0, 0 }, new List<int> { 1, 1 }, new List<int> { 2, 2 },
+                    new List<int> { 3, 3 }, new List<int> { 4, 4 }, new List<int> { 5, 5 }, new List<int> { 6, 6 }
+                }
+            }
             
-            //#endregion
+            #endregion
         };
     }
 }

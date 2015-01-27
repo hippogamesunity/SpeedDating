@@ -9,7 +9,7 @@ namespace Assets.Scripts.Views
         public GameObject Panel;
         public static ViewBase Previous;
         public static ViewBase Current;
-        private const float LoadingTime = 0.5f;
+        private const float LoadingTime = 1f;
 
         public void Open(Action callback = null)
         {

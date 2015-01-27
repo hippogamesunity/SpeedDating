@@ -24,60 +24,6 @@ namespace Assets.Scripts
             //StartGame(3);
         }
 
-        public void ShowLevels()
-        {
-            GetComponent<Levels>().Open();
-        }
-
-        public void StartGame(object level)
-        {
-            Level = int.Parse(level.ToString());
-            GetComponent<Views.Game>().Open(BeginGame);
-        }
-
-        public void CompleteGame()
-        {
-            var level = GameData.Levels[Level];
-            var scores = GetComponent<Score>();
-
-            scores.Set(CalcScore(), level.Target, level.Time, (int) (_timeout - DateTime.Now).TotalSeconds);
-            scores.Open();
-        }
-
-        public void BeginGame()
-        {
-            GetComponent<Views.Game>().Open();
-
-            foreach (var table in FindObjectsOfType<Table>())
-            {
-                Destroy(table.gameObject);
-            }
-            
-            GameData.Shuffle();
-
-            var level = GameData.Levels[Level];
-            var target = 0;
-            var tables = level.Generator ? GenerateLevel(level.TableNumber, out target, level.Target) : InitializeLevel(level);
-
-            Target.SetText(Convert.ToString(level.Generator ? target : level.Target));
-
-            _timeout = DateTime.Now.AddSeconds(level.Time);
-
-            for (var i = 0; i < level.TableNumber; i++)
-            {
-                var table = PrefabsHelper.Instantiate(level.TableName, GameTransform);
-                var characters = table.GetComponentsInChildren<Character>();
-
-                Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + level.Background);
-
-                characters[0].Initialize(tables[i][0]);
-                characters[1].Initialize(tables[i][1]);
-
-                table.transform.localPosition = level.TablePositions[i];
-                table.transform.localScale = level.TableScale * Vector3.one;
-            }
-        }
-
         public void Update()
         {
             if (ViewBase.Current is Views.Game)
@@ -104,7 +50,7 @@ namespace Assets.Scripts
                 }
                 else
                 {
-                    GetComponent<Score>().Open();
+                    CompleteGame();
                 }
             }
         }
@@ -135,41 +81,104 @@ namespace Assets.Scripts
             Current.SetText(busy ? "?" : Convert.ToString(CalcScore()));
         }
 
-        private static List<List<Person>> InitializeLevel(Level level)
+        private void BeginGame()
+        {
+            GetComponent<Views.Game>().Open();
+
+            foreach (var table in FindObjectsOfType<Table>())
+            {
+                Destroy(table.gameObject);
+            }
+
+            GameData.Shuffle();
+
+            var level = GameData.Levels[Level];
+            var target = 0;
+            var tables = level.Generator ? GenerateTables(level.TableNumber, out target, level.Target) : InitializeTables(level);
+
+            Target.SetText(Convert.ToString(level.Generator ? target : level.Target));
+            Current.SetText("?");
+
+            _timeout = DateTime.Now.AddSeconds(level.Time);
+
+            for (var i = 0; i < level.TableNumber; i++)
+            {
+                var table = PrefabsHelper.Instantiate(level.TableName, GameTransform);
+                var characters = table.GetComponentsInChildren<Character>();
+
+                Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + level.Background);
+
+                characters[0].Initialize(tables[i][0]);
+                characters[1].Initialize(tables[i][1]);
+
+                table.transform.localPosition = level.TablePositions[i];
+                table.transform.localScale = level.TableScale * Vector3.one;
+            }
+        }
+
+        private static List<List<Person>> InitializeTables(Level level)
         {
             GameData.Shuffle();
 
             var tables = new List<List<Person>>();
+            var boys = new List<Person>();
+            var girls = new List<Person>();
 
             for (var i = 0; i < level.TableNumber; i++)
             {
-                var boy = new Person
+                tables.Add(new List<Person>());
+                boys.Add(new Person
                 {
                     Name = GameData.GetNextMaleName(),
                     Image = GameData.GetNextMaleImage(),
                     Male = true,
                     Gay = level.MaleHobbies[i].Contains(Hobby.Gay),
                     Hobbies = level.MaleHobbies[i]
-                };
-                var girl = new Person
+                });
+                girls.Add(new Person
                 {
                     Name = GameData.GetNextFemaleName(),
                     Image = GameData.GeNextFemaleImage(),
                     Male = false,
                     Gay = level.MaleHobbies[i].Contains(Hobby.Gay),
                     Hobbies = level.FemaleHobbies[i]
-                };
-
-                tables.Add(CRandom.Chance(0.5f) ? new List<Person> { boy, girl } : new List<Person> { girl, boy });
+                });
             }
 
-            List<List<Person>> worst;
-            List<List<Person>> best;
+            if (level.Formation != null)
+            {
+                for (var i = 0; i < level.TableNumber; i++)
+                {
+                    tables[i] = new List<Person> { boys[level.Formation[i][0]], girls[level.Formation[i][1]] };
+                }
+
+                return Shuffle(tables);
+            }
+
+            for (var i = 0; i < level.TableNumber; i++)
+            {
+                tables[i] = new List<Person> { boys[i], girls[i] };
+            }
+
+            List<List<Person>> worst, best;
             int max;
 
             Analize(tables, out worst, out best, out max);
 
-            return worst;
+            return Shuffle(worst);
+        }
+
+        private static List<List<Person>> Shuffle(List<List<Person>> tables)
+        {
+            foreach (var table in tables)
+            {
+                if (CRandom.Chance(0.5f))
+                {
+                    table.Reverse();
+                }
+            }
+
+            return tables.Shuffle();
         }
     }
 }

@@ -7,22 +7,30 @@ namespace Assets.Scripts
 {
     public partial class GameData
     {
+        public static readonly List<Hobby> Hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().ToList(); 
+
         public static void Shuffle()
         {
             _maleNames = _maleNames.Shuffle();
             _femaleNames = _femaleNames.Shuffle();
-
             _maleImages = _maleImages.Shuffle();
             _femaleImages = _femaleImages.Shuffle();
-
-            foreach (var level in Levels)
-            {
-                level.MaleHobbies = level.MaleHobbies.Shuffle();
-                level.FemaleHobbies = level.FemaleHobbies.Shuffle();
-            }
         }
 
-        public static readonly List<Hobby> Hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().ToList(); 
+        public static string GetNextFemaleName()
+        {
+            return GeNext(_femaleNames, ref _femaleName);
+        }
+
+        public static string GetNextMaleImage()
+        {
+            return GeNext(_maleImages, ref _maleImage);
+        }
+
+        public static string GeNextFemaleImage()
+        {
+            return GeNext(_femaleImages, ref _femaleImage);
+        }
 
         private static List<string> _maleNames = new List<string>
         {
@@ -115,52 +123,20 @@ namespace Assets.Scripts
             return name;
         }
 
-        public static string GetNextFemaleName()
+        private static string GeNext(IList<string> list, ref int index)
         {
-            var name = _femaleNames[_femaleName];
+            var result = list[index];
 
-            if (_maleName == _femaleNames.Count - 1)
+            if (index == list.Count - 1)
             {
-                _femaleName = 0;
+                index = 0;
             }
             else
             {
-                _femaleName++;
+                index++;
             }
 
-            return name;
-        }
-
-        public static string GetNextMaleImage()
-        {
-            var image = _maleImages[_maleImage];
-
-            if (_maleImage == _maleImages.Count - 1)
-            {
-                _maleImage = 0;
-            }
-            else
-            {
-                _maleImage++;
-            }
-
-            return image;
-        }
-
-        public static string GeNextFemaleImage()
-        {
-            var image = _femaleImages[_femaleImage];
-
-            if (_femaleImage == _femaleImages.Count - 1)
-            {
-                _femaleImage = 0;
-            }
-            else
-            {
-                _femaleImage++;
-            }
-
-            return image;
+            return result;
         }
     }
 }

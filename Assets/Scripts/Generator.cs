@@ -9,11 +9,18 @@ namespace Assets.Scripts
 {
     public partial class Game
     {
-        private static List<List<Person>> GenerateLevel(int count, out int target, int fixedTarget = 0)
+        private const int MaxCombinations = 518400;
+
+        private static List<List<Person>> GenerateTables(int count, out int target, int fixedTarget = 0)
         {
+            if (count > 7)
+            {
+                throw new NotSupportedException();
+            }
+
             target = 0;
 
-            const int iterations = 10;
+            const int iterations = 1;
 
             for (var i = 0; i <= iterations; i++)
             {
@@ -26,7 +33,7 @@ namespace Assets.Scripts
                 Analize(tables, out worst, out best, out max);
                 target = max;
 
-                Debug.Log(max);
+                Debug.Log("max = " + max);
 
                 if (max == fixedTarget || i == iterations)
                 {
@@ -60,7 +67,7 @@ namespace Assets.Scripts
                     Hobbies = GenerateHobbies(CRandom.GetRandom(3, 9))
                 };
 
-                tables.Add(CRandom.Chance(0.5f) ? new List<Person> {boy, girl} : new List<Person> {girl, boy});
+                tables.Add(new List<Person> { boy, girl });
             }
             return tables;
         }
@@ -173,7 +180,7 @@ namespace Assets.Scripts
                     {
                         combinations.Add(t);
                     }
-                    else
+                    else if (combinations.Count <= MaxCombinations)
                     {
                         GetCombinations(boys.Where(i => i != pair[0]).ToList(), girls.Where(i => i != pair[1]).ToList(), ref combinations, t);
                     }
