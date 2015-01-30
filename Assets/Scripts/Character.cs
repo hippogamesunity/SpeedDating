@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Xml.Schema;
 using Assets.Scripts.Common;
 using UnityEngine;
 
@@ -39,7 +38,7 @@ namespace Assets.Scripts
             InterestsLoop();
         }
 
-        public void Update()
+        public new void Update()
         {
             if (Busy) return;
 
@@ -116,7 +115,7 @@ namespace Assets.Scripts
                 var nearest = buttons.FirstOrDefault(i => Vector2.Distance(transform.parent.localPosition / transform.parent.localScale.x
                     + transform.localPosition, i.transform.parent.localPosition / transform.parent.localScale.x + i.transform.localPosition) < 100);
 
-                if (nearest == null)
+                if (nearest == null || nearest.Busy)
                 {
                     TweenPosition.Begin(gameObject, 0.5f, Position);
                 }
