@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Assets.Scripts.Common;
-using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class Table : Script
     {
         public UISprite[] Hearts;
-        public UISprite Progress;
-        public UISprite ProgressTrack;
+        public Progress Progress;
         private const float TweenTime = 0.4f;
 
         public void Start()
@@ -34,18 +32,15 @@ namespace Assets.Scripts
             {
                 const float delay = 1;
 
-                Progress.transform.localScale = new Vector2(0, 1);
-                TweenAlpha.Begin(Progress.gameObject, TweenTime, 0.75f);
-                TweenAlpha.Begin(ProgressTrack.gameObject, TweenTime, 0.75f);
-                TweenScale.Begin(Progress.gameObject, delay, Vector2.one);
+                Progress.Show(TweenTime);
+                Progress.Animate(delay);
                 TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), delay);
             }, TweenTime);
         }
 
         private void ShowSympathy(Character character1, Character character2, int sympathy)
         {
-            TweenAlpha.Begin(Progress.gameObject, TweenTime, 0);
-            TweenAlpha.Begin(ProgressTrack.gameObject, TweenTime, 0);
+            Progress.Hide(TweenTime);
 
             TaskScheduler.CreateTask(() =>
             {
@@ -59,6 +54,11 @@ namespace Assets.Scripts
 
             character1.Busy = character2.Busy = false;
             Find<Game>().RefreshScore();
+
+            if (sympathy >= 3)
+            {
+                TaskScheduler.CreateTask(Find<AudioPlayer>().Blink, 0.5f);
+            }
         }
 
         public static int GetSympathy(Person p1, Person p2)

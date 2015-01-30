@@ -10,6 +10,7 @@ namespace Assets.Scripts.Common
         public float ScaleDown = 1.2f;
         public float TweenTimeDown = 0.1f;
         public float TweenTimeUp = 0.4f;
+        public bool DisableTweenColor = false;
         public MonoBehaviour Listener;
         public string ListenerMethodDown;
         public string ListenerMethodUp;
@@ -26,6 +27,18 @@ namespace Assets.Scripts.Common
         }
 
         protected bool _down;
+
+        public void Update()
+        {
+            if (_down)
+            {
+                if (!collider2D.bounds.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+                {
+                    Tween(false);
+                    _down = false;
+                }
+            }
+        }
 
         public bool Enabled
         {
@@ -114,12 +127,20 @@ namespace Assets.Scripts.Common
         {
             if (down)
             {
-                TweenColor.Begin(gameObject, TweenTimeDown, ColorDown);
+                if (!DisableTweenColor)
+                {
+                    TweenColor.Begin(gameObject, TweenTimeDown, ColorDown);
+                }
+
                 TweenScale.Begin(gameObject, TweenTimeDown, ScaleDown * Vector3.one);
             }
             else
             {
-                TweenColor.Begin(gameObject, TweenTimeUp, Color);
+                if (!DisableTweenColor)
+                {
+                    TweenColor.Begin(gameObject, TweenTimeDown, ColorDown);
+                }
+
                 TweenScale.Begin(gameObject, TweenTimeUp, Vector3.one);
             }
         }

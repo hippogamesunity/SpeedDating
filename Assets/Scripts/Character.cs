@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Xml.Schema;
 using Assets.Scripts.Common;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ namespace Assets.Scripts
 
             tables.Sort((a, b) => Vector2.Distance(transform.position, a.transform.position).CompareTo(Vector2.Distance(transform.position, b.transform.position)));
             Table = tables[0];
+            Interest.color = person.Male ? ColorHelper.GetColor(0, 120, 255) : ColorHelper.GetColor(200, 0, 200);
             Flip();
             InterestsLoop();
         }
@@ -60,7 +62,7 @@ namespace Assets.Scripts
             else
             {
                 Interest.spriteName = Convert.ToString(Person.Hobbies[CRandom.GetRandom(0, Person.Hobbies.Count)]);
-                TweenAlpha.Begin(Interest.gameObject, 0.4f, 0.8f);
+                TweenAlpha.Begin(Interest.gameObject, 0.4f, 1);
                 TaskScheduler.CreateTask(() =>
                 {
                     if (this == null) return;
@@ -93,7 +95,7 @@ namespace Assets.Scripts
 
         protected override void OnPress(bool down)
         {
-            if (Busy) return;
+            if (Busy || !Find<Game>().CanShift()) return;
 
             base.OnPress(down);
 
@@ -142,6 +144,8 @@ namespace Assets.Scripts
                     
                     Flip();
                     nearest.Flip();
+
+                    Find<Game>().Shifted();
                 }
             }
         }

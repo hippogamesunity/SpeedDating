@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: 2b0f2e6aed570554f939c71e37650edb
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Archery
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -25,7 +26,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0

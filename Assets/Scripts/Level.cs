@@ -6,7 +6,9 @@ namespace Assets.Scripts
     public class Level
     {
         public int TableNumber;
+        public LevelType Type = LevelType.Time;
         public int Time = 120;
+        public int Shifts;
         public string TableName = "BurgerKingTable";
         public string Background = "BurgerKing";
         public int Target;

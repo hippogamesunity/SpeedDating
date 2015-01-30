@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: 1d05817597c1d1f41a3542cfe646c0cc
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Hobbies
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0

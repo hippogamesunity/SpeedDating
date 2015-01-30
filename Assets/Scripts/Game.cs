@@ -16,7 +16,9 @@ namespace Assets.Scripts
         public UILabel Current;
         public UILabel Target;
         public static int Level;
+
         private DateTime _timeout;
+        private int _shifts;
 
         public void Start()
         {
@@ -28,29 +30,33 @@ namespace Assets.Scripts
         {
             if (ViewBase.Current is Views.Game)
             {
-                var timespan = _timeout - DateTime.Now;
-
-                if (timespan.TotalSeconds > 0)
+                if (GameData.Levels[Level].Type == LevelType.Time)
                 {
-                    Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
-                    TimerProgress.fillAmount = (float) timespan.TotalSeconds / GameData.Levels[Level].Time;
+                    var timespan = _timeout - DateTime.Now;
 
-                    if (TimerProgress.fillAmount >= 0.5)
+                    if (timespan.TotalSeconds > 0)
                     {
-                        TimerProgress.color = Color.green;
-                    }
-                    else if (TimerProgress.fillAmount >= 0.25)
-                    {
-                        TimerProgress.color = Color.yellow;
+                        Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
+                        TimerProgress.fillAmount = (float) timespan.TotalSeconds/GameData.Levels[Level].Time;
                     }
                     else
                     {
-                        TimerProgress.color = Color.red;
+                        CompleteGame();
                     }
                 }
                 else
                 {
-                    CompleteGame();
+                    var shiftsLeft = GameData.Levels[Level].Shifts - _shifts;
+
+                    if (shiftsLeft >= 0)
+                    {
+                        Timer.SetText(Convert.ToString(shiftsLeft));
+                        TimerProgress.fillAmount = (float) shiftsLeft / GameData.Levels[Level].Shifts;
+                    }
+                    else
+                    {
+                        //CompleteGame();
+                    }
                 }
             }
         }
@@ -81,6 +87,13 @@ namespace Assets.Scripts
             Current.SetText(busy ? "?" : Convert.ToString(CalcScore()));
         }
 
+        public bool CanShift()
+        {
+            return GameData.Levels[Level].Type == LevelType.Shifts
+                ? GameData.Levels[Level].Shifts - _shifts > 0
+                : (_timeout - DateTime.Now).TotalSeconds > 0;
+        }
+
         private void BeginGame()
         {
             GetComponent<Views.Game>().Open();
@@ -100,6 +113,9 @@ namespace Assets.Scripts
             Current.SetText("?");
 
             _timeout = DateTime.Now.AddSeconds(level.Time);
+            _shifts = 0;
+
+            //RemoveUnusedHobbies(tables);
 
             for (var i = 0; i < level.TableNumber; i++)
             {
@@ -113,6 +129,23 @@ namespace Assets.Scripts
 
                 table.transform.localPosition = level.TablePositions[i];
                 table.transform.localScale = level.TableScale * Vector3.one;
+            }
+        }
+
+        private static void RemoveUnusedHobbies(List<List<Person>> tables)
+        {
+            var hobbies = new List<Hobby>();
+
+            foreach (var table in tables)
+            {
+                hobbies.AddRange(table[0].Hobbies);
+                hobbies.AddRange(table[1].Hobbies);
+            }
+
+            foreach (var table in tables)
+            {
+                table[0].Hobbies.RemoveAll(i => hobbies.Count(j => j == i) == 1);
+                table[1].Hobbies.RemoveAll(i => hobbies.Count(j => j == i) == 1);
             }
         }
 

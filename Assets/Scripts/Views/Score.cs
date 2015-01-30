@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Common;
-using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
@@ -12,12 +11,12 @@ namespace Assets.Scripts.Views
             if (score >= target)
             {
                 Message.SetText("Level completed!");
-                Message.color = Color.green;
+                Message.color = ColorHelper.GetColor(100, 255, 0);
             }
             else
             {
-                Message.SetText("Level failed!");
-                Message.color = Color.red;
+                Message.SetText("Level failed");
+                Message.color = ColorHelper.GetColor(255, 80, 40);
             }
         }
     }

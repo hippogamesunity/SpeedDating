@@ -34,5 +34,10 @@ namespace Assets.Scripts
 
             _state = GameState.Ready;
         }
+
+        public void Shifted()
+        {
+            _shifts++;
+        }
     }
 }
