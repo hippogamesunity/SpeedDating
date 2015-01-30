@@ -6,9 +6,7 @@
         Archery,
         Beauty,
         Books,
-        Skate,
         Cars,
-        Guitar,
         Drink,
         Fashion,
         Fishing,
@@ -17,6 +15,7 @@
         Football,
         Games,
         Gay,
+        Guitar,
         Jewelry,
         Money,
         Music,
@@ -25,6 +24,7 @@
         Running,
         Sex,
         Singing,
+        Skate,
         TV,
         Work
     }
