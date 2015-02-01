@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Common;
+﻿using System.Linq;
+using Assets.Scripts.Common;
 using UnityEngine;
 
 namespace Assets.Scripts.Views
@@ -13,10 +14,11 @@ namespace Assets.Scripts.Views
         public void Refresh()
         {
             var progress = Profile.Progress;
-            
-            foreach (var button in Panel.GetComponentsInChildren<GameButton>())
+
+            foreach (var button in Panel.GetComponentsInChildren<GameButton>().Where(i => i.ListenerMethodUp == "StartGame"))
             {
-                if (int.Parse(button.Params) <= progress)
+                Debug.Log(button.Params);
+                if (int.Parse(button.Params) <= progress || Settings.Debug)
                 {
                     button.Enabled = true;
                     button.GetComponent<UITexture>().mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");
