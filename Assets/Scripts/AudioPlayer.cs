@@ -3,10 +3,16 @@
 public class AudioPlayer : Script
 {
     public AudioClip BlinkSound;
+    public AudioClip SuccessSound;
 
     public void Blink()
     {
         PlayEffect(BlinkSound);
+    }
+
+    public void Success()
+    {
+        PlayEffect(SuccessSound);
     }
 
     private void PlayEffect(AudioClip audioClip)

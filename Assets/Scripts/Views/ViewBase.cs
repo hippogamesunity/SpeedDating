@@ -25,9 +25,9 @@ namespace Assets.Scripts.Views
 
                 Previous = Current;
                 Current = this;
-                Initialize();
                 enabled = true;
                 Panel.SetActive(true);
+                Initialize();
 
                 if (callback != null)
                 {

@@ -101,7 +101,12 @@ public class TweenColor : UITweener
 		return comp;
 	}
 
-	[ContextMenu("Set 'From' to current value")]
+    public static TweenColor Begin(Component go, float duration, Color color)
+    {
+        return Begin(go.gameObject, duration, color);
+    }
+
+    [ContextMenu("Set 'From' to current value")]
 	public override void SetStartToCurrentValue () { from = value; }
 
 	[ContextMenu("Set 'To' to current value")]

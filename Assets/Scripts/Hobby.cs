@@ -14,7 +14,6 @@
         Food,
         Football,
         Games,
-        Gay,
         Guitar,
         Jewelry,
         Money,

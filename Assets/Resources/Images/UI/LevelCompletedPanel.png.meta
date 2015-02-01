@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: fc4ac454d1d25bb469ff18bb04f9a1c2
+guid: 526867f42d3e21d4ab62b1d2a4071837
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ProgressBar
-    21300002: Progress
+    21300000: LevelClearedPanel
+    21300002: LevelCompletedPanel
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -19,11 +19,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: .25
     normalMapFilter: 0
-  isReadable: 1
+  isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: 5
+  textureFormat: -3
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
@@ -40,7 +40,7 @@ TextureImporter:
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:

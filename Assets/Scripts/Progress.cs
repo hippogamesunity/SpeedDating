@@ -4,8 +4,8 @@ namespace Assets.Scripts
 {
     public class Progress : Script
     {
-        public UISprite Image;
-        public UISprite Frame;
+        public UIBasicSprite Image;
+        public UIBasicSprite Frame;
 
         private float _time;
 

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Assets.Scripts.Common;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class Table : Script
     {
-        public UISprite[] Hearts;
+        public UIBasicSprite[] Hearts;
         public Progress Progress;
         private const float TweenTime = 0.4f;
 
@@ -30,7 +31,7 @@ namespace Assets.Scripts
 
             TaskScheduler.CreateTask(() =>
             {
-                const float delay = 1;
+                const float delay = 2;
 
                 Progress.Show(TweenTime);
                 Progress.Animate(delay);
@@ -55,7 +56,12 @@ namespace Assets.Scripts
             character1.Busy = character2.Busy = false;
             Find<Game>().RefreshScore();
 
-            if (sympathy >= 3)
+            if (Game.CalcScore() >= Game.Level.Target)
+            {
+                TaskScheduler.CreateTask(Find<AudioPlayer>().Success, 0.5f);
+                //TweenColor.Begin(Find<Game>().TimerProgress, 0.5f, Color.green);
+            }
+            else if (sympathy >= 3)
             {
                 TaskScheduler.CreateTask(Find<AudioPlayer>().Blink, 0.5f);
             }

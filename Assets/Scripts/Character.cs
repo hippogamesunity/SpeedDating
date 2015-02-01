@@ -18,6 +18,7 @@ namespace Assets.Scripts
         [HideInInspector] public bool Busy;
 
         private Vector3 _delta;
+        private int _hobby;
 
         public void Initialize(Person person)
         {
@@ -35,7 +36,7 @@ namespace Assets.Scripts
             Table = tables[0];
             Interest.color = person.Male ? ColorHelper.GetColor(0, 120, 255) : ColorHelper.GetColor(200, 0, 200);
             Flip();
-            InterestsLoop();
+            HobbyLoop();
         }
 
         public new void Update()
@@ -48,7 +49,7 @@ namespace Assets.Scripts
             }
         }
 
-        public void InterestsLoop()
+        public void HobbyLoop()
         {
             if (this == null) return; // TODO:
 
@@ -60,7 +61,13 @@ namespace Assets.Scripts
             }
             else
             {
-                Interest.spriteName = Convert.ToString(Person.Hobbies[CRandom.GetRandom(0, Person.Hobbies.Count)]);
+                Interest.spriteName = Convert.ToString(Person.Hobbies[_hobby++]);
+
+                if (_hobby == Person.Hobbies.Count)
+                {
+                    _hobby = 0;
+                }
+
                 TweenAlpha.Begin(Interest.gameObject, 0.4f, 1);
                 TaskScheduler.CreateTask(() =>
                 {
@@ -70,7 +77,7 @@ namespace Assets.Scripts
                 }, duration);
             }
 
-            TaskScheduler.CreateTask(InterestsLoop, duration + 1);
+            TaskScheduler.CreateTask(HobbyLoop, duration + 1);
         }
 
         public int Sympathy

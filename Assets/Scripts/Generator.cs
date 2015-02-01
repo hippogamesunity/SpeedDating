@@ -52,7 +52,7 @@ namespace Assets.Scripts
             {
                 var boy = new Person
                 {
-                    Name = GameData.GetNextMaleName(),
+                    Name = GameData.GetNextMaleName(false),
                     Image = GameData.GetNextMaleImage(),
                     Male = true,
                     Gay = false,
@@ -60,7 +60,7 @@ namespace Assets.Scripts
                 };
                 var girl = new Person
                 {
-                    Name = GameData.GetNextFemaleName(),
+                    Name = GameData.GetNextFemaleName(false),
                     Image = GameData.GeNextFemaleImage(),
                     Male = false,
                     Gay = false,
@@ -155,9 +155,7 @@ namespace Assets.Scripts
 
         private static List<Hobby> GenerateHobbies(int count)
         {
-            var hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().Shuffle();
-
-            hobbies.Remove(Hobby.Gay);
+            var hobbies = GameData.Hobbies.Shuffle();
 
             return hobbies.Take(count).ToList();
         }

@@ -1,5 +1,5 @@
-﻿using System;
-using Assets.Scripts.Views;
+﻿using Assets.Scripts.Views;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -9,14 +9,18 @@ namespace Assets.Scripts
 
         public void ShowLevels()
         {
-            GetComponent<Levels>().Open();
+            GetComponent<SelectLevel>().Open();
         }
 
         public void StartGame(object level)
         {
             if (_state != GameState.Ready) return;
 
-            Level = int.Parse(level.ToString());
+            var progress = int.Parse(level.ToString());
+
+            Level = GameData.Levels[progress];
+            Level.Progress = progress;
+
             GetComponent<Views.Game>().Open(BeginGame);
 
             _state = GameState.Game;
@@ -26,13 +30,28 @@ namespace Assets.Scripts
         {
             if (_state != GameState.Game) return;
 
-            var level = GameData.Levels[Level];
+            var score = CalcScore();
             var scores = GetComponent<Score>();
 
-            scores.Set(CalcScore(), level.Target, level.Time, (int) (_timeout - DateTime.Now).TotalSeconds);
+            if (score >= Level.Target && Profile.Progress == Level.Progress)
+            {
+                Profile.Progress++;
+                Debug.Log(Profile.Progress);
+            }
+
+            scores.Set(score >= Level.Target);
             scores.Open();
 
             _state = GameState.Ready;
+        }
+
+        public void RestartGame()
+        {
+            if (_state != GameState.Ready) return;
+
+            GetComponent<Views.Game>().Open(BeginGame);
+
+            _state = GameState.Game;
         }
 
         public void Shifted()

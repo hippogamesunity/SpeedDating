@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 4d99e518e8e15e549bd8c6f78efa581a
+guid: 9b887caf9180ae04c91a2eec49610c84
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ProgressBarFrame
-    21300002: ProgressFrame
+    21300000: LevelLocked
+    21300002: LevelLockedButton
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -19,11 +19,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: .25
     normalMapFilter: 0
-  isReadable: 1
+  isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: 5
+  textureFormat: -3
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
@@ -40,7 +40,7 @@ TextureImporter:
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:

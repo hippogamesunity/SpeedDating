@@ -11,11 +11,11 @@ namespace Assets.Scripts
     {
         public Transform GameTransform;
         public UILabel Timer;
-        public UISprite TimerProgress;
+        public UIBasicSprite TimerProgress;
         public UITexture Background;
         public UILabel Current;
         public UILabel Target;
-        public static int Level;
+        public static Level Level;
 
         private DateTime _timeout;
         private int _shifts;
@@ -28,16 +28,28 @@ namespace Assets.Scripts
 
         public void Update()
         {
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                if (ViewBase.Current is Menu)
+                {
+                    Application.Quit();
+                }
+                else if (ViewBase.Current is SelectLevel)
+                {
+                    GetComponent<Menu>().Open();
+                }
+            }
+
             if (ViewBase.Current is Views.Game)
             {
-                if (GameData.Levels[Level].Type == LevelType.Time)
+                if (Level.Type == LevelType.Time)
                 {
                     var timespan = _timeout - DateTime.Now;
 
                     if (timespan.TotalSeconds > 0)
                     {
                         Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
-                        TimerProgress.fillAmount = (float) timespan.TotalSeconds/GameData.Levels[Level].Time;
+                        TimerProgress.fillAmount = (float) timespan.TotalSeconds / Level.Time;
                     }
                     else
                     {
@@ -46,16 +58,12 @@ namespace Assets.Scripts
                 }
                 else
                 {
-                    var shiftsLeft = GameData.Levels[Level].Shifts - _shifts;
+                    var shiftsLeft = Level.Shifts - _shifts;
 
                     if (shiftsLeft >= 0)
                     {
                         Timer.SetText(Convert.ToString(shiftsLeft));
-                        TimerProgress.fillAmount = (float) shiftsLeft / GameData.Levels[Level].Shifts;
-                    }
-                    else
-                    {
-                        //CompleteGame();
+                        TimerProgress.fillAmount = (float) shiftsLeft / Level.Shifts;
                     }
                 }
             }
@@ -89,8 +97,8 @@ namespace Assets.Scripts
 
         public bool CanShift()
         {
-            return GameData.Levels[Level].Type == LevelType.Shifts
-                ? GameData.Levels[Level].Shifts - _shifts > 0
+            return Level.Type == LevelType.Shifts
+                ? Level.Shifts - _shifts > 0
                 : (_timeout - DateTime.Now).TotalSeconds > 0;
         }
 
@@ -105,30 +113,30 @@ namespace Assets.Scripts
 
             GameData.Shuffle();
 
-            var level = GameData.Levels[Level];
             var target = 0;
-            var tables = level.Generator ? GenerateTables(level.TableNumber, out target, level.Target) : InitializeTables(level);
+            var tables = Level.Generator ? GenerateTables(Level.TableNumber, out target, Level.Target) : InitializeTables(Level);
 
-            Target.SetText(Convert.ToString(level.Generator ? target : level.Target));
+            //TimerProgress.color = Color.white;
+            Target.SetText(Convert.ToString(Level.Generator ? target : Level.Target));
             Current.SetText("?");
 
-            _timeout = DateTime.Now.AddSeconds(level.Time);
+            _timeout = DateTime.Now.AddSeconds(Level.Time);
             _shifts = 0;
 
-            //RemoveUnusedHobbies(tables);
+            RemoveUnusedHobbies(tables);
 
-            for (var i = 0; i < level.TableNumber; i++)
+            for (var i = 0; i < Level.TableNumber; i++)
             {
-                var table = PrefabsHelper.Instantiate(level.TableName, GameTransform);
+                var table = PrefabsHelper.Instantiate(Level.TableName, GameTransform);
                 var characters = table.GetComponentsInChildren<Character>();
 
-                Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + level.Background);
+                Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + Level.Background);
 
                 characters[0].Initialize(tables[i][0]);
                 characters[1].Initialize(tables[i][1]);
 
-                table.transform.localPosition = level.TablePositions[i];
-                table.transform.localScale = level.TableScale * Vector3.one;
+                table.transform.localPosition = Level.TablePositions[i];
+                table.transform.localScale = Level.TableScale * Vector3.one;
             }
         }
 
@@ -156,24 +164,33 @@ namespace Assets.Scripts
             var tables = new List<List<Person>>();
             var boys = new List<Person>();
             var girls = new List<Person>();
+            var hobbyShift = CRandom.GetRandom(0, 10);
 
             for (var i = 0; i < level.TableNumber; i++)
             {
+                for (var j = 0; j < level.MaleHobbies[i].Count; j++)
+                {
+                    level.MaleHobbies[i][j] = (Hobby) IncMod((int) level.MaleHobbies[i][j], hobbyShift, GameData.Hobbies.Count);
+                }
+
+                for (var j = 0; j < level.FemaleHobbies[i].Count; j++)
+                {
+                    level.FemaleHobbies[i][j] = (Hobby) IncMod((int) level.FemaleHobbies[i][j], hobbyShift, GameData.Hobbies.Count);
+                }
+
                 tables.Add(new List<Person>());
                 boys.Add(new Person
                 {
-                    Name = GameData.GetNextMaleName(),
+                    Name = GameData.GetNextMaleName(level.JapanNames),
                     Image = GameData.GetNextMaleImage(),
                     Male = true,
-                    Gay = level.MaleHobbies[i].Contains(Hobby.Gay),
                     Hobbies = level.MaleHobbies[i]
                 });
                 girls.Add(new Person
                 {
-                    Name = GameData.GetNextFemaleName(),
+                    Name = GameData.GetNextFemaleName(level.JapanNames),
                     Image = GameData.GeNextFemaleImage(),
                     Male = false,
-                    Gay = level.MaleHobbies[i].Contains(Hobby.Gay),
                     Hobbies = level.FemaleHobbies[i]
                 });
             }
@@ -212,6 +229,20 @@ namespace Assets.Scripts
             }
 
             return tables.Shuffle();
+        }
+
+        private static int IncMod(int source, int value, int mod)
+        {
+            if (source >= mod) throw new ArgumentException();
+
+            var result = source + value;
+
+            if (result >= mod)
+            {
+                result -= mod;
+            }
+
+            return result;
         }
     }
 }
