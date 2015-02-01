@@ -58,5 +58,17 @@ namespace Assets.Scripts
         {
             _shifts++;
         }
+
+        public void GoBack()
+        {
+            if (ViewBase.Current is Menu)
+            {
+                Application.Quit();
+            }
+            else if (ViewBase.Current is SelectLevel)
+            {
+                GetComponent<Menu>().Open();
+            }
+        }
     }
 }

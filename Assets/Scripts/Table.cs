@@ -31,7 +31,7 @@ namespace Assets.Scripts
 
             TaskScheduler.CreateTask(() =>
             {
-                const float delay = 2;
+                const float delay = 0;
 
                 Progress.Show(TweenTime);
                 Progress.Animate(delay);

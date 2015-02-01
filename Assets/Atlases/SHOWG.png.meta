@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: d4477ff16cbeb8b4587449f04f19292b
+guid: fcd1dfb559d02534482118bd52881b07
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ClocksProgress
-    21300002: ClockProgress
+    21300000: SHOWG
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -19,17 +18,17 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: .25
     normalMapFilter: 0
-  isReadable: 1
+  isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -40,7 +39,7 @@ TextureImporter:
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:

@@ -11,40 +11,63 @@ namespace Assets.Scripts
     {
         private const int MaxCombinations = 518400;
 
-        private static List<List<Person>> GenerateTables(int count, out int target, int fixedTarget = 0)
+        private static List<List<Person>> GenerateTables(int count, out int target, int fixedTarget, int complexity)
         {
-            if (count > 7)
+            var stopWatch = new Stopwatch();
+
+            stopWatch.Start();
+
+            Action stop = () =>
             {
-                throw new NotSupportedException();
-            }
+                stopWatch.Stop();
+                Debug.Log("GenerateTables: stopWatch.Elapsed=" + stopWatch.Elapsed.TotalSeconds);
+            };
 
             target = 0;
 
-            const int iterations = 1;
+            const int iterations = 1000;
 
             for (var i = 0; i <= iterations; i++)
             {
-                var tables = GenerateTables(count);
-
+                var tables = CreateRandomTables(count);
+                int max, fake;
                 List<List<Person>> worst;
                 List<List<Person>> best;
-                int max;
 
-                Analize(tables, out worst, out best, out max);
+                Analize(tables, out worst, out best, out max, out fake);
                 target = max;
 
                 Debug.Log("max = " + max);
 
-                if (max == fixedTarget || i == iterations)
+                if (fixedTarget != -1 && complexity != -1)
                 {
-                    return best;
+                    if (max == fixedTarget && fake == complexity)
+                    {
+                        stop();
+                        return worst;
+                    }
+                }
+                else if (fixedTarget != -1 && max == fixedTarget)
+                {
+                    stop();
+                    return worst;
+                }
+                else if (complexity != -1 && fake == complexity)
+                {
+                    stop();
+                    return worst;
+                }
+                else if (i == iterations)
+                {
+                    stop();
+                    return worst;
                 }
             }
 
             throw new Exception();
         }
 
-        private static List<List<Person>> GenerateTables(int count)
+        private static List<List<Person>> CreateRandomTables(int count)
         {
             var tables = new List<List<Person>>();
 
@@ -69,10 +92,11 @@ namespace Assets.Scripts
 
                 tables.Add(new List<Person> { boy, girl });
             }
+
             return tables;
         }
 
-        private static void Analize(List<List<Person>> tables, out List<List<Person>> worst, out List<List<Person>> best, out int max)
+        private static void Analize(List<List<Person>> tables, out List<List<Person>> worst, out List<List<Person>> best, out int max, out int complexity)
         {
             var combinations = new List<List<List<Person>>>();
             var boys = tables.Select(p => p.Single(c => c.Male)).ToList();
@@ -88,13 +112,91 @@ namespace Assets.Scripts
 
             Debug.Log("combinations.Count = " + combinations.Count);
 
-            var minIndex = 0;
-            var maxIndex = 0;
+            var mins = new List<int>();
+            var maxs = new List<int>();
             var min = 999;
+            long sum = 0;
 
-            max = 0;
+            max = complexity = 0;
 
             var sympathies = GetSympathies(boys, girls);
+
+            for (var j = 0; j < combinations.Count; j++)
+            {
+                var s = 0;
+
+                foreach (var table in combinations[j])
+                {
+                    var sympathy = sympathies[table[0]][table[1]];
+
+                    s += sympathy;
+                }
+
+                if (s < min)
+                {
+                    min = s;
+                    mins = new List<int> { j };
+                }
+                else if (s == min)
+                {
+                    mins.Add(j);
+                }
+
+                if (s > max)
+                {
+                    max = s;
+                    maxs = new List<int> { j };
+                }
+                else if (s == max)
+                {
+                    maxs.Add(j);
+                }
+
+                sum += s;
+            }
+
+            var m = 0;
+
+            foreach (var i in maxs)
+            {
+                foreach (var table in combinations[i])
+                {
+                    var sympathy = Table.GetSympathy(table[0], table[1]);
+
+                    if (sympathy > m)
+                    {
+                        m = sympathy;
+                    }
+                }
+            }
+
+            foreach (var boy in boys)
+            {
+                foreach (var girl in girls)
+                {
+                    if (IsComplex(boy, girl, boys, girls, m, max, sympathies))
+                    {
+                        complexity++;
+                    }
+                }
+            }
+
+            worst = combinations[mins[CRandom.GetRandom(0, mins.Count)]];
+            best = combinations[maxs[CRandom.GetRandom(0, maxs.Count)]];
+
+            stopWatch.Stop();
+
+            Debug.Log(string.Format("min={0}, max={1}, avg={2}, minRate={3}, maxRate={4}, m={5} complexity={6}", min, max, (float) sum / combinations.Count, mins.Count, maxs.Count, m, complexity));
+            Debug.Log("Analize: stopWatch.Elapsed=" + stopWatch.Elapsed.TotalSeconds);
+        }
+
+        private static bool IsComplex(Person boy, Person girl, List<Person> boys, List<Person> girls, int m, int max, Dictionary<Person, Dictionary<Person, int>> sympathies)
+        {
+            if (Table.GetSympathy(boy, girl) < m) return false;
+
+            var combinations = new List<List<List<Person>>>();
+
+            GetCombinations(boys.Where(b => b != boy).ToList(), girls.Where(g => g != girl).ToList(), ref combinations, new List<List<Person>>());
 
             for (var j = 0; j < combinations.Count; j++)
             {
@@ -105,25 +207,13 @@ namespace Assets.Scripts
                     s += sympathies[table[0]][table[1]];
                 }
 
-                if (s < min)
+                if (s + m >= max)
                 {
-                    min = s;
-                    minIndex = j;
-                }
-
-                if (s > max)
-                {
-                    max = s;
-                    maxIndex = j;
+                    return false;
                 }
             }
 
-            worst = combinations[minIndex];
-            best = combinations[maxIndex];
-
-            stopWatch.Stop();
-
-            Debug.Log(stopWatch.Elapsed);
+            return true;
         }
 
         private static Dictionary<Person, Dictionary<Person, int>> GetSympathies(List<Person> boys, List<Person> girls)
@@ -160,28 +250,27 @@ namespace Assets.Scripts
             return hobbies.Take(count).ToList();
         }
 
-        private static void GetCombinations(ICollection<Person> boys, ICollection<Person> girls, ref List<List<List<Person>>> combinations, List<List<Person>> tables)
+        private static void GetCombinations(IList<Person> boys, IList<Person> girls, ref List<List<List<Person>>> combinations, List<List<Person>> tables)
         {
-            foreach (var boy in boys)
+            var boy = boys[0];
+
+            foreach (var girl in girls)
             {
-                foreach (var girl in girls)
+                var pair = new List<Person> { boy, girl };
+                var t = new List<List<Person>> { pair };
+
+                foreach (var table in tables)
                 {
-                    var pair = new List<Person> { boy, girl };
-                    var t = new List<List<Person>> { pair };
+                    t.Add(new List<Person> { table[0], table[1] });
+                }
 
-                    foreach (var table in tables)
-                    {
-                        t.Add(new List<Person> { table[0], table[1] });
-                    }
-
-                    if (boys.Count == 1 || girls.Count == 1)
-                    {
-                        combinations.Add(t);
-                    }
-                    else if (combinations.Count <= MaxCombinations)
-                    {
-                        GetCombinations(boys.Where(i => i != pair[0]).ToList(), girls.Where(i => i != pair[1]).ToList(), ref combinations, t);
-                    }
+                if (boys.Count == 1 || girls.Count == 1)
+                {
+                    combinations.Add(t);
+                }
+                else if (combinations.Count <= MaxCombinations)
+                {
+                    GetCombinations(boys.Where(i => i != pair[0]).ToList(), girls.Where(i => i != pair[1]).ToList(), ref combinations, t);
                 }
             }
         }

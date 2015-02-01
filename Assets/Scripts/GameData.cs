@@ -2,12 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Common;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
     public partial class GameData
     {
-        public static readonly List<Hobby> Hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().ToList(); 
+        public static readonly List<Hobby> Hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().ToList();
+
+        public static List<Level> Levels
+        {
+            get
+            {
+                return new List<Level>
+                {
+                    null,
+                    Level2x0, Level3x0, Level3x1, Level4x0, Level4x2,
+                    Level4x3, Level4x4, Level5x0, Level5x1, Level5x2,
+                    Level5x3, Level6x0, Level6x1, Level6x2, Level6x3,
+                    Level6x4
+                };
+            }
+        }
 
         public static void Shuffle()
         {
@@ -179,5 +195,49 @@ namespace Assets.Scripts
 
             return result;
         }
+
+        public static readonly Dictionary<int, List<Vector2>> TablePositions = new Dictionary<int, List<Vector2>>
+        {
+            {
+                2, new List<Vector2>
+                {
+                    new Vector2(-280, -40), new Vector2(280, -40)
+                }
+            },
+            {
+                3, new List<Vector2>
+                {
+                    new Vector2(-400, 40), new Vector2(400, 40), new Vector2(0, -120)
+                }
+            },
+            {
+                4, new List<Vector2>
+                {
+                    new Vector2(-240, 80), new Vector2(240, 80), new Vector2(-440, -240), new Vector2(440, -240)
+                }
+            },
+            {
+                5, new List<Vector2>
+                {
+                    new Vector2(-280, 80), new Vector2(280, 80), new Vector2(0, -120), new Vector2(-440, -260), new Vector2(440, -260)
+                }
+            },
+            {
+                6, new List<Vector2>
+                {
+                    new Vector2(-180, 100), new Vector2(180, 100),
+                    new Vector2(-520, -60), new Vector2(520, -60),
+                    new Vector2(-240, -260), new Vector2(240, -260)
+                }
+            },
+            {
+                7, new List<Vector2>
+                {
+                    new Vector2(-240, 100), new Vector2(240, 100),
+                    new Vector2(-520, -60), new Vector2(0, -60), new Vector2(520, -60),
+                    new Vector2(-280, -260), new Vector2(280, -260)
+                }
+            }
+        };
     }
 }

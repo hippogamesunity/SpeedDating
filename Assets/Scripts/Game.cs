@@ -23,21 +23,14 @@ namespace Assets.Scripts
         public void Start()
         {
             GetComponent<Menu>().Open();
-            //StartGame(3);
+            //StartGame(GameData.Levels.Count - 1);
         }
 
         public void Update()
         {
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                if (ViewBase.Current is Menu)
-                {
-                    Application.Quit();
-                }
-                else if (ViewBase.Current is SelectLevel)
-                {
-                    GetComponent<Menu>().Open();
-                }
+                GoBack();
             }
 
             if (ViewBase.Current is Views.Game)
@@ -114,7 +107,7 @@ namespace Assets.Scripts
             GameData.Shuffle();
 
             var target = 0;
-            var tables = Level.Generator ? GenerateTables(Level.TableNumber, out target, Level.Target) : InitializeTables(Level);
+            var tables = Level.Generator ? GenerateTables(Level.TableNumber, out target, Level.Target, Level.Сomplexity) : InitializeTables(Level);
 
             //TimerProgress.color = Color.white;
             Target.SetText(Convert.ToString(Level.Generator ? target : Level.Target));
@@ -135,7 +128,7 @@ namespace Assets.Scripts
                 characters[0].Initialize(tables[i][0]);
                 characters[1].Initialize(tables[i][1]);
 
-                table.transform.localPosition = Level.TablePositions[i];
+                table.transform.localPosition = GameData.TablePositions[Level.TableNumber][i];
                 table.transform.localScale = Level.TableScale * Vector3.one;
             }
         }
@@ -195,25 +188,15 @@ namespace Assets.Scripts
                 });
             }
 
-            if (level.Formation != null)
-            {
-                for (var i = 0; i < level.TableNumber; i++)
-                {
-                    tables[i] = new List<Person> { boys[level.Formation[i][0]], girls[level.Formation[i][1]] };
-                }
-
-                return Shuffle(tables);
-            }
-
             for (var i = 0; i < level.TableNumber; i++)
             {
                 tables[i] = new List<Person> { boys[i], girls[i] };
             }
 
             List<List<Person>> worst, best;
-            int max;
+            int max, complexity;
 
-            Analize(tables, out worst, out best, out max);
+            Analize(tables, out worst, out best, out max, out complexity);
 
             return Shuffle(worst);
         }
