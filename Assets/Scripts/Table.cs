@@ -59,7 +59,7 @@ namespace Assets.Scripts
             if (Game.CalcScore() >= Game.Level.Target)
             {
                 TaskScheduler.CreateTask(Find<AudioPlayer>().Success, 0.5f);
-                //TweenColor.Begin(Find<Game>().TimerProgress, 0.5f, Color.green);
+                TaskScheduler.CreateTask(Find<Game>().CompleteGame, 1f);
             }
             else if (sympathy >= 3)
             {

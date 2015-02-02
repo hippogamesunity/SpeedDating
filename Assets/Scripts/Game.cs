@@ -11,10 +11,8 @@ namespace Assets.Scripts
     {
         public Transform GameTransform;
         public UILabel Timer;
-        public UIBasicSprite TimerProgress;
         public UITexture Background;
-        public UILabel Current;
-        public UILabel Target;
+        public UILabel Score;
         public static Level Level;
 
         private DateTime _timeout;
@@ -42,7 +40,7 @@ namespace Assets.Scripts
                     if (timespan.TotalSeconds > 0)
                     {
                         Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
-                        TimerProgress.fillAmount = (float) timespan.TotalSeconds / Level.Time;
+                        //TimerProgress.fillAmount = (float) timespan.TotalSeconds / Level.Time;
                     }
                     else
                     {
@@ -56,7 +54,7 @@ namespace Assets.Scripts
                     if (shiftsLeft >= 0)
                     {
                         Timer.SetText(Convert.ToString(shiftsLeft));
-                        TimerProgress.fillAmount = (float) shiftsLeft / Level.Shifts;
+                        //TimerProgress.fillAmount = (float) shiftsLeft / Level.Shifts;
                     }
                 }
             }
@@ -85,7 +83,7 @@ namespace Assets.Scripts
         {
             var busy = FindObjectsOfType<Character>().Any(i => i.Busy);
 
-            Current.SetText(busy ? "?" : Convert.ToString(CalcScore()));
+            Score.SetText("{0}/{1}", busy ? "?" : Convert.ToString(CalcScore()), Level.Target);
         }
 
         public bool CanShift()
@@ -109,9 +107,7 @@ namespace Assets.Scripts
             var target = 0;
             var tables = Level.Generator ? GenerateTables(Level.TableNumber, out target, Level.Target, Level.Сomplexity) : InitializeTables(Level);
 
-            //TimerProgress.color = Color.white;
-            Target.SetText(Convert.ToString(Level.Generator ? target : Level.Target));
-            Current.SetText("?");
+            Score.SetText("{0}/{1}", 0, Level.Target);
 
             _timeout = DateTime.Now.AddSeconds(Level.Time);
             _shifts = 0;

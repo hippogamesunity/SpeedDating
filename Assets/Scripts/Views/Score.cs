@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Common;
 
 namespace Assets.Scripts.Views
 {
     public class Score : ViewBase
     {
-        public UITexture ScorePanel;
+        public UILabel Result;
 
         public void Set(bool completed)
         {
-            ScorePanel.mainTexture = Resources.Load<Texture2D>(completed ? "Images/UI/LevelCompletedPanel" : "Images/UI/LevelFailedPanel");
+            Result.SetText(completed ? "Completed" : "Failed");
         }
     }
 }

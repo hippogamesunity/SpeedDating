@@ -17,8 +17,7 @@ namespace Assets.Scripts.Views
 
             foreach (var button in Panel.GetComponentsInChildren<GameButton>().Where(i => i.ListenerMethodUp == "StartGame"))
             {
-                Debug.Log(button.Params);
-                if (int.Parse(button.Params) <= progress || Settings.Debug)
+                if ((int.Parse(button.Params) <= progress || Settings.Debug) && GameData.Levels.Count > progress)
                 {
                     button.Enabled = true;
                     button.GetComponent<UITexture>().mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");

@@ -69,6 +69,10 @@ namespace Assets.Scripts
             {
                 GetComponent<Menu>().Open();
             }
+            else if (ViewBase.Current is Views.Game)
+            {
+                CompleteGame();
+            }
         }
     }
 }
