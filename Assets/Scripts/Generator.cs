@@ -11,7 +11,7 @@ namespace Assets.Scripts
     {
         private const int MaxCombinations = 518400;
 
-        private static List<List<Person>> GenerateTables(int count, out int target, int fixedTarget, int complexity)
+        private static List<List<Person>> GenerateTables(int count, int fixedTarget, int complexity)
         {
             var stopWatch = new Stopwatch();
 
@@ -23,8 +23,6 @@ namespace Assets.Scripts
                 Debug.Log("GenerateTables: stopWatch.Elapsed=" + stopWatch.Elapsed.TotalSeconds);
             };
 
-            target = 0;
-
             const int iterations = 1000;
 
             for (var i = 0; i <= iterations; i++)
@@ -35,7 +33,6 @@ namespace Assets.Scripts
                 List<List<Person>> best;
 
                 Analize(tables, out worst, out best, out max, out fake);
-                target = max;
 
                 Debug.Log("max = " + max);
 

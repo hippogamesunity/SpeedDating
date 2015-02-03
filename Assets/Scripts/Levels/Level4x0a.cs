@@ -4,10 +4,10 @@ namespace Assets.Scripts
 {
     public partial class GameData
     {
-        public static Level Level4x0_ = new Level
+        public static Level Level4x0a = new Level
         {
             TableNumber = 4,
-            Time = 30,
+            Time = 60,
             Target = 8,
             MaleHobbies = new List<List<Hobby>>
             {

@@ -13,10 +13,11 @@ namespace Assets.Scripts
         public UILabel Timer;
         public UITexture Background;
         public UILabel Score;
-        public static Level Level;
 
-        private DateTime _timeout;
-        private int _shifts;
+        public static Level Level;
+        private static DateTime _timeout;
+        private static int _shifts;
+        public static GameState State;
 
         public void Start()
         {
@@ -31,7 +32,7 @@ namespace Assets.Scripts
                 GoBack();
             }
 
-            if (ViewBase.Current is Views.Game)
+            if (ViewBase.Current is Play)
             {
                 if (Level.Type == LevelType.Time)
                 {
@@ -39,8 +40,11 @@ namespace Assets.Scripts
 
                     if (timespan.TotalSeconds > 0)
                     {
-                        Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
-                        //TimerProgress.fillAmount = (float) timespan.TotalSeconds / Level.Time;
+                        if (State == GameState.Playing)
+                        {
+                            Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
+                            //TimerProgress.fillAmount = (float) timespan.TotalSeconds / Level.Time;
+                        }
                     }
                     else
                     {
@@ -81,31 +85,38 @@ namespace Assets.Scripts
 
         public void RefreshScore()
         {
-            var busy = FindObjectsOfType<Character>().Any(i => i.Busy);
-
-            Score.SetText("{0}/{1}", busy ? "?" : Convert.ToString(CalcScore()), Level.Target);
+            Score.SetText("{0}/{1}", Convert.ToString(CalcScore()), Level.Target);
         }
 
-        public bool CanShift()
+        public static bool CanShift()
         {
             return Level.Type == LevelType.Shifts
                 ? Level.Shifts - _shifts > 0
                 : (_timeout - DateTime.Now).TotalSeconds > 0;
         }
 
+        public static void PauseGame()
+        {
+            foreach (var character in FindObjectsOfType<Character>())
+            {
+                character.Busy = true;
+            }
+
+            State = GameState.Paused;
+        }
+
         private void BeginGame()
         {
-            GetComponent<Views.Game>().Open();
+            GetComponent<Play>().Open();
 
             foreach (var table in FindObjectsOfType<Table>())
             {
                 Destroy(table.gameObject);
             }
 
-            GameData.Shuffle();
+            GameData.Levels.Shuffle();
 
-            var target = 0;
-            var tables = Level.Generator ? GenerateTables(Level.TableNumber, out target, Level.Target, Level.Сomplexity) : InitializeTables(Level);
+            var tables = Level.Generator ? GenerateTables(Level.TableNumber, Level.Target, Level.Сomplexity) : InitializeTables(Level);
 
             Score.SetText("{0}/{1}", 0, Level.Target);
 

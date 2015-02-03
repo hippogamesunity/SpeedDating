@@ -11,13 +11,15 @@ namespace Assets.Scripts
 
         public void Update()
         {
+            if (_time <= 0) return;
+
             if (Image.fillAmount < 1)
             {
                 Image.fillAmount += Time.deltaTime / _time;
             }
             else if (Image.fillAmount > 1)
             {
-                Image.fillAmount = 1;
+                //Image.fillAmount = 1;
             }
         }
 

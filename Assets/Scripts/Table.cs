@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Assets.Scripts.Common;
-using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -31,7 +30,7 @@ namespace Assets.Scripts
 
             TaskScheduler.CreateTask(() =>
             {
-                const float delay = 0;
+                const float delay = 2.8f;
 
                 Progress.Show(TweenTime);
                 Progress.Animate(delay);
@@ -54,12 +53,14 @@ namespace Assets.Scripts
             }, TweenTime);
 
             character1.Busy = character2.Busy = false;
+            
             Find<Game>().RefreshScore();
 
-            if (Game.CalcScore() >= Game.Level.Target)
+            if (Game.CalcScore() >= Game.Level.Target && Game.Level.Target != -1)
             {
+                Game.PauseGame();
                 TaskScheduler.CreateTask(Find<AudioPlayer>().Success, 0.5f);
-                TaskScheduler.CreateTask(Find<Game>().CompleteGame, 1f);
+                TaskScheduler.CreateTask(Find<Game>().CompleteGame, 2f);
             }
             else if (sympathy >= 3)
             {

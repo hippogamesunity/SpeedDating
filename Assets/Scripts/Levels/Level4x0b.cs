@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public partial class GameData
     {
-        public static Level Level4x0 = new Level
+        public static Level Level4x0b = new Level
         {
             TableNumber = 4,
             Time = 60,

@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
 
-public class AudioPlayer : Script
+namespace Assets.Scripts
 {
-    public AudioClip BlinkSound;
-    public AudioClip SuccessSound;
-
-    public void Blink()
+    public class AudioPlayer : Script
     {
-        PlayEffect(BlinkSound);
-    }
+        public AudioClip BlinkSound;
+        public AudioClip SuccessSound;
 
-    public void Success()
-    {
-        PlayEffect(SuccessSound);
-    }
+        public void Blink()
+        {
+            PlayEffect(BlinkSound);
+        }
 
-    private void PlayEffect(AudioClip audioClip)
-    {
-        var audioSource = gameObject.AddComponent<AudioSource>();
+        public void Success()
+        {
+            PlayEffect(SuccessSound);
+        }
 
-        audioSource.volume = 0.5f;
-        audioSource.PlayOneShot(audioClip);
-        Destroy(audioSource, audioClip.length);
+        private void PlayEffect(AudioClip audioClip)
+        {
+            var audioSource = gameObject.AddComponent<AudioSource>();
+
+            audioSource.volume = 0.5f;
+            audioSource.PlayOneShot(audioClip);
+            Destroy(audioSource, audioClip.length);
+        }
     }
 }

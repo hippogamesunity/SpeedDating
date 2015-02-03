@@ -17,15 +17,22 @@ namespace Assets.Scripts.Views
 
             foreach (var button in Panel.GetComponentsInChildren<GameButton>().Where(i => i.ListenerMethodUp == "StartGame"))
             {
+                var image = button.GetComponent<UITexture>();
+                var text = button.GetComponentInChildren<UILabel>();
+
                 if ((int.Parse(button.Params) <= progress || Settings.Debug) && GameData.Levels.Count > progress)
                 {
                     button.Enabled = true;
-                    button.GetComponent<UITexture>().mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");
+                    image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");
+                    text.color = ColorHelper.GetColor(255, 255, 255);
+                    text.applyGradient = true;
                 }
                 else
                 {
                     button.Enabled = false;
-                    button.GetComponent<UITexture>().mainTexture = Resources.Load<Texture2D>("Images/UI/LevelLockedButton");
+                    image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelLockedButton");
+                    text.color = ColorHelper.GetColor(180, 180, 180);
+                    text.applyGradient = false;
                 }
             }
         }

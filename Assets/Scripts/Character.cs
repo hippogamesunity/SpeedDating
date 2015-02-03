@@ -41,7 +41,7 @@ namespace Assets.Scripts
 
         public new void Update()
         {
-            if (Busy) return;
+            if (Busy || Game.State == GameState.Paused) return;
 
             if (_down)
             {
@@ -101,7 +101,7 @@ namespace Assets.Scripts
 
         protected override void OnPress(bool down)
         {
-            if (Busy || !Find<Game>().CanShift()) return;
+            if (Busy || !Game.CanShift()) return;
 
             base.OnPress(down);
 
@@ -120,7 +120,7 @@ namespace Assets.Scripts
                 buttons.Remove(this);
 
                 var nearest = buttons.FirstOrDefault(i => Vector2.Distance(transform.parent.localPosition / transform.parent.localScale.x
-                    + transform.localPosition, i.transform.parent.localPosition / transform.parent.localScale.x + i.transform.localPosition) < 100);
+                    + transform.localPosition, i.transform.parent.localPosition / transform.parent.localScale.x + i.transform.localPosition) < 200);
 
                 if (nearest == null || nearest.Busy)
                 {
