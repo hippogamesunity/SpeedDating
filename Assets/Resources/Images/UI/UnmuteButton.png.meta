@@ -1,8 +1,10 @@
 fileFormatVersion: 2
-guid: 5f401bb71a5f00a468576cdc6b4dfab7
+guid: e27eb6aa2f221714fa410feb8bcb14e5
 TextureImporter:
   fileIDToRecycleName:
-    21300000: SoundButton
+    21300000: MuteButton
+    21300002: MuteButton1
+    21300004: UnmuteButton
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

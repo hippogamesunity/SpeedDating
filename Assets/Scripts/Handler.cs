@@ -71,5 +71,11 @@ namespace Assets.Scripts
                 CompleteGame();
             }
         }
+
+        public void Mute()
+        {
+            Profile.Mute = !Profile.Mute;
+            GetComponent<AudioPlayer>().Refresh();
+        }
     }
 }
