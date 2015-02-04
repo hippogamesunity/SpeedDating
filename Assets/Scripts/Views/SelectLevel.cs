@@ -20,7 +20,7 @@ namespace Assets.Scripts.Views
                 var image = button.GetComponent<UITexture>();
                 var text = button.GetComponentInChildren<UILabel>();
 
-                if ((int.Parse(button.Params) <= progress || Settings.Debug) && GameData.Levels.Count > progress)
+                if ((int.Parse(button.Params) <= progress || Settings.Debug) && GameData.Levels.Count > int.Parse(button.Params))
                 {
                     button.Enabled = true;
                     image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");

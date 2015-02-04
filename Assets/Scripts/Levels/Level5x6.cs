@@ -25,7 +25,6 @@ namespace Assets.Scripts
                 new List<Hobby> { Hobby.Food, Hobby.Photo, Hobby.TV, Hobby.Drink, Hobby.Archery, Hobby.Guitar, Hobby.Football },
                 new List<Hobby> { Hobby.Books, Hobby.Jewelry, Hobby.Fashion, Hobby.Cars, Hobby.Beauty }
             },
-            Generator = true,
             Сomplexity = 6
         };
     }

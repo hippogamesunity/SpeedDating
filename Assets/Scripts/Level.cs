@@ -10,7 +10,7 @@ namespace Assets.Scripts
         public int Time = 120;
         public int Shifts;
         public string TableName = "BurgerKingTable";
-        public string Background = "BurgerKing";
+        public string Background = "Paris";
         public int Target;
         public bool Generator;
         public float TableScale = 0.75f;
