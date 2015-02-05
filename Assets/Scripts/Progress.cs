@@ -36,6 +36,8 @@ namespace Assets.Scripts
 
         public void Hide(float time)
         {
+            if (gameObject == null) return;
+
             TweenAlpha.Begin(gameObject, time, 0);
         }
     }

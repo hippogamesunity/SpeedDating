@@ -14,11 +14,6 @@ namespace Assets.Scripts
         public UITexture Background;
         public UILabel Score;
 
-        public static Level Level;
-        private static DateTime _timeout;
-        private static int _shifts;
-        public static GameState State;
-
         public void Start()
         {
             GetComponent<Menu>().Open();
@@ -48,6 +43,7 @@ namespace Assets.Scripts
                     }
                     else
                     {
+                        State = GameState.Paused;
                         CompleteGame();
                     }
                 }
@@ -59,6 +55,11 @@ namespace Assets.Scripts
                     {
                         Timer.SetText(Convert.ToString(shiftsLeft));
                         //TimerProgress.fillAmount = (float) shiftsLeft / Level.Shifts;
+                    }
+                    else
+                    {
+                        State = GameState.Paused;
+                        CompleteGame();
                     }
                 }
             }
@@ -88,11 +89,12 @@ namespace Assets.Scripts
             Score.SetText("{0}/{1}", Convert.ToString(CalcScore()), Level.Target);
         }
 
-        public static bool CanShift()
+        public static bool CanShift
         {
-            return Level.Type == LevelType.Shifts
-                ? Level.Shifts - _shifts > 0
-                : (_timeout - DateTime.Now).TotalSeconds > 0;
+            get
+            {
+                return Level.Type == LevelType.Shifts ? Level.Shifts - _shifts > 0 : (_timeout - DateTime.Now).TotalSeconds > 0;
+            }
         }
 
         private void BeginGame()

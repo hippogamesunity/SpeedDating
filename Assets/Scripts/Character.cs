@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Common;
 using UnityEngine;
@@ -101,7 +102,7 @@ namespace Assets.Scripts
 
         protected override void OnPress(bool down)
         {
-            if (Busy || !Engine.CanShift()) return;
+            if (Engine.State != GameState.Playing || Busy || !Engine.CanShift) return;
 
             base.OnPress(down);
 
@@ -119,8 +120,15 @@ namespace Assets.Scripts
 
                 buttons.Remove(this);
 
-                var nearest = buttons.FirstOrDefault(i => Vector2.Distance(transform.parent.localPosition / transform.parent.localScale.x
-                    + transform.localPosition, i.transform.parent.localPosition / transform.parent.localScale.x + i.transform.localPosition) < 200);
+                var distances = new Dictionary<Character, float>();
+
+                foreach (var button in buttons)
+                {
+                    distances.Add(button, Vector2.Distance(transform.parent.localPosition / transform.parent.localScale.x
+                        + transform.localPosition, button.transform.parent.localPosition / button.transform.parent.localScale.x + button.transform.localPosition));
+                }
+
+                var nearest = distances.OrderBy(i => i.Value).FirstOrDefault(i => i.Value < 200).Key;
 
                 if (nearest == null || nearest.Busy)
                 {

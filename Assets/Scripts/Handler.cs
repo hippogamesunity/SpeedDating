@@ -10,47 +10,6 @@ namespace Assets.Scripts
             GetComponent<SelectLevel>().Open();
         }
 
-        public void StartGame(object level)
-        {
-            if (State != GameState.Ready) return;
-
-            var progress = int.Parse(level.ToString());
-
-            Level = GameData.Levels[progress];
-            Level.Progress = progress;
-
-            GetComponent<Play>().Open(BeginGame);
-
-            State = GameState.Playing;
-        }
-
-        public void CompleteGame()
-        {
-            if (State != GameState.Playing && State != GameState.Paused) return;
-
-            var score = CalcScore();
-            var scores = GetComponent<Score>();
-
-            if (score >= Level.Target && Profile.Progress == Level.Progress)
-            {
-                Profile.Progress++;
-            }
-
-            scores.Set(score >= Level.Target);
-            scores.Open();
-
-            State = GameState.Ready;
-        }
-
-        public void RestartGame()
-        {
-            if (State != GameState.Ready) return;
-
-            GetComponent<Play>().Open(BeginGame);
-
-            State = GameState.Playing;
-        }
-
         public void Shifted()
         {
             _shifts++;

@@ -58,7 +58,7 @@ namespace Assets.Scripts
 
             if (Engine.CalcScore() >= Engine.Level.Target && Engine.Level.Target != -1)
             {
-                Find<Engine>().PauseGame();
+                Engine.State = GameState.Paused;
                 TaskScheduler.CreateTask(Find<AudioPlayer>().Success, 0.5f);
                 TaskScheduler.CreateTask(Find<Engine>().CompleteGame, 2f);
             }

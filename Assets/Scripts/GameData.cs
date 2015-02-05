@@ -227,15 +227,15 @@ namespace Assets.Scripts
                 6, new List<Vector2>
                 {
                     new Vector2(-180, 100), new Vector2(180, 100),
-                    new Vector2(-520, -60), new Vector2(520, -60),
-                    new Vector2(-240, -260), new Vector2(240, -260)
+                    new Vector2(-500, -60), new Vector2(500, -60),
+                    new Vector2(-220, -260), new Vector2(220, -260)
                 }
             },
             {
                 7, new List<Vector2>
                 {
                     new Vector2(-240, 100), new Vector2(240, 100),
-                    new Vector2(-520, -60), new Vector2(0, -60), new Vector2(520, -60),
+                    new Vector2(-500, -60), new Vector2(0, -60), new Vector2(500, -60),
                     new Vector2(-280, -260), new Vector2(280, -260)
                 }
             }
