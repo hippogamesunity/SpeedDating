@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public partial class Game
+    public partial class Engine
     {
         public void ShowLevels()
         {
@@ -68,7 +68,14 @@ namespace Assets.Scripts
             }
             else if (ViewBase.Current is Play)
             {
-                CompleteGame();
+                if (State == GameState.Playing)
+                {
+                    PauseGame();
+                }
+                else
+                {
+                    ResumeGame();
+                }
             }
         }
 

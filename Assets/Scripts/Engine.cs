@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public partial class Game : Script
+    public partial class Engine : Script
     {
         public Transform GameTransform;
         public UILabel Timer;
@@ -93,16 +93,6 @@ namespace Assets.Scripts
             return Level.Type == LevelType.Shifts
                 ? Level.Shifts - _shifts > 0
                 : (_timeout - DateTime.Now).TotalSeconds > 0;
-        }
-
-        public static void PauseGame()
-        {
-            foreach (var character in FindObjectsOfType<Character>())
-            {
-                character.Busy = true;
-            }
-
-            State = GameState.Paused;
         }
 
         private void BeginGame()

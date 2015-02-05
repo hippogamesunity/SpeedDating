@@ -41,7 +41,7 @@ namespace Assets.Scripts
 
         public new void Update()
         {
-            if (Busy || Game.State == GameState.Paused) return;
+            if (Busy || Engine.State == GameState.Paused) return;
 
             if (_down)
             {
@@ -101,7 +101,7 @@ namespace Assets.Scripts
 
         protected override void OnPress(bool down)
         {
-            if (Busy || !Game.CanShift()) return;
+            if (Busy || !Engine.CanShift()) return;
 
             base.OnPress(down);
 
@@ -151,7 +151,7 @@ namespace Assets.Scripts
                     Flip();
                     nearest.Flip();
 
-                    Find<Game>().Shifted();
+                    Find<Engine>().Shifted();
                 }
             }
         }

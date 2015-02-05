@@ -54,13 +54,13 @@ namespace Assets.Scripts
 
             character1.Busy = character2.Busy = false;
             
-            Find<Game>().RefreshScore();
+            Find<Engine>().RefreshScore();
 
-            if (Game.CalcScore() >= Game.Level.Target && Game.Level.Target != -1)
+            if (Engine.CalcScore() >= Engine.Level.Target && Engine.Level.Target != -1)
             {
-                Game.PauseGame();
+                Find<Engine>().PauseGame();
                 TaskScheduler.CreateTask(Find<AudioPlayer>().Success, 0.5f);
-                TaskScheduler.CreateTask(Find<Game>().CompleteGame, 2f);
+                TaskScheduler.CreateTask(Find<Engine>().CompleteGame, 2f);
             }
             else if (sympathy >= 3)
             {

@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 
 namespace Assets.Scripts
 {
-    public partial class Game
+    public partial class Engine
     {
         private const int MaxCombinations = 518400;
 
