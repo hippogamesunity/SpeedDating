@@ -13,27 +13,16 @@ namespace Assets.Scripts.Views
 
         public void Open(Action callback = null)
         {
+            var prev = Current;
+
+            Current = null;
             GetComponent<Loading>().Open(LoadingTime);
-            TaskScheduler.CreateTask(() =>
+            TaskScheduler.CreateTask(() => DelayedOpen(callback), LoadingTime);
+
+            if (prev != null && !ReferenceEquals(prev, this))
             {
-                GetComponent<Loading>().Close(LoadingTime);
-
-                if (Current != null && !ReferenceEquals(Current, this))
-                {
-                    Current.Close();
-                }
-
-                Previous = Current;
-                Current = this;
-                enabled = true;
-                Panel.SetActive(true);
-                Initialize();
-
-                if (callback != null)
-                {
-                    callback();
-                }
-            }, LoadingTime);
+                TaskScheduler.CreateTask(prev.Close, LoadingTime);
+            }
         }
 
         public void Close()
@@ -59,6 +48,21 @@ namespace Assets.Scripts.Views
 
         protected virtual void Cleanup()
         {
+        }
+
+        private void DelayedOpen(Action callback)
+        {
+            GetComponent<Loading>().Close(LoadingTime);
+            Previous = Current;
+            Current = this;
+            enabled = true;
+            Panel.SetActive(true);
+            Initialize();
+
+            if (callback != null)
+            {
+                callback();
+            }
         }
     }
 }

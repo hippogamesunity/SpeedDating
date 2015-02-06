@@ -26,7 +26,7 @@ namespace Assets.Scripts.Common
 
         public static int CreateTask(Action task, float delay)
         {
-            var id = (int) CRandom.GetRandom(999999);
+            var id = CRandom.GetRandom(999999);
 
             Tasks.Add(id);
             Instance.StartCoroutine(Coroutine(task, id, delay));

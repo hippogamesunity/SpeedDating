@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -52,8 +53,6 @@ namespace Assets.Scripts
 
         public void HobbyLoop()
         {
-            if (this == null) return; // TODO:
-
             var duration = 2 + CRandom.GetRandom(200) / 100f;
 
             if (Person.Hobbies.Count == 0)
@@ -70,15 +69,10 @@ namespace Assets.Scripts
                 }
 
                 TweenAlpha.Begin(Interest.gameObject, 0.4f, 1);
-                TaskScheduler.CreateTask(() =>
-                {
-                    if (this == null) return;
-
-                    TweenAlpha.Begin(Interest.gameObject, 0.4f, 0);
-                }, duration);
+                TaskScheduler.CreateTask(() => TweenAlpha.Begin(Interest.gameObject, 0.4f, 0), Engine.TaskId, duration);
             }
 
-            TaskScheduler.CreateTask(HobbyLoop, duration + 1);
+            TaskScheduler.CreateTask(HobbyLoop, Engine.TaskId, duration + 1);
         }
 
         public int Sympathy

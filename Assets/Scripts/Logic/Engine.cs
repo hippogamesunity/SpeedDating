@@ -5,15 +5,10 @@ using Assets.Scripts.Common;
 using Assets.Scripts.Views;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Logic
 {
     public partial class Engine : Script
     {
-        public Transform GameTransform;
-        public UILabel Timer;
-        public UITexture Background;
-        public UILabel Score;
-
         public void Start()
         {
             GetComponent<Menu>().Open();
@@ -25,43 +20,6 @@ namespace Assets.Scripts
             if (Input.GetKeyUp(KeyCode.Escape))
             {
                 GoBack();
-            }
-
-            if (ViewBase.Current is Play)
-            {
-                if (Level.Type == LevelType.Time)
-                {
-                    var timespan = _timeout - DateTime.Now;
-
-                    if (timespan.TotalSeconds > 0)
-                    {
-                        if (State == GameState.Playing)
-                        {
-                            Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
-                            //TimerProgress.fillAmount = (float) timespan.TotalSeconds / Level.Time;
-                        }
-                    }
-                    else
-                    {
-                        State = GameState.Paused;
-                        CompleteGame();
-                    }
-                }
-                else
-                {
-                    var shiftsLeft = Level.Shifts - _shifts;
-
-                    if (shiftsLeft >= 0)
-                    {
-                        Timer.SetText(Convert.ToString(shiftsLeft));
-                        //TimerProgress.fillAmount = (float) shiftsLeft / Level.Shifts;
-                    }
-                    else
-                    {
-                        State = GameState.Paused;
-                        CompleteGame();
-                    }
-                }
             }
         }
 
@@ -84,23 +42,16 @@ namespace Assets.Scripts
             return CalcScore(tables);
         }
 
-        public void RefreshScore()
-        {
-            Score.SetText("{0}/{1}", Convert.ToString(CalcScore()), Level.Target);
-        }
-
         public static bool CanShift
         {
             get
             {
-                return Level.Type == LevelType.Shifts ? Level.Shifts - _shifts > 0 : (_timeout - DateTime.Now).TotalSeconds > 0;
+                return Level.Type == LevelType.Shifts ? Level.Shifts - Shifts > 0 : (Timeout - DateTime.Now).TotalSeconds > 0;
             }
         }
 
         private void BeginGame()
         {
-            GetComponent<Play>().Open();
-
             foreach (var table in FindObjectsOfType<Table>())
             {
                 Destroy(table.gameObject);
@@ -110,19 +61,17 @@ namespace Assets.Scripts
 
             var tables = Level.Generator ? GenerateTables(Level.TableNumber, Level.Target, Level.Сomplexity) : InitializeTables(Level);
 
-            Score.SetText("{0}/{1}", 0, Level.Target);
-
-            _timeout = DateTime.Now.AddSeconds(Level.Time);
-            _shifts = 0;
+            Timeout = DateTime.Now.AddSeconds(Level.Time);
+            Shifts = 0;
 
             RemoveUnusedHobbies(tables);
 
             for (var i = 0; i < Level.TableNumber; i++)
             {
-                var table = PrefabsHelper.Instantiate(Level.TableName, GameTransform);
+                var table = PrefabsHelper.Instantiate(Level.TableName, Get<Play>().GameTransform);
                 var characters = table.GetComponentsInChildren<Character>();
 
-                Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + Level.Background);
+                Get<Play>().Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + Level.Background);
 
                 characters[0].Initialize(tables[i][0]);
                 characters[1].Initialize(tables[i][1]);
@@ -130,6 +79,8 @@ namespace Assets.Scripts
                 table.transform.localPosition = GameData.TablePositions[Level.TableNumber][i];
                 table.transform.localScale = Level.TableScale * Vector3.one;
             }
+
+            State = GameState.Playing;
         }
 
         private static void RemoveUnusedHobbies(List<List<Person>> tables)

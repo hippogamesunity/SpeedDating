@@ -5,7 +5,7 @@ using System.Linq;
 using Assets.Scripts.Common;
 using Debug = UnityEngine.Debug;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Logic
 {
     public partial class Engine
     {

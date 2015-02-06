@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic;
+using Assets.Scripts.Views;
 
 namespace Assets.Scripts
 {
@@ -34,8 +36,8 @@ namespace Assets.Scripts
 
                 Progress.Show(TweenTime);
                 Progress.Animate(delay);
-                TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), delay);
-            }, TweenTime);
+                TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), Engine.TaskId, delay);
+            }, Engine.TaskId, TweenTime);
         }
 
         private void ShowSympathy(Character character1, Character character2, int sympathy)
@@ -50,21 +52,21 @@ namespace Assets.Scripts
                 }
 
                 character1.Sympathy = character2.Sympathy = sympathy;
-            }, TweenTime);
+            }, Engine.TaskId, TweenTime);
 
             character1.Busy = character2.Busy = false;
             
-            Find<Engine>().RefreshScore();
+            Find<Play>().RefreshScore();
 
             if (Engine.CalcScore() >= Engine.Level.Target && Engine.Level.Target != -1)
             {
-                Engine.State = GameState.Paused;
-                TaskScheduler.CreateTask(Find<AudioPlayer>().Success, 0.5f);
-                TaskScheduler.CreateTask(Find<Engine>().CompleteGame, 2f);
+                Engine.State = GameState.Ready;
+                TaskScheduler.CreateTask(Find<AudioPlayer>().Success, Engine.TaskId, 0.5f);
+                TaskScheduler.CreateTask(Find<Engine>().CompleteGame, Engine.TaskId, 2f);
             }
             else if (sympathy >= 3)
             {
-                TaskScheduler.CreateTask(Find<AudioPlayer>().Blink, 0.5f);
+                TaskScheduler.CreateTask(Find<AudioPlayer>().Blink, Engine.TaskId, 0.5f);
             }
         }
 
