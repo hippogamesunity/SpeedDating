@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: bbb9b637c08b2b347b82784064ede49f
+guid: e42c5f432280c4a49b92e0ad7f0432c5
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Paris1
-    21300002: Paris
+    21300000: m1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -19,11 +18,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: .25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: 5
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
@@ -40,7 +39,7 @@ TextureImporter:
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   textureType: 8
   buildTargetSettings: []
   spriteSheet:

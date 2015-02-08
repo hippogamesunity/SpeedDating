@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: bbb9b637c08b2b347b82784064ede49f
+guid: 7772474d819590942bd15279963e04e5
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Paris1
-    21300002: Paris
+    21300000: CharactersNew
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -23,14 +22,14 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
-  maxTextureSize: 1024
+  textureFormat: 5
+  maxTextureSize: 4096
   textureSettings:
-    filterMode: -1
-    aniso: 1
+    filterMode: 2
+    aniso: 4
     mipBias: -1
     wrapMode: 1
-  nPOTScale: 0
+  nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
