@@ -7,8 +7,8 @@ namespace Assets.Scripts
         public int Progress;
         public int TableNumber;
         public LevelType Type = LevelType.Time;
-        public int Time = 120;
-        public int Shifts;
+        public int Time;
+        public int Swaps;
         public string TableName = "RestaurantTable";
         public string Background = "Paris";
         public int Target;

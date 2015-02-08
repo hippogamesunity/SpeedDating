@@ -68,6 +68,16 @@ namespace Assets.Scripts
             {
                 TaskScheduler.CreateTask(Find<AudioPlayer>().Blink, Engine.TaskId, 0.5f);
             }
+
+            if (Engine.Level.Type == LevelType.Swap)
+            {
+                var swapsleft = Engine.Level.Swaps - Engine.Swaps;
+
+                if (swapsleft <= 0)
+                {
+                    TaskScheduler.CreateTask(Find<Engine>().CompleteGame, Engine.TaskId, 1);
+                }
+            }
         }
 
         public static int GetSympathy(Person p1, Person p2)

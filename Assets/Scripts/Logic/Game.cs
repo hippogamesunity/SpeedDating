@@ -11,7 +11,7 @@ namespace Assets.Scripts.Logic
         public static int TaskId = 999;
         public static DateTime Timeout;
         public static TimeSpan Timeleft;
-        public static int Shifts;
+        public static int Swaps;
 
         private static GameState _state;
 

@@ -46,7 +46,7 @@ namespace Assets.Scripts.Logic
         {
             get
             {
-                return Level.Type == LevelType.Shifts ? Level.Shifts - Shifts > 0 : (Timeout - DateTime.Now).TotalSeconds > 0;
+                return Level.Type == LevelType.Swap ? Level.Swaps - Swaps > 0 : (Timeout - DateTime.Now).TotalSeconds > 0;
             }
         }
 
@@ -62,7 +62,7 @@ namespace Assets.Scripts.Logic
             var tables = Level.Generator ? GenerateTables(Level.TableNumber, Level.Target, Level.Сomplexity) : InitializeTables(Level);
 
             Timeout = DateTime.Now.AddSeconds(Level.Time);
-            Shifts = 0;
+            Swaps = 0;
 
             RemoveUnusedHobbies(tables);
 

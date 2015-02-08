@@ -26,6 +26,18 @@ namespace Assets.Scripts
             }
         }
 
+        public static List<Level> SwapLevels
+        {
+            get
+            {
+                return new List<Level>
+                {
+                    null,
+                    SwapLevel3x0
+                };
+            }
+        }
+
         public static void Shuffle()
         {
             _maleNamesEn = _maleNamesEn.Shuffle();

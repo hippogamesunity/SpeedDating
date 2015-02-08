@@ -1,5 +1,4 @@
 ﻿using System;
-using Assets.Scripts.Common;
 using Assets.Scripts.Views;
 using UnityEngine;
 
@@ -12,6 +11,14 @@ namespace Assets.Scripts.Logic
             if (ViewBase.Current is Menu)
             {
                 GetComponent<SelectLevel>().Open();
+            }
+        }
+
+        public void ShowSwapLevels()
+        {
+            if (ViewBase.Current is SelectLevel)
+            {
+                GetComponent<SelectSwapLevel>().Open();
             }
         }
 
@@ -28,9 +35,22 @@ namespace Assets.Scripts.Logic
             }
         }
 
-        public void Shifted()
+        public void StartSwapGameByLevel(object level)
         {
-            Shifts++;
+            if (ViewBase.Current is SelectSwapLevel)
+            {
+                var progress = Convert.ToInt32(level);
+
+                Level = GameData.SwapLevels[progress];
+                Level.Progress = progress;
+                
+                StartGame();
+            }
+        }
+
+        public void Swapped()
+        {
+            Swaps++;
         }
 
         public void GoBack()
@@ -40,6 +60,10 @@ namespace Assets.Scripts.Logic
                 Application.Quit();
             }
             else if (ViewBase.Current is SelectLevel)
+            {
+                GetComponent<Menu>().Open();
+            }
+            else if (ViewBase.Current is SelectSwapLevel)
             {
                 GetComponent<Menu>().Open();
             }

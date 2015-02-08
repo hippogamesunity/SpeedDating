@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: 526867f42d3e21d4ab62b1d2a4071837
+guid: 22c6748466a594f409f9703b909c632e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: LevelClearedPanel
-    21300002: LevelCompletedPanel
+    21300000: BonusButton
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -24,12 +23,12 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

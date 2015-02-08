@@ -153,7 +153,7 @@ namespace Assets.Scripts
                     Flip();
                     nearest.Flip();
 
-                    Find<Engine>().Shifted();
+                    Find<Engine>().Swapped();
                 }
             }
         }
