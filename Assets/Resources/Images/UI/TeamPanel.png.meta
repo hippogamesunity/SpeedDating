@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 98facd958ad2ad4438444f59c8274ffc
+guid: faed8487aac212042a02f16b08ddbf44
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TeamButton
+    21300000: TeamPanel
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

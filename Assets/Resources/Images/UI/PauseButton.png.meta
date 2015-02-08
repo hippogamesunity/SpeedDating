@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 98facd958ad2ad4438444f59c8274ffc
+guid: 6d7e2abe3181b3c4593920aed642d62c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TeamButton
+    21300000: PauseButton
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
