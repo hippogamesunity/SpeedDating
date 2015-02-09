@@ -73,7 +73,7 @@ namespace Assets.Scripts.Logic
             if (State != GameState.Paused) return;
 
             TaskScheduler.Kill(TaskId);
-            Get<SelectLevel>().Open();
+            Get<Levels>().Open();
             State = GameState.Ready;
         }
     }

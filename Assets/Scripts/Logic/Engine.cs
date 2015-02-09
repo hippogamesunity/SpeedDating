@@ -11,6 +11,7 @@ namespace Assets.Scripts.Logic
     {
         public void Start()
         {
+            DetectLanguage();
             GetComponent<Menu>().Open();
             //StartGame(GameData.Levels.Count - 1);
         }
@@ -176,6 +177,25 @@ namespace Assets.Scripts.Logic
             }
 
             return result;
+        }
+
+        private static void DetectLanguage()
+        {
+            var languages = (TextAsset) Resources.Load("Localization", typeof(TextAsset));
+
+            Localization.LoadCSV(languages);
+
+            switch (Application.systemLanguage)
+            {
+                case SystemLanguage.Russian:
+                case SystemLanguage.Ukrainian:
+                case SystemLanguage.Belarusian:
+                    Localization.language = "English";
+                    break;
+                default:
+                    Localization.language = "English";
+                    break;
+            }
         }
     }
 }

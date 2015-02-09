@@ -17,7 +17,7 @@ namespace Assets.Scripts.Views
         public UILabel Timer;
         public UITexture Background;
         public UILabel Score;
-        public Transform Arrow;
+        public Transform HourHand;
         public UITexture TimeIcon;
         public UITexture SwapIcon;
 
@@ -33,15 +33,15 @@ namespace Assets.Scripts.Views
             {
                 TimeIcon.enabled = true;
                 SwapIcon.enabled = false;
-                Arrow.gameObject.SetActive(true);
-                HelpDialogMessage.SetText("Help characters to find a soulmate\nMove them between tables");
+                HourHand.gameObject.SetActive(true);
+                HelpDialogMessage.SetLocalizedText("%TimeMode%");
             }
             else if (Engine.Level.Type == LevelType.Swap)
             {
                 SwapIcon.enabled = true;
                 TimeIcon.enabled = false;
-                Arrow.gameObject.SetActive(false);
-                HelpDialogMessage.SetText("You have swap limit in this mode");
+                HourHand.gameObject.SetActive(false);
+                HelpDialogMessage.SetLocalizedText("%SwapMode%");
             }
         }
 
@@ -66,7 +66,7 @@ namespace Assets.Scripts.Views
 
                     var p = (float) timespan.TotalSeconds / Engine.Level.Time;
 
-                    Arrow.rotation = Quaternion.Euler(0, 0, 360 * p - 360);
+                    HourHand.rotation = Quaternion.Euler(0, 0, 360 * p - 360);
 
                     if (p < 0.25)
                     {
@@ -102,8 +102,8 @@ namespace Assets.Scripts.Views
 
         public void SetScoreDialog(bool completed)
         {
-            ScoreDialogTitle.SetText(completed ? "Win" : Engine.Level.Type == LevelType.Time ? "Time is up" : "Game over");
-            ScoreDialogMessage.SetText(completed ? "Congratulation, level completed!" : "Better luck next time!");
+            ScoreDialogTitle.SetLocalizedText(completed ? "%Win%" : Engine.Level.Type == LevelType.Time ? "%TimeUp%" : "%GameOver%");
+            ScoreDialogMessage.SetLocalizedText(completed ? "%LevelCompleted%" : "%LevelFailed%");
         }
 
         public void CloseDialog()

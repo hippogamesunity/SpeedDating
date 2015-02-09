@@ -10,25 +10,25 @@ namespace Assets.Scripts.Logic
         {
             if (ViewBase.Current is Menu)
             {
-                GetComponent<SelectLevel>().Open();
+                GetComponent<Levels>().Open();
             }
         }
 
         public void ShowSwapLevels()
         {
-            if (ViewBase.Current is SelectLevel)
+            if (ViewBase.Current is Levels)
             {
-                GetComponent<SelectSwapLevel>().Open();
+                GetComponent<SwapLevels>().Open();
             }
         }
 
         public void StartGameByLevel(object level)
         {
-            if (ViewBase.Current is SelectLevel)
+            if (ViewBase.Current is Levels)
             {
                 var progress = Convert.ToInt32(level);
 
-                Level = GameData.Levels[progress];
+                Level = GameData.Levels[progress - 1];
                 Level.Progress = progress;
 
                 StartGame();
@@ -37,11 +37,11 @@ namespace Assets.Scripts.Logic
 
         public void StartSwapGameByLevel(object level)
         {
-            if (ViewBase.Current is SelectSwapLevel)
+            if (ViewBase.Current is SwapLevels)
             {
                 var progress = Convert.ToInt32(level);
 
-                Level = GameData.SwapLevels[progress];
+                Level = GameData.SwapLevels[progress - 1];
                 Level.Progress = progress;
                 
                 StartGame();
@@ -59,11 +59,11 @@ namespace Assets.Scripts.Logic
             {
                 Application.Quit();
             }
-            else if (ViewBase.Current is SelectLevel)
+            else if (ViewBase.Current is Levels)
             {
                 GetComponent<Menu>().Open();
             }
-            else if (ViewBase.Current is SelectSwapLevel)
+            else if (ViewBase.Current is SwapLevels)
             {
                 GetComponent<Menu>().Open();
             }

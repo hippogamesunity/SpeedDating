@@ -17,10 +17,6 @@ namespace Assets.Scripts
             {
                 Image.fillAmount += Time.deltaTime / _time;
             }
-            else if (Image.fillAmount > 1)
-            {
-                //Image.fillAmount = 1;
-            }
         }
 
         public void Animate(float time)
@@ -36,8 +32,6 @@ namespace Assets.Scripts
 
         public void Hide(float time)
         {
-            if (this == null) return;
-
             TweenAlpha.Begin(gameObject, time, 0);
         }
     }

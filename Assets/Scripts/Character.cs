@@ -11,7 +11,7 @@ namespace Assets.Scripts
     {
         public UISprite Image;
         public UILabel Name;
-        public UISprite Interest;
+        public UISprite Hobby;
         public Hobby[] HobbiesDebug;
 
         [HideInInspector] public Person Person;
@@ -36,7 +36,7 @@ namespace Assets.Scripts
 
             tables.Sort((a, b) => Vector2.Distance(transform.position, a.transform.position).CompareTo(Vector2.Distance(transform.position, b.transform.position)));
             Table = tables[0];
-            Interest.color = person.Male ? ColorHelper.GetColor(0, 120, 255) : ColorHelper.GetColor(200, 0, 200);
+            Hobby.color = person.Male ? ColorHelper.GetColor(0, 120, 255) : ColorHelper.GetColor(200, 0, 200);
             Flip();
             HobbyLoop();
         }
@@ -57,19 +57,19 @@ namespace Assets.Scripts
 
             if (Person.Hobbies.Count == 0)
             {
-                Interest.enabled = false;
+                Hobby.enabled = false;
             }
             else
             {
-                Interest.spriteName = Convert.ToString(Person.Hobbies[_hobby++]);
+                Hobby.spriteName = Convert.ToString(Person.Hobbies[_hobby++]);
 
                 if (_hobby == Person.Hobbies.Count)
                 {
                     _hobby = 0;
                 }
 
-                TweenAlpha.Begin(Interest.gameObject, 0.4f, 1);
-                TaskScheduler.CreateTask(() => TweenAlpha.Begin(Interest.gameObject, 0.4f, 0), Engine.TaskId, duration);
+                TweenAlpha.Begin(Hobby.gameObject, 0.4f, 1);
+                TaskScheduler.CreateTask(() => TweenAlpha.Begin(Hobby.gameObject, 0.4f, 0), Engine.TaskId, duration);
             }
 
             TaskScheduler.CreateTask(HobbyLoop, Engine.TaskId, duration + 1);

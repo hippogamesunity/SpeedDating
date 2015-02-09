@@ -230,7 +230,7 @@ public class ByteReader
 			{
 				char ch = line[i];
 
-				if (ch == ',')
+				if (ch == ';')
 				{
 					if (!insideQuotes)
 					{

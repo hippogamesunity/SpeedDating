@@ -99,7 +99,10 @@ namespace Assets.Scripts.Logic
             var boys = tables.Select(p => p.Single(c => c.Male)).ToList();
             var girls = tables.Select(p => p.Single(c => !c.Male)).ToList();
 
-            Dump(boys, girls);
+            if (Settings.Debug)
+            {
+                Dump(boys, girls);
+            }
 
             var stopWatch = new Stopwatch();
 

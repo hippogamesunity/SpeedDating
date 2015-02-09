@@ -16,7 +16,6 @@ namespace Assets.Scripts
             {
                 return new List<Level>
                 {
-                    null,
                     Level2x0, Level3x0, Level3x1, Level3x2, Level4x0a,
                     Level4x0b, Level4x2, Level4x3, Level4x4, Level4x5,
                     Level5x0, Level5x1, Level5x2, Level5x3, Level5x4,
@@ -32,7 +31,6 @@ namespace Assets.Scripts
             {
                 return new List<Level>
                 {
-                    null,
                     SwapLevel3x0
                 };
             }

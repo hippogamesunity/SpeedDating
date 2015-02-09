@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
-    public class SelectSwapLevel : ViewBase
+    public class Levels : ViewBase
     {
         private List<GameButton> _levelButtons; 
 
@@ -21,14 +21,14 @@ namespace Assets.Scripts.Views
 
         public void Refresh()
         {
-            var progress = Profile.SwapProgress;
+            var progress = Profile.Progress;
 
             foreach (var button in _levelButtons)
             {
                 var image = button.GetComponent<UITexture>();
                 var text = button.GetComponentInChildren<UILabel>();
 
-                if ((int.Parse(button.Params) <= progress || Settings.Debug) && GameData.SwapLevels.Count > int.Parse(button.Params))
+                if ((int.Parse(button.Params) <= progress || Settings.Debug) && GameData.Levels.Count > int.Parse(button.Params))
                 {
                     button.Enabled = true;
                     image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");
