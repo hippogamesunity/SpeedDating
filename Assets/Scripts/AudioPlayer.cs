@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using Assets.Scripts.Common;
 using UnityEngine;
@@ -17,7 +16,7 @@ namespace Assets.Scripts
         public void Awake()
         {
             Refresh();
-            PlayMusic();
+            PlayInGameNext(Music[CRandom.GetRandom(0, Music.Length)]);
         }
 
         public void Refresh()
@@ -26,16 +25,9 @@ namespace Assets.Scripts
             MuteButton.mainTexture = Resources.Load<Texture2D>(Profile.Mute ? "Images/UI/UnmuteButton" : "Images/UI/MuteButton");
         }
 
-        public void PlayMusic()
-        {
-            var track = Music[CRandom.GetRandom(0, Music.Length)];
-
-            StartCoroutine(PlayInGameNext(track, 0));
-        }
-
         public void PlayMusicByIndex(object index)
         {
-            StartCoroutine(PlayInGameNext(Music[Convert.ToInt32(index)], 0));
+            PlayInGameNext(Music[Convert.ToInt32(index)]);
         }
 
         public void Blink()
@@ -59,10 +51,8 @@ namespace Assets.Scripts
             Destroy(audioSource, clip.length);
         }
 
-        private IEnumerator PlayInGameNext(AudioClip clip, float seconds)
+        private void PlayInGameNext(AudioClip clip)
         {
-            yield return new WaitForSeconds(seconds);
-
             AudioSource.Stop();
             AudioSource.clip = clip;
             AudioSource.loop = false;
@@ -71,7 +61,8 @@ namespace Assets.Scripts
             var nexts = Music.Where(i => i != clip).ToList();
             var next = nexts[CRandom.GetRandom(0, nexts.Count)];
 
-            StartCoroutine(PlayInGameNext(next, next.length));
+            TaskScheduler.Kill(888);
+            TaskScheduler.CreateTask(() => PlayInGameNext(next), 888, next.length);
         }
     }
 }
