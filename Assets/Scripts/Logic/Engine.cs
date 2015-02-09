@@ -190,7 +190,7 @@ namespace Assets.Scripts.Logic
                 case SystemLanguage.Russian:
                 case SystemLanguage.Ukrainian:
                 case SystemLanguage.Belarusian:
-                    Localization.language = "English";
+                    Localization.language = "Russian";
                     break;
                 default:
                     Localization.language = "English";

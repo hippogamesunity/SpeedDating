@@ -73,7 +73,16 @@ namespace Assets.Scripts.Logic
             if (State != GameState.Paused) return;
 
             TaskScheduler.Kill(TaskId);
-            Get<Levels>().Open();
+
+            if (Level.Type == LevelType.Time)
+            {
+                Get<Levels>().Open();
+            }
+            else
+            {
+                Get<SwapLevels>().Open();
+            }
+
             State = GameState.Ready;
         }
     }

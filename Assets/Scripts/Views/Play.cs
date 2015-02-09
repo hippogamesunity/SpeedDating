@@ -90,6 +90,7 @@ namespace Assets.Scripts.Views
 
                 if (swapsleft >= 0)
                 {
+                    Timer.color = Color.white;
                     Timer.SetText(Convert.ToString(swapsleft));
                 }
             }
