@@ -2,7 +2,8 @@
 {
     public enum LevelType
     {
-        Time,
+        Easy,
+        Hard,
         Swap
     }
 }

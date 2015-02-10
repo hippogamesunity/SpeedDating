@@ -41,7 +41,7 @@ namespace Assets.Scripts.Logic
 
             play.Open(BeginGame);
 
-            if (Level.Progress == 0)
+            if ((Level.Type == LevelType.Easy || Level.Type == LevelType.Swap) && Level.Progress == 0)
             {
                 TaskScheduler.CreateTask(() => PauseGame(play.HelpDialog), TaskId, 1);
             }
@@ -67,9 +67,26 @@ namespace Assets.Scripts.Logic
 
             var score = CalcScore();
 
-            if (score >= Level.Target && Profile.Progress == Level.Progress)
+            if (Level.Type == LevelType.Easy)
             {
-                Profile.Progress++;
+                if (score >= Level.Target && Profile.ProgressEasy == Level.Progress)
+                {
+                    Profile.ProgressEasy++;
+                }
+            }
+            else if (Level.Type == LevelType.Hard)
+            {
+                if (score >= Level.Target && Profile.ProgressHard == Level.Progress)
+                {
+                    Profile.ProgressHard++;
+                }
+            }
+            else if (Level.Type == LevelType.Swap)
+            {
+                if (score >= Level.Target && Profile.ProgressSwap == Level.Progress)
+                {
+                    Profile.ProgressSwap++;
+                }
             }
 
             var play = Get<Play>();
@@ -84,13 +101,17 @@ namespace Assets.Scripts.Logic
 
             TaskScheduler.Kill(TaskId);
 
-            if (Level.Type == LevelType.Time)
+            switch (Level.Type)
             {
-                Get<Levels>().Open();
-            }
-            else
-            {
-                Get<SwapLevels>().Open();
+                case LevelType.Easy:
+                    Get<EasyLevels>().Open();
+                    break;
+                case LevelType.Hard:
+                    Get<HardLevels>().Open();
+                    break;
+                case LevelType.Swap:
+                    Get<SwapLevels>().Open();
+                    break;
             }
 
             State = GameState.Ready;

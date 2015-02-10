@@ -5,28 +5,27 @@ namespace Assets.Scripts
 {
     public static class Profile
     {
-        private static readonly string ProgressKey = Md5.Encode("ProgressKey");
-        private static readonly string SwapProgressKey = Md5.Encode("SwapProgressKey");
+        private static readonly string ProgressEasyKey = Md5.Encode("ProgressEasyKey");
+        private static readonly string ProgressHardKey = Md5.Encode("ProgressHardKey");
+        private static readonly string ProgressSwapKey = Md5.Encode("ProgressSwapKey");
         private static readonly string MuteKey = Md5.Encode("MuteKey");
 
-        public static int Progress
+        public static int ProgressEasy
         {
-            get { return PlayerPrefs.HasKey(ProgressKey) ? PlayerPrefs.GetInt(ProgressKey) : 1; }
-            set
-            {
-                PlayerPrefs.SetInt(ProgressKey, value);
-                PlayerPrefs.Save();
-            }
+            get { return PlayerPrefs.HasKey(ProgressEasyKey) ? PlayerPrefs.GetInt(ProgressEasyKey) : 1; }
+            set { PlayerPrefs.SetInt(ProgressEasyKey, value); PlayerPrefs.Save(); }
         }
 
-        public static int SwapProgress
+        public static int ProgressHard
         {
-            get { return PlayerPrefs.HasKey(SwapProgressKey) ? PlayerPrefs.GetInt(SwapProgressKey) : 1; }
-            set
-            {
-                PlayerPrefs.SetInt(SwapProgressKey, value);
-                PlayerPrefs.Save();
-            }
+            get { return PlayerPrefs.HasKey(ProgressHardKey) ? PlayerPrefs.GetInt(ProgressHardKey) : 1; }
+            set { PlayerPrefs.SetInt(ProgressHardKey, value); PlayerPrefs.Save(); }
+        }
+
+        public static int ProgressSwap
+        {
+            get { return PlayerPrefs.HasKey(ProgressSwapKey) ? PlayerPrefs.GetInt(ProgressSwapKey) : 1; }
+            set { PlayerPrefs.SetInt(ProgressSwapKey, value); PlayerPrefs.Save(); }
         }
 
         public static bool Mute

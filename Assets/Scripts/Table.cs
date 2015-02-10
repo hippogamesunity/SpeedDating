@@ -58,6 +58,11 @@ namespace Assets.Scripts
             
             Find<Play>().RefreshScore();
 
+            if (FindObjectsOfType<Character>().Any(i => i.Busy))
+            {
+                return;
+            }
+
             if (Engine.CalcScore() >= Engine.Level.Target && Engine.Level.Target != -1)
             {
                 Engine.State = GameState.Ready;

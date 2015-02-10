@@ -30,6 +30,12 @@ namespace Assets.Scripts.Views
             Cleanup();
             enabled = false;
             Panel.SetActive(false);
+
+            foreach (var tween in Panel.GetComponentsInChildren<TweenScale>(true))
+            {
+                tween.transform.localScale = Vector2.one;
+                Destroy(tween);
+            }
         }
 
         protected void Open<T>() where T : ViewBase

@@ -4,13 +4,11 @@ namespace Assets.Scripts
 {
     public partial class GameData
     {
-        public static Level SwapLevel3x0 = new Level
+        public static Level Level3x0 = new Level
         {
             TableNumber = 3,
-            Swaps = 2,
-            Type = LevelType.Swap,
+            Time = 40,
             Target = 9,
-            TableScale = 1,
             MaleHobbies = new List<List<Hobby>>
             {
                 new List<Hobby> { Hobby.Singing, Hobby.Animals, Hobby.Beauty, Hobby.Money, Hobby.Books, Hobby.Drink },

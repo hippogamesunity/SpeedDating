@@ -10,7 +10,7 @@ namespace Assets.Scripts
     {
         public static readonly List<Hobby> Hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().ToList();
 
-        public static List<Level> Levels
+        public static List<Level> EasyLevels
         {
             get
             {
@@ -20,19 +20,7 @@ namespace Assets.Scripts
                     Level4x0b, Level4x2, Level4x3, Level4x4, Level4x5,
                     Level5x0, Level5x1, Level5x2, Level5x3, Level5x4,
                     Level5x5a, Level5x5b, Level5x6, Level6x0, Level6x1,
-                    Level6x2, Level6x3, Level6x4a, Level6x4a, Level6x5,
-                    Level6x4b
-                };
-            }
-        }
-
-        public static List<Level> SwapLevels
-        {
-            get
-            {
-                return new List<Level>
-                {
-                    SwapLevel3x0
+                    Level6x2, Level6x3, Level6x4a, Level6x4a, Level6x4b,
                 };
             }
         }
@@ -208,6 +196,17 @@ namespace Assets.Scripts
             return result;
         }
 
+        public static readonly Dictionary<int, float> TableScales = new Dictionary<int, float>
+        {
+            { 2, 1 },
+            { 3, 1 },
+            { 4, 0.75f },
+            { 5, 0.75f },
+            { 6, 0.70f },
+            { 7, 0.70f },
+            { 8, 0.6f },
+        };
+
         public static readonly Dictionary<int, List<Vector2>> TablePositions = new Dictionary<int, List<Vector2>>
         {
             {
@@ -248,6 +247,14 @@ namespace Assets.Scripts
                     new Vector2(-240, 100), new Vector2(240, 100),
                     new Vector2(-500, -60), new Vector2(0, -60), new Vector2(500, -60),
                     new Vector2(-280, -260), new Vector2(280, -260)
+                }
+            },
+            {
+                8, new List<Vector2>
+                {
+                    new Vector2(-500, 60), new Vector2(0, 120), new Vector2(500, 60),
+                    new Vector2(-230, -80), new Vector2(230, -80),
+                    new Vector2(-500, -240), new Vector2(0, -300), new Vector2(500, -240)
                 }
             }
         };

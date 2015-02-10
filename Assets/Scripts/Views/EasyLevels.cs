@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
-    public class Levels : ViewBase
+    public class EasyLevels : ViewBase
     {
         public int Page;
         private List<GameButton> _levelButtons;
@@ -28,17 +28,17 @@ namespace Assets.Scripts.Views
 
         protected virtual string ListenerMethodUp
         {
-            get { return "StartGameByLevel"; }
+            get { return "PlayEasyLevel"; }
         }
 
         protected virtual int Progress
         {
-            get { return Profile.Progress; }
+            get { return Profile.ProgressEasy; }
         }
 
         protected virtual List<Level> LevelsList
         {
-            get { return GameData.Levels; }
+            get { return GameData.EasyLevels; }
         }
 
         public void Refresh()

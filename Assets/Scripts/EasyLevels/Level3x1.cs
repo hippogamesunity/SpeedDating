@@ -9,7 +9,6 @@ namespace Assets.Scripts
             TableNumber = 3,
             Time = 40,
             Target = 8,
-            TableScale = 1,
             MaleHobbies = new List<List<Hobby>>
             {
                 new List<Hobby> { Hobby.Books, Hobby.Music, Hobby.Flowers, Hobby.Work, Hobby.Money, Hobby.Running, Hobby.Pictures, Hobby.Sex },

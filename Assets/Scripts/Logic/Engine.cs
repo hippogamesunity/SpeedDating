@@ -13,7 +13,12 @@ namespace Assets.Scripts.Logic
         {
             DetectLanguage();
             GetComponent<Menu>().Open();
-            //StartGame(GameData.Levels.Count - 1);
+
+            //var level = GameData.HardLevels[10];
+            //level.Generator = true;
+            //Level = level;
+            //Level.Progress = 0;
+            //StartGame();
         }
 
         public void Update()
@@ -58,7 +63,7 @@ namespace Assets.Scripts.Logic
                 Destroy(table.gameObject);
             }
 
-            GameData.Levels.Shuffle();
+            GameData.EasyLevels.Shuffle();
 
             var tables = Level.Generator ? GenerateTables(Level.TableNumber, Level.Target, Level.Сomplexity) : InitializeTables(Level);
 
@@ -78,7 +83,7 @@ namespace Assets.Scripts.Logic
                 characters[1].Initialize(tables[i][1]);
 
                 table.transform.localPosition = GameData.TablePositions[Level.TableNumber][i];
-                table.transform.localScale = Level.TableScale * Vector3.one;
+                table.transform.localScale = GameData.TableScales[Level.TableNumber] * Vector3.one;
             }
 
             State = GameState.Playing;
@@ -148,6 +153,11 @@ namespace Assets.Scripts.Logic
             int max, complexity;
 
             Analize(tables, out worst, out best, out max, out complexity);
+
+            if (max < Level.Target)
+            {
+                throw new Exception(Convert.ToString(max));
+            }
 
             return Shuffle(worst);
         }

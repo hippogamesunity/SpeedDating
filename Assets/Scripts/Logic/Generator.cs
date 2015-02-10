@@ -13,14 +13,14 @@ namespace Assets.Scripts.Logic
 
         private static List<List<Person>> GenerateTables(int count, int fixedTarget, int complexity)
         {
-            var stopWatch = new Stopwatch();
+            var stopwatch = new Stopwatch();
 
-            stopWatch.Start();
+            stopwatch.Start();
 
             Action stop = () =>
             {
-                stopWatch.Stop();
-                Debug.Log("GenerateTables: stopWatch.Elapsed=" + stopWatch.Elapsed.TotalSeconds);
+                stopwatch.Stop();
+                Debug.Log("GenerateTables: stopWatch.Elapsed=" + stopwatch.Elapsed.TotalSeconds);
             };
 
             const int iterations = 1000;
@@ -35,6 +35,12 @@ namespace Assets.Scripts.Logic
                 Analize(tables, out worst, out best, out max, out fake);
 
                 Debug.Log("max = " + max);
+
+                if (fixedTarget == -1 && complexity == -1)
+                {
+                    stop();
+                    return worst;
+                }
 
                 if (fixedTarget != -1 && complexity != -1)
                 {
@@ -55,6 +61,11 @@ namespace Assets.Scripts.Logic
                     return worst;
                 }
                 else if (i == iterations)
+                {
+                    stop();
+                    return worst;
+                }
+                else if (stopwatch.Elapsed.TotalSeconds > 20)
                 {
                     stop();
                     return worst;
@@ -279,15 +290,21 @@ namespace Assets.Scripts.Logic
         {
             var rows = new List<string>();
 
+            rows.Add("MaleHobbies = new List<List<Hobby>>\r\n{");
+
             foreach (var boy in boys)
             {
                 rows.Add("new List<Hobby> { " + string.Join(", ", boy.Hobbies.Select(h => string.Format("Hobby.{0}", h)).ToArray()) + " },");
             }
 
+            rows.Add("},\r\nFemaleHobbies = new List<List<Hobby>>\r\n{");
+
             foreach (var girl in girls)
             {
                 rows.Add("new List<Hobby> { " + string.Join(", ", girl.Hobbies.Select(h => string.Format("Hobby.{0}", h)).ToArray()) + " },");
             }
+
+            rows.Add("},");
 
             Debug.Log(string.Join(Environment.NewLine, rows.ToArray()));
         }

@@ -2,9 +2,9 @@
 %SpeedDating%;Быстрые Свидания;Speed Dating
 %MenuMessage%;Добро пожаловать\nна самую крутую вечеринку!;Welcome to the greatest party!
 %Team%;Команда;Team
-%SelectLevel%;Выберите уровень;Select level
-%Bonus%;Бонус;Bonus
-%SwapLevels%;Бонус-уровни;Bonus levels
+%EasyLevels%;Легкие уровни;Easy levels
+%HardLevels%;Сложные уровни;Hard levels
+%SwapLevels%;Бонус уровни;Select level
 %Paused%;Пауза;Paused
 %PauseMessage%;Вы точно хотите выйти?;Do you wont to quit?
 %Win%;Победа;Win
@@ -19,3 +19,9 @@
 %Developer%;разработчик;developer
 %BackgroundArtist%;художник интерьеров;background artist
 %CharacterArtist%;художник персонажей;character artist
+%Mode%;Режим;Mode
+%Easy%;Легкий;Easy
+%Hard%;Сложный;Hard
+%Swap%;Думай;Think
+%Memo%;Запоминай;Memorize
+%Max%;Кто больше;Who is more

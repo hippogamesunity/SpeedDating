@@ -29,7 +29,7 @@ namespace Assets.Scripts.Views
 
             Score.SetText("0/{0}", Engine.Level.Target);
 
-            if (Engine.Level.Type == LevelType.Time)
+            if (Engine.Level.Type == LevelType.Easy)
             {
                 TimeIcon.enabled = true;
                 SwapIcon.enabled = false;
@@ -54,7 +54,7 @@ namespace Assets.Scripts.Views
         {
             if (Engine.State != GameState.Playing) return;
 
-            if (Engine.Level.Type == LevelType.Time)
+            if (Engine.Level.Type == LevelType.Easy || Engine.Level.Type == LevelType.Hard)
             {
                 var timespan = Engine.Timeout - DateTime.Now;
 
@@ -103,7 +103,7 @@ namespace Assets.Scripts.Views
 
         public void SetScoreDialog(bool completed)
         {
-            ScoreDialogTitle.SetLocalizedText(completed ? "%Win%" : Engine.Level.Type == LevelType.Time ? "%TimeUp%" : "%GameOver%");
+            ScoreDialogTitle.SetLocalizedText(completed ? "%Win%" : Engine.Level.Type == LevelType.Easy ? "%TimeUp%" : "%GameOver%");
             ScoreDialogMessage.SetLocalizedText(completed ? "%LevelCompleted%" : "%LevelFailed%");
         }
 

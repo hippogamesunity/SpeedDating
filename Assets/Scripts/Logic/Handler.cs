@@ -6,36 +6,65 @@ namespace Assets.Scripts.Logic
 {
     public partial class Engine
     {
-        public void ShowLevels()
+        public void ShowModes()
         {
             if (ViewBase.Current is Menu)
             {
-                GetComponent<Levels>().Open();
+                GetComponent<Mode>().Open();
+            }
+        }
+
+        public void ShowEasyLevels()
+        {
+            if (ViewBase.Current is Mode)
+            {
+                GetComponent<EasyLevels>().Open();
+            }
+        }
+
+        public void ShowHardLevels()
+        {
+            if (ViewBase.Current is Mode)
+            {
+                GetComponent<HardLevels>().Open();
             }
         }
 
         public void ShowSwapLevels()
         {
-            if (ViewBase.Current is Levels)
+            if (ViewBase.Current is Mode)
             {
                 GetComponent<SwapLevels>().Open();
             }
         }
 
-        public void StartGameByLevel(object level)
+        public void PlayEasyLevel(object level)
         {
-            if (ViewBase.Current is Levels)
+            if (ViewBase.Current is EasyLevels)
             {
                 var progress = Convert.ToInt32(level);
 
-                Level = GameData.Levels[progress];
+                Level = GameData.EasyLevels[progress];
                 Level.Progress = progress;
 
                 StartGame();
             }
         }
 
-        public void StartSwapGameByLevel(object level)
+        public void PlayHardLevel(object level)
+        {
+            if (ViewBase.Current is HardLevels)
+            {
+                var progress = Convert.ToInt32(level);
+
+                Level = GameData.HardLevels[progress];
+                Level.Progress = progress;
+
+                StartGame();
+            }
+        }
+
+        public void PlaySwapLevel(object level)
         {
             if (ViewBase.Current is SwapLevels)
             {
@@ -59,9 +88,13 @@ namespace Assets.Scripts.Logic
             {
                 Application.Quit();
             }
-            else if (ViewBase.Current is Levels)
+            else if (ViewBase.Current is Mode)
             {
                 GetComponent<Menu>().Open();
+            }
+            else if (ViewBase.Current is EasyLevels)
+            {
+                GetComponent<Mode>().Open();
             }
             else if (ViewBase.Current is Play)
             {
@@ -102,9 +135,9 @@ namespace Assets.Scripts.Logic
 
         public void ShowLevelPage(object index)
         {
-            if (ViewBase.Current is Levels)
+            if (ViewBase.Current is EasyLevels)
             {
-                var view = GetComponent<Levels>();
+                var view = GetComponent<EasyLevels>();
 
                 view.Page = view.Page == 0 ? 1 : 0;
                 view.Open();

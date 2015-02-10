@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 22c6748466a594f409f9703b909c632e
+guid: 67911cbef1b28304db6b039a88f7d871
 TextureImporter:
   fileIDToRecycleName:
-    21300000: BonusButton
+    21300000: RankingsButton
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -22,7 +22,7 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1

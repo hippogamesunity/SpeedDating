@@ -2,21 +2,21 @@
 
 namespace Assets.Scripts.Views
 {
-    public class SwapLevels : EasyLevels
+    public class HardLevels : EasyLevels
     {
         protected override string ListenerMethodUp
         {
-            get { return "PlaySwapLevel"; }
+            get { return "PlayHardLevel"; }
         }
 
         protected override int Progress
         {
-            get { return Profile.ProgressSwap; }
+            get { return Profile.ProgressHard; }
         }
 
         protected override List<Level> LevelsList
         {
-            get { return GameData.SwapLevels; }
+            get { return GameData.HardLevels; }
         }
     }
 }
