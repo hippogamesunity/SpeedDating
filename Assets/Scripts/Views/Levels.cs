@@ -8,11 +8,12 @@ namespace Assets.Scripts.Views
 {
     public class Levels : ViewBase
     {
-        private List<GameButton> _levelButtons; 
+        public int Page;
+        private List<GameButton> _levelButtons;
 
         public void Awake()
         {
-            _levelButtons = Panel.GetComponentsInChildren<GameButton>(true).Where(i => i.ListenerMethodUp == "StartGameByLevel").ToList();
+            _levelButtons = Panel.GetComponentsInChildren<GameButton>(true).Where(i => i.ListenerMethodUp == ListenerMethodUp).ToList();
 
             if (_levelButtons.Count == 0)
             {
@@ -25,16 +26,42 @@ namespace Assets.Scripts.Views
             Refresh();
         }
 
+        protected virtual string ListenerMethodUp
+        {
+            get { return "StartGameByLevel"; }
+        }
+
+        protected virtual int Progress
+        {
+            get { return Profile.Progress; }
+        }
+
+        protected virtual List<Level> LevelsList
+        {
+            get { return GameData.Levels; }
+        }
+
         public void Refresh()
         {
-            var progress = Profile.Progress;
+            var progress = Progress;
 
-            foreach (var button in _levelButtons)
+            for (var i = 0; i < _levelButtons.Count; i++)
             {
+                var button = _levelButtons[i];
+                var index = Page == 0 ? i : i + _levelButtons.Count;
+                var exists = LevelsList.Count > index;
+
+                button.gameObject.SetActive(exists);
+
+                if (!exists) continue;
+
                 var image = button.GetComponent<UITexture>();
                 var text = button.GetComponentInChildren<UILabel>();
+                
+                button.Params = Convert.ToString(index);
+                text.SetText(index + 1);
 
-                if ((int.Parse(button.Params) <= progress || Settings.Debug) && GameData.Levels.Count >= int.Parse(button.Params))
+                if (index < progress || Settings.Debug)
                 {
                     button.Enabled = true;
                     image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");
@@ -43,10 +70,16 @@ namespace Assets.Scripts.Views
                 }
                 else
                 {
-                    button.Enabled = false;
-                    image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelLockedButton");
-                    text.color = ColorHelper.GetColor(180, 180, 180);
-                    text.applyGradient = false;
+                    if (LevelsList.Count > index)
+                    {
+                        image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelLockedButton");
+                        text.color = ColorHelper.GetColor(180, 180, 180);
+                        text.applyGradient = false;
+                    }
+                    else
+                    {
+                        button.gameObject.SetActive(false);
+                    }
                 }
             }
         }

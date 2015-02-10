@@ -20,7 +20,8 @@ namespace Assets.Scripts
                     Level4x0b, Level4x2, Level4x3, Level4x4, Level4x5,
                     Level5x0, Level5x1, Level5x2, Level5x3, Level5x4,
                     Level5x5a, Level5x5b, Level5x6, Level6x0, Level6x1,
-                    Level6x2, Level6x3, Level6x4a, Level6x4a, Level6x5, Level6x4b
+                    Level6x2, Level6x3, Level6x4a, Level6x4a, Level6x5,
+                    Level6x4b
                 };
             }
         }

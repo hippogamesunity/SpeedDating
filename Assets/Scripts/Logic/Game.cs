@@ -18,7 +18,17 @@ namespace Assets.Scripts.Logic
         public static GameState State
         {
             get { return _state; }
-            set { _state = value; Time.timeScale = value == GameState.Paused ? 0 : 1; }
+            set
+            {
+                _state = value;
+                
+                Time.timeScale = value == GameState.Paused ? 0 : 1;
+                
+                if (Time.timeScale > 0)
+                {
+                    Find<AudioPlayer>().ScheduleFix();
+                }
+            }
         }
 
         public void StartGame()
@@ -31,7 +41,7 @@ namespace Assets.Scripts.Logic
 
             play.Open(BeginGame);
 
-            if (Level.Progress == 1)
+            if (Level.Progress == 0)
             {
                 TaskScheduler.CreateTask(() => PauseGame(play.HelpDialog), TaskId, 1);
             }

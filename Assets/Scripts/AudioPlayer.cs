@@ -27,6 +27,12 @@ namespace Assets.Scripts
 
         public void PlayMusicByIndex(object index)
         {
+            if (Profile.Mute)
+            {
+                Profile.Mute = false;
+                Refresh();
+            }
+
             PlayInGameNext(Music[Convert.ToInt32(index)]);
         }
 
@@ -38,6 +44,15 @@ namespace Assets.Scripts
         public void Success()
         {
             PlayEffect(SuccessSound);
+        }
+
+        public void ScheduleFix()
+        {
+            var nexts = Music.Where(i => i != AudioSource.clip).ToList();
+            var next = nexts[CRandom.GetRandom(0, nexts.Count)];
+
+            TaskScheduler.Kill(888);
+            TaskScheduler.CreateTask(() => PlayInGameNext(next), 888, AudioSource.clip.length - AudioSource.time);
         }
 
         private void PlayEffect(AudioClip clip)

@@ -28,7 +28,7 @@ namespace Assets.Scripts.Logic
             {
                 var progress = Convert.ToInt32(level);
 
-                Level = GameData.Levels[progress - 1];
+                Level = GameData.Levels[progress];
                 Level.Progress = progress;
 
                 StartGame();
@@ -41,7 +41,7 @@ namespace Assets.Scripts.Logic
             {
                 var progress = Convert.ToInt32(level);
 
-                Level = GameData.SwapLevels[progress - 1];
+                Level = GameData.SwapLevels[progress];
                 Level.Progress = progress;
                 
                 StartGame();
@@ -60,10 +60,6 @@ namespace Assets.Scripts.Logic
                 Application.Quit();
             }
             else if (ViewBase.Current is Levels)
-            {
-                GetComponent<Menu>().Open();
-            }
-            else if (ViewBase.Current is SwapLevels)
             {
                 GetComponent<Menu>().Open();
             }
@@ -101,6 +97,17 @@ namespace Assets.Scripts.Logic
             if (ViewBase.Current is Menu)
             {
                 GetComponent<Team>().Open();
+            }
+        }
+
+        public void ShowLevelPage(object index)
+        {
+            if (ViewBase.Current is Levels)
+            {
+                var view = GetComponent<Levels>();
+
+                view.Page = view.Page == 0 ? 1 : 0;
+                view.Open();
             }
         }
     }
