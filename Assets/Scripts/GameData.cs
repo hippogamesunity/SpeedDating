@@ -80,7 +80,7 @@ namespace Assets.Scripts
                 case "m2": return "Steven";
                 case "m3": return "Luis";
                 case "m4": return "Robert";
-                case "m5": return "Ales";
+                case "m5": return "Alex";
                 case "m6": return "Daniel";
                 case "m7": return "Tony";
                 case "m8": return "Kevin";
