@@ -94,7 +94,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Memo,
                         Time = 20,
-                        MemoizeTime = 15,
+                        MemoizeTime = 20,
                         TableNumber = 6,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -119,7 +119,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Memo,
                         Time = 20,
-                        MemoizeTime = 20,
+                        MemoizeTime = 25,
                         TableNumber = 7,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -147,7 +147,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Memo,
                         Time = 20,
-                        MemoizeTime = 20,
+                        MemoizeTime = 30,
                         TableNumber = 8,
                         MaleHobbies = new List<List<Hobby>>
                         {
