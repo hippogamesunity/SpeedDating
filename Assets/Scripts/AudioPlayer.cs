@@ -91,7 +91,7 @@ namespace Assets.Scripts
             var next = nexts[CRandom.GetRandom(0, nexts.Count)];
 
             TaskScheduler.Kill(888);
-            TaskScheduler.CreateTask(() => PlayInGameNext(next), 888, next.length);
+            TaskScheduler.CreateTask(() => PlayInGameNext(next), 888, clip.length);
         }
     }
 }

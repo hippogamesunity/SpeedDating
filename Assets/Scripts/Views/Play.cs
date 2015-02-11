@@ -29,9 +29,16 @@ namespace Assets.Scripts.Views
             ScoreDialog.Hide(0f);
             HelpDialog.Hide(0f);
 
-            Score.SetText("0/{0}", Engine.Level.HideTarget ? "?" : Convert.ToString(Engine.Level.Target));
+            if (Engine.Level.Type == LevelType.Memo)
+            {
+                Score.SetText(null);
+            }
+            else
+            {
+                Score.SetText("0/{0}", Engine.Level.HideTarget ? "?" : Convert.ToString(Engine.Level.Target));
+            }
 
-            if (Engine.Level.Type == LevelType.Easy)
+            if (Engine.Level.Type == LevelType.Easy || Engine.Level.Type == LevelType.Hard)
             {
                 TimeIcon.enabled = true;
                 SwapIcon.enabled = false;
@@ -45,6 +52,13 @@ namespace Assets.Scripts.Views
                 HourHand.gameObject.SetActive(false);
                 HelpDialogMessage.SetLocalizedText("%SwapMode%");
             }
+            if (Engine.Level.Type == LevelType.Memo)
+            {
+                TimeIcon.enabled = true;
+                SwapIcon.enabled = false;
+                HourHand.gameObject.SetActive(true);
+                HelpDialogMessage.SetLocalizedText(Engine.Level.Memorize ? "%MemoMode1%" : "%MemoMode2%");
+            }
         }
 
         protected override void Cleanup()
@@ -56,7 +70,7 @@ namespace Assets.Scripts.Views
         {
             if (Engine.State != GameState.Playing) return;
 
-            if (Engine.Level.Type == LevelType.Easy || Engine.Level.Type == LevelType.Hard)
+            if (Engine.Level.Type == LevelType.Easy || Engine.Level.Type == LevelType.Hard || Engine.Level.Type == LevelType.Memo)
             {
                 var timespan = Engine.Timeout - DateTime.Now;
 
@@ -66,7 +80,7 @@ namespace Assets.Scripts.Views
 
                     Timer.SetText(Convert.ToString(Math.Round(timespan.TotalSeconds)));
 
-                    var p = (float) timespan.TotalSeconds / Engine.Level.Time;
+                    var p = (float) timespan.TotalSeconds / (Engine.Level.Memorize ? Engine.Level.MemoizeTime : Engine.Level.Time);
 
                     HourHand.rotation = Quaternion.Euler(0, 0, 360 * p - 360);
 
@@ -83,7 +97,14 @@ namespace Assets.Scripts.Views
                 }
                 else
                 {
-                    Get<Engine>().CompleteGame();
+                    if (Engine.Level.Type == LevelType.Memo && Engine.Level.Memorize)
+                    {
+                        Get<Engine>().PlayMemo();
+                    }
+                    else
+                    {
+                        Get<Engine>().CompleteGame();
+                    }
                 }
             }
             else if (Engine.Level.Type == LevelType.Swap)

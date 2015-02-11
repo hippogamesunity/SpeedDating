@@ -1,8 +1,10 @@
 fileFormatVersion: 2
-guid: 22f9969aad01d86498fc7ea6cef480bd
+guid: 2b441732e53df4744bc75a87221df05a
 TextureImporter:
   fileIDToRecycleName:
-    21300000: SelectSwapLevelPanel
+    21300000: SelectLevel
+    21300002: SelectLevelPanel
+    21300004: SelectLevelPanelLarge
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

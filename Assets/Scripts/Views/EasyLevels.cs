@@ -61,7 +61,7 @@ namespace Assets.Scripts.Views
                 button.Params = Convert.ToString(index);
                 text.SetText(index + 1);
 
-                if (index < progress || Settings.Debug)
+                if (index <= progress || Settings.Debug)
                 {
                     button.Enabled = true;
                     image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");

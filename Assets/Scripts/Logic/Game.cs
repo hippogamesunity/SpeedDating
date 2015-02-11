@@ -23,11 +23,7 @@ namespace Assets.Scripts.Logic
                 _state = value;
                 
                 Time.timeScale = value == GameState.Paused ? 0 : 1;
-                
-                if (Time.timeScale > 0)
-                {
-                    Find<AudioPlayer>().ScheduleFix();
-                }
+                Find<AudioPlayer>().ScheduleFix();
             }
         }
 
@@ -41,10 +37,20 @@ namespace Assets.Scripts.Logic
 
             play.Open(BeginGame);
 
-            if ((Level.Type == LevelType.Easy || Level.Type == LevelType.Swap) && Level.Progress == 0)
+            if ((Level.Type == LevelType.Easy || Level.Type == LevelType.Swap || Level.Type == LevelType.Memo) && Level.Progress == 0)
             {
                 TaskScheduler.CreateTask(() => PauseGame(play.HelpDialog), TaskId, 1);
             }
+        }
+
+        public void RestartGame()
+        {
+            if (Level.Type == LevelType.Memo)
+            {
+                Level.Memorize = true;
+            }
+
+            StartGame();
         }
 
         public void PlayNext()
@@ -55,10 +61,23 @@ namespace Assets.Scripts.Logic
             {
                 var progress = Level.Progress + 1;
 
-                Level = levels[progress];
-                Level.Progress = progress;
-
-                StartGame();
+                switch (Level.Type)
+                {
+                    case LevelType.Easy:
+                        PlayEasyLevel(progress);
+                        break;
+                    case LevelType.Hard:
+                        PlayHardLevel(progress);
+                        break;
+                    case LevelType.Swap:
+                        PlaySwapLevel(progress);
+                        break;
+                    case LevelType.Memo:
+                        PlayMemoLevel(progress);
+                        break;
+                    default:
+                        throw new Exception();
+                }
             }
             else
             {
@@ -85,32 +104,60 @@ namespace Assets.Scripts.Logic
             State = GameState.Paused;
 
             var score = CalcScore();
+            var success = false;
 
             if (Level.Type == LevelType.Easy)
             {
-                if (score >= Level.Target && Profile.ProgressEasy == Level.Progress)
+                if (score >= Level.Target)
                 {
-                    Profile.ProgressEasy++;
+                    success = true;
+
+                    if (Profile.ProgressEasy == Level.Progress)
+                    {
+                        Profile.ProgressEasy++;
+                    }
                 }
             }
             else if (Level.Type == LevelType.Hard)
             {
-                if (score >= Level.Target && Profile.ProgressHard == Level.Progress)
+                if (score >= Level.Target)
                 {
-                    Profile.ProgressHard++;
+                    success = true;
+
+                    if (Profile.ProgressHard == Level.Progress)
+                    {
+                        Profile.ProgressHard++;
+                    }
                 }
             }
             else if (Level.Type == LevelType.Swap)
             {
-                if (score >= Level.Target && Profile.ProgressSwap == Level.Progress)
+                if (score >= Level.Target)
                 {
-                    Profile.ProgressSwap++;
+                    success = true;
+
+                    if (Profile.ProgressSwap == Level.Progress)
+                    {
+                        Profile.ProgressSwap++;
+                    }
+                }
+            }
+            else if (Level.Type == LevelType.Memo)
+            {
+                if (Level.FormationHash == GetFormation())
+                {
+                    success = true;
+
+                    if (Profile.ProgressMemo == Level.Progress)
+                    {
+                        Profile.ProgressMemo++;
+                    }
                 }
             }
 
             var play = Get<Play>();
 
-            play.SetScoreDialog(score >= Level.Target);
+            play.SetScoreDialog(success);
             play.ShowDialog(play.ScoreDialog);
 
             if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(5) && AdBuddizBinding.IsReadyToShowAd())
@@ -137,9 +184,20 @@ namespace Assets.Scripts.Logic
                 case LevelType.Swap:
                     Get<SwapLevels>().Open();
                     break;
+                case LevelType.Memo:
+                    Get<MemoLevels>().Open();
+                    break;
+                default:
+                    throw new Exception();
             }
 
             State = GameState.Ready;
+        }
+
+        public void PlayMemo()
+        {
+            Level.Memorize = false;
+            StartGame();
         }
     }
 }

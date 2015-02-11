@@ -4,6 +4,7 @@
     {
         Easy,
         Hard,
-        Swap
+        Swap,
+        Memo
     }
 }

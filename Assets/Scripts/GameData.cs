@@ -35,6 +35,8 @@ namespace Assets.Scripts
                     return HardLevels;
                 case LevelType.Swap:
                     return SwapLevels;
+                case LevelType.Memo:
+                    return MemoLevels;
                 default:
                     throw new Exception();
             }
@@ -242,13 +244,13 @@ namespace Assets.Scripts
 
         public static readonly Dictionary<int, float> TableScales = new Dictionary<int, float>
         {
-            { 2, 1 },
-            { 3, 1 },
+            { 2, 1.00f },
+            { 3, 1.00f },
             { 4, 0.75f },
             { 5, 0.75f },
-            { 6, 0.70f },
-            { 7, 0.70f },
-            { 8, 0.6f },
+            { 6, 0.75f },
+            { 7, 0.65f },
+            { 8, 0.60f },
         };
 
         public static readonly Dictionary<int, List<Vector2>> TablePositions = new Dictionary<int, List<Vector2>>
@@ -282,15 +284,15 @@ namespace Assets.Scripts
                 {
                     new Vector2(-180, 100), new Vector2(180, 100),
                     new Vector2(-500, -60), new Vector2(500, -60),
-                    new Vector2(-220, -260), new Vector2(220, -260)
+                    new Vector2(-180, -260), new Vector2(180, -260)
                 }
             },
             {
                 7, new List<Vector2>
                 {
-                    new Vector2(-240, 100), new Vector2(240, 100),
-                    new Vector2(-500, -60), new Vector2(0, -60), new Vector2(500, -60),
-                    new Vector2(-280, -260), new Vector2(280, -260)
+                    new Vector2(-250, 120), new Vector2(250, 120),
+                    new Vector2(-500, -80), new Vector2(0, -80), new Vector2(500, -80),
+                    new Vector2(-250, -300), new Vector2(250, -300)
                 }
             },
             {

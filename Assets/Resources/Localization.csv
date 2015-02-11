@@ -4,19 +4,23 @@
 %Team%;Команда;Team
 %EasyLevels%;Легкие уровни;Easy levels
 %HardLevels%;Сложные уровни;Hard levels
-%SwapLevels%;Бонус уровни;Select level
+%SwapLevels%;Думай;Think
+%MemoLevels%;Запоминай;Memorize
 %Paused%;Пауза;Paused
-%PauseMessage%;Нажмите Play, чтобы продолжить;Press play button to continue
+%PauseMessage%;Нажми Play, чтобы продолжить;Press play button to continue
 %Win%;Победа;Win
 %TimeUp%;Время вышло;Time is up
 %GameOver%;Вы проиграли;You lose
 %LevelCompleted%;Супер, уровень пройден!;Congratulation, level completed!
 %LevelFailed%;Повезет в другой раз!;Better luck next time!
 %HowToPlay%;Подсказка;How to play
-%TimeMode%;Пересаживайте персонажей\nи найдите им вторую половинку;How to find love?\nRepot characters between tables
-%SwapMode%;Пройдите уровень с меньшим\nколичеством перемещений;Pass this level\nwith less swap actions
+%TimeMode%;Пересаживай персонажей\nи найди им вторую половинку;How to find love?\nRepot characters between tables
+%SwapMode%;Пройди уровень с меньшим\nколичеством перемещений;Pass this level\nwith less swap actions
+%MemoMode1%;У тебя есть пара секунд, чтобы\nзапомнить, кто с кем сидит;You have a few seconds\nto memorize who sits with who
+%MemoMode2%;А теперь самое время\nвспомнить, кто с кем сидел;Now remember\nwho was sitting with who
 %TeamLead%;руководитель;team lead
 %Developer%;разработчик;developer
+%Linguist%;лингвист;linguist
 %BackgroundArtist%;художник интерьеров;background artist
 %CharacterArtist%;художник персонажей;character artist
 %Mode%;Режим;Mode

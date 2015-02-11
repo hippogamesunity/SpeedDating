@@ -6,14 +6,12 @@ namespace Assets.Scripts.Views
     public class Mode : ViewBase
     {
         public GameButton HardLevelsButton;
-        public GameButton MemoLevelsButton;
         public GameButton MaxLevelsButton;
         public GameButton RankingsButton;
 
         protected override void Initialize()
         {
             EnableButton(HardLevelsButton, Profile.ProgressEasy >= GameData.EasyLevels.Count || Settings.Debug);
-            EnableButton(MemoLevelsButton, false);
             EnableButton(MaxLevelsButton, false);
 
             RankingsButton.Enabled = false;

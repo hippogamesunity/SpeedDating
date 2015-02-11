@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Common;
 using Assets.Scripts.Views;
 using UnityEngine;
 
@@ -38,48 +39,95 @@ namespace Assets.Scripts.Logic
             }
         }
 
+        public void ShowMemoLevels()
+        {
+            if (ViewBase.Current is Mode)
+            {
+                GetComponent<MemoLevels>().Open();
+            }
+        }
+
         public void PlayEasyLevel(object level)
         {
             if (ViewBase.Current is EasyLevels)
             {
-                var progress = Convert.ToInt32(level);
-
-                Level = GameData.EasyLevels[progress];
-                Level.Progress = progress;
-
-                StartGame();
+                PlayEasyLevel(Convert.ToInt32(level));
             }
+        }
+
+        public void PlayEasyLevel(int progress)
+        {
+            Level = GameData.EasyLevels[progress];
+            Level.Progress = progress;
+
+            StartGame();
         }
 
         public void PlayHardLevel(object level)
         {
             if (ViewBase.Current is HardLevels)
             {
-                var progress = Convert.ToInt32(level);
-
-                Level = GameData.HardLevels[progress];
-                Level.Progress = progress;
-
-                StartGame();
+                PlayHardLevel(Convert.ToInt32(level));
             }
+        }
+
+        public void PlayHardLevel(int progress)
+        {
+            Level = GameData.HardLevels[progress];
+            Level.Progress = progress;
+
+            StartGame();
         }
 
         public void PlaySwapLevel(object level)
         {
             if (ViewBase.Current is SwapLevels)
             {
-                var progress = Convert.ToInt32(level);
-
-                Level = GameData.SwapLevels[progress];
-                Level.Progress = progress;
-                
-                StartGame();
+                PlaySwapLevel(Convert.ToInt32(level));
             }
+        }
+
+        public void PlaySwapLevel(int progress)
+        {
+            Level = GameData.SwapLevels[progress];
+            Level.Progress = progress;
+
+            StartGame();
+        }
+
+        public void PlayMemoLevel(object level)
+        {
+            if (ViewBase.Current is MemoLevels)
+            {
+                PlayMemoLevel(Convert.ToInt32(level));
+            }
+        }
+
+        public void PlayMemoLevel(int progress)
+        {
+            Level = GameData.MemoLevels[progress];
+            Level.Progress = progress;
+            Level.Memorize = true;
+
+            StartGame();
         }
 
         public void Swapped()
         {
             Swaps++;
+
+            if (Level.Type == LevelType.Memo)
+            {
+                var formation = GetFormation();
+
+                Debug.Log(formation);
+
+                if (formation == Level.FormationHash)
+                {
+                    TaskScheduler.CreateTask(Find<AudioPlayer>().Success, TaskId, 0.5f);
+                    TaskScheduler.CreateTask(Find<Engine>().CompleteGame, TaskId, 0.5f);
+                }
+            }
         }
 
         public void GoBack()

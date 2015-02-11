@@ -239,7 +239,7 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Games, Hobby.Guitar, Hobby.Animals },
                         },
                         Сomplexity = 1,
-                        Formation = new List<List<int>> {new List<int> { 6, 4 }, new List<int> { 5, 1 }, new List<int> { 4, 3 }, new List<int> { 3, 6 }, new List<int> { 2, 2 }, new List<int> { 1, 0 }, new List<int> { 0, 5 } }
+                        Formation = new List<List<int>> { new List<int> { 6, 4 }, new List<int> { 5, 1 }, new List<int> { 4, 3 }, new List<int> { 3, 6 }, new List<int> { 2, 2 }, new List<int> { 1, 0 }, new List<int> { 0, 5 } }
                     },
                     new Level
                     {
@@ -267,7 +267,8 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Cars, Hobby.Animals, Hobby.Flowers, Hobby.Running, Hobby.Jewelry, Hobby.Football, Hobby.Music },
                         new List<Hobby> { Hobby.Money, Hobby.Football, Hobby.Pictures, Hobby.Work },
                         },
-                        Сomplexity = 2
+                        Сomplexity = 2,
+                        Formation = new List<List<int>> { new List<int> { 0, 0 }, new List<int> { 1, 6 }, new List<int> { 2, 3 }, new List<int> { 3, 4 }, new List<int> { 4, 1 }, new List<int> { 5, 2 }, new List<int> { 6, 5 } }
                     },
                     new Level
                     {
@@ -296,7 +297,7 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Cars, Hobby.Guitar, Hobby.Skate, Hobby.Flowers, Hobby.Fashion, Hobby.Money, Hobby.Football, Hobby.Sex },
                         },
                         Сomplexity = 5,
-                        Formation = new List<List<int>> {new List<int> { 6, 1 }, new List<int> { 5, 2 }, new List<int> { 4, 0 }, new List<int> { 3, 3 }, new List<int> { 2, 4 }, new List<int> { 1, 6 }, new List<int> { 0, 5 } }
+                        Formation = new List<List<int>> { new List<int> { 6, 1 }, new List<int> { 5, 2 }, new List<int> { 4, 0 }, new List<int> { 3, 3 }, new List<int> { 2, 4 }, new List<int> { 1, 6 }, new List<int> { 0, 5 } }
                     },
                     new Level
                     {
@@ -325,7 +326,7 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Beauty, Hobby.Guitar, Hobby.Food, Hobby.Jewelry, Hobby.Music, Hobby.TV },
                         },
                         Сomplexity = 7,
-                        Formation = new List<List<int>> {new List<int> { 6, 0 }, new List<int> { 5, 2 }, new List<int> { 4, 4 }, new List<int> { 3, 5 }, new List<int> { 2, 3 }, new List<int> { 1, 6 }, new List<int> { 0, 1 } }
+                        Formation = new List<List<int>> { new List<int> { 6, 0 }, new List<int> { 5, 2 }, new List<int> { 4, 4 }, new List<int> { 3, 5 }, new List<int> { 2, 3 }, new List<int> { 1, 6 }, new List<int> { 0, 1 } }
                     },
                     new Level
                     {
@@ -354,7 +355,7 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Money, Hobby.Cars, Hobby.Games, Hobby.Work, Hobby.Singing, Hobby.Flowers, Hobby.Fishing, Hobby.Guitar },
                         },
                         Сomplexity = 8,
-                        Formation = new List<List<int>> {new List<int> { 6, 3 }, new List<int> { 5, 5 }, new List<int> { 4, 0 }, new List<int> { 3, 4 }, new List<int> { 2, 2 }, new List<int> { 1, 1 }, new List<int> { 0, 6 } }
+                        Formation = new List<List<int>> { new List<int> { 6, 3 }, new List<int> { 5, 5 }, new List<int> { 4, 0 }, new List<int> { 3, 4 }, new List<int> { 2, 2 }, new List<int> { 1, 1 }, new List<int> { 0, 6 } }
                     },
                     new Level
                     {
@@ -385,7 +386,7 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Music, Hobby.Sex, Hobby.Football },
                         },
                         Сomplexity = 1,
-                        Formation = new List<List<int>> {new List<int> { 7, 3 }, new List<int> { 6, 7 }, new List<int> { 5, 4 }, new List<int> { 4, 0 }, new List<int> { 3, 2 }, new List<int> { 2, 5 }, new List<int> { 1, 1 }, new List<int> { 0, 6 } }
+                        Formation = new List<List<int>> { new List<int> { 7, 3 }, new List<int> { 6, 7 }, new List<int> { 5, 4 }, new List<int> { 4, 0 }, new List<int> { 3, 2 }, new List<int> { 2, 5 }, new List<int> { 1, 1 }, new List<int> { 0, 6 } }
                     },
                     new Level
                     {
@@ -416,7 +417,7 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Pictures, Hobby.Fashion, Hobby.Sex, Hobby.Singing, Hobby.Skate, Hobby.Money, Hobby.Archery },
                         },
                         Сomplexity = 6,
-                        Formation = new List<List<int>> {new List<int> { 7, 7 }, new List<int> { 6, 0 }, new List<int> { 5, 5 }, new List<int> { 4, 2 }, new List<int> { 3, 1 }, new List<int> { 2, 4 }, new List<int> { 1, 6 }, new List<int> { 0, 3 } }
+                        Formation = new List<List<int>> { new List<int> { 7, 7 }, new List<int> { 6, 0 }, new List<int> { 5, 5 }, new List<int> { 4, 2 }, new List<int> { 3, 1 }, new List<int> { 2, 4 }, new List<int> { 1, 6 }, new List<int> { 0, 3 } }
                     },
                     new Level
                     {

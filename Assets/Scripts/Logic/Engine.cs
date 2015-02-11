@@ -14,6 +14,9 @@ namespace Assets.Scripts.Logic
             AdBuddizBinding.SetLogLevel(AdBuddizBinding.ABLogLevel.Info);
             AdBuddizBinding.SetAndroidPublisherKey("bdc2f780-6d67-4ad9-9545-5092d50bf19a");
             AdBuddizBinding.CacheAds();
+
+            //PlayerPrefs.DeleteAll();
+            //PlayerPrefs.Save();
         }
 
         public void Start()
@@ -21,10 +24,11 @@ namespace Assets.Scripts.Logic
             DetectLanguage();
             GetComponent<Menu>().Open();
 
-            //var level = GameData.HardLevels[3];
+            //var level = GameData.MemoLevels[0];
             //level.Generator = true;
             //Level = level;
             //Level.Progress = 0;
+            //Level.Memorize = true;
             //StartGame();
         }
 
@@ -72,9 +76,57 @@ namespace Assets.Scripts.Logic
 
             GameData.EasyLevels.Shuffle();
 
-            var tables = Level.Generator ? GenerateTables(Level.TableNumber, Level.Target, Level.Сomplexity) : InitializeTables(Level);
+            List<List<Person>> tables;
 
-            Timeout = DateTime.Now.AddSeconds(Level.Time);
+            if (Level.Generator)
+            {
+                tables = GenerateTables(Level.TableNumber, Level.Target, Level.Сomplexity);
+            }
+            else if (Level.Type == LevelType.Memo)
+            {
+                if (Level.Memorize)
+                {
+                    tables = Level.Tables = InitializeTables(Level);
+                }
+                else
+                {
+                    tables = Level.Tables;
+
+                    if (tables.Count <= 3)
+                    {
+                        List<List<Person>> worst, best;
+                        int max, complexity;
+
+                        Analize(tables, out worst, out best, out max, out complexity);
+
+                        tables = best;
+                    }
+                    else // Fix slow analization on mobile
+                    {
+                        var persons = new List<Person>();
+
+                        foreach (var table in tables)
+                        {
+                            persons.Add(table[0]);
+                            persons.Add(table[1]);
+                        }
+
+                        persons.Shuffle();
+
+                        for (var i = 0; i < tables.Count; i++)
+                        {
+                            tables[i][0] = persons[i];
+                            tables[i][1] = persons[i + tables.Count];
+                        }
+                    }
+                }
+            }
+            else
+            {
+                tables = InitializeTables(Level);
+            }
+
+            Timeout = Level.Memorize ? DateTime.Now.AddSeconds(Level.MemoizeTime) : DateTime.Now.AddSeconds(Level.Time);
             Swaps = 0;
 
             RemoveUnusedHobbies(tables);
@@ -91,6 +143,11 @@ namespace Assets.Scripts.Logic
 
                 table.transform.localPosition = GameData.TablePositions[Level.TableNumber][i];
                 table.transform.localScale = GameData.TableScales[Level.TableNumber] * Vector3.one;
+            }
+
+            if (Level.Type == LevelType.Memo && Level.Memorize)
+            {
+                Level.FormationHash = GetFormation(tables);
             }
 
             State = GameState.Playing;
@@ -179,7 +236,7 @@ namespace Assets.Scripts.Logic
 
             Analize(tables, out worst, out best, out max, out complexity);
 
-            if (max != Level.Target)
+            if (max != Level.Target && Level.Type != LevelType.Memo)
             {
                 throw new Exception(Convert.ToString(max));
             }
@@ -199,22 +256,43 @@ namespace Assets.Scripts.Logic
 
             if (Settings.Debug)
             {
-                var formation = new List<string>();
-
-                foreach (var table in tables)
-                {
-                    var i = table[0].Male ? Level.MaleHobbies.IndexOf(table[0].Hobbies) : Level.FemaleHobbies.IndexOf(table[0].Hobbies);
-                    var j = table[1].Male ? Level.MaleHobbies.IndexOf(table[1].Hobbies) : Level.FemaleHobbies.IndexOf(table[1].Hobbies);
-
-                    formation.Add(table[0].Male
-                        ? string.Format("new List<int> {{ {0}, {1} }}", i, j)
-                        : string.Format("new List<int> {{ {0}, {1} }}", j, i));
-                }
-            
-                Debug.Log("Formation = new List<List<int>> {" + string.Join(", ", formation.ToArray()) + " }");
+                Debug.Log(GetFormation(tables));
             }
 
             return tables.Shuffle();
+        }
+
+        private static string GetFormation(List<List<Person>> tables)
+        {
+            var formation = new List<string>();
+
+            foreach (var table in tables)
+            {
+                var i = table[0].Male ? Level.MaleHobbies.IndexOf(table[0].Hobbies) : Level.FemaleHobbies.IndexOf(table[0].Hobbies);
+                var j = table[1].Male ? Level.MaleHobbies.IndexOf(table[1].Hobbies) : Level.FemaleHobbies.IndexOf(table[1].Hobbies);
+
+                formation.Add(table[0].Male
+                    ? string.Format("new List<int> {{ {0}, {1} }}", i, j)
+                    : string.Format("new List<int> {{ {0}, {1} }}", j, i));
+            }
+
+            formation.Sort();
+
+            return "Formation = new List<List<int>> { " + string.Join(", ", formation.ToArray()) + " }";
+        }
+
+        private static string GetFormation()
+        {
+            var tables = new List<List<Person>>();
+
+            foreach (var table in FindObjectsOfType<Table>())
+            {
+                var characters = table.GetComponentsInChildren<Character>().Select(i => i.Person).ToList();
+
+                tables.Add(new List<Person> { characters[0], characters[1] });
+            }
+
+            return GetFormation(tables);
         }
 
         private static int IncMod(int source, int value, int mod)

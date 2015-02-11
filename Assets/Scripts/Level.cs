@@ -19,5 +19,10 @@ namespace Assets.Scripts
         public bool JapanNames;
         public int Сomplexity = 0;
         public bool HideTarget;
+
+        public int MemoizeTime;
+        public bool Memorize;
+        public string FormationHash;
+        public List<List<Person>> Tables;
     }
 }

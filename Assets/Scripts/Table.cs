@@ -19,6 +19,8 @@ namespace Assets.Scripts
 
         public void Refresh()
         {
+            if (Engine.Level.Type == LevelType.Memo) return;
+
             var characters = FindObjectsOfType<Character>().Where(i => i.Table == this).ToList();
             var sympathy = GetSympathy(characters[0].Person, characters[1].Person);
 
