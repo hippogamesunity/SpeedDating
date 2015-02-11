@@ -124,8 +124,8 @@ namespace Assets.Scripts.Logic
 
                 if (formation == Level.FormationHash)
                 {
-                    TaskScheduler.CreateTask(Find<AudioPlayer>().Success, TaskId, 0.5f);
-                    TaskScheduler.CreateTask(Find<Engine>().CompleteGame, TaskId, 0.5f);
+                    TaskScheduler.CreateTask(Find<AudioPlayer>().Success, TaskId, 0f);
+                    TaskScheduler.CreateTask(Find<Engine>().CompleteGame, TaskId, 1f);
                 }
             }
         }
