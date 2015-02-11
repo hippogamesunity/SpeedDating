@@ -13,8 +13,106 @@ namespace Assets.Scripts
                     new Level
                     {
                         Type = LevelType.Hard,
-                        TableNumber = 6,
+                        TableNumber = 4,
                         Time = 120,
+                        Target = 10,
+                        MaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Photo, Hobby.Sex, Hobby.Food, Hobby.Animals, Hobby.Archery, Hobby.Money, Hobby.Flowers, Hobby.Work },
+                        new List<Hobby> { Hobby.Photo, Hobby.Football, Hobby.Archery, Hobby.Games, Hobby.Drink, Hobby.Money, Hobby.Work, Hobby.TV },
+                        new List<Hobby> { Hobby.Food, Hobby.Work, Hobby.Football },
+                        new List<Hobby> { Hobby.Fishing, Hobby.Running, Hobby.Cars, Hobby.Drink, Hobby.Games, Hobby.Singing },
+                        },
+                        FemaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Food, Hobby.Fishing, Hobby.Cars, Hobby.Games, Hobby.Books, Hobby.Work, Hobby.Skate },
+                        new List<Hobby> { Hobby.Jewelry, Hobby.Books, Hobby.Archery, Hobby.Skate, Hobby.Animals, Hobby.Sex, Hobby.Photo, Hobby.Work },
+                        new List<Hobby> { Hobby.Photo, Hobby.Pictures, Hobby.Beauty, Hobby.Work, Hobby.Animals, Hobby.Sex, Hobby.Cars },
+                        new List<Hobby> { Hobby.Pictures, Hobby.Fishing, Hobby.Games, Hobby.Photo },
+                        },
+                        Сomplexity = 2,
+                        HideTarget = true
+                    },
+                    new Level
+                    {
+                        Type = LevelType.Hard,
+                        TableNumber = 5,
+                        Time = 120,
+                        Target = 12,
+                        MaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Fashion, Hobby.Work, Hobby.Fishing, Hobby.Photo, Hobby.Singing, Hobby.Animals },
+                        new List<Hobby> { Hobby.Photo, Hobby.Drink, Hobby.Guitar, Hobby.Jewelry },
+                        new List<Hobby> { Hobby.Work, Hobby.Jewelry, Hobby.Football, Hobby.Cars },
+                        new List<Hobby> { Hobby.Work, Hobby.Games, Hobby.Fashion, Hobby.Money, Hobby.TV, Hobby.Photo, Hobby.Guitar },
+                        new List<Hobby> { Hobby.Pictures, Hobby.Skate, Hobby.Food, Hobby.Cars, Hobby.Archery, Hobby.Flowers, Hobby.Running, Hobby.Sex },
+                        },
+                        FemaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Work, Hobby.Cars, Hobby.Guitar, Hobby.Fashion },
+                        new List<Hobby> { Hobby.Sex, Hobby.Photo, Hobby.Running, Hobby.Books, Hobby.Skate },
+                        new List<Hobby> { Hobby.Guitar, Hobby.Fashion, Hobby.Sex, Hobby.Music, Hobby.Photo },
+                        new List<Hobby> { Hobby.Skate, Hobby.Fashion, Hobby.Archery, Hobby.Work, Hobby.Music, Hobby.Photo, Hobby.Beauty },
+                        new List<Hobby> { Hobby.Drink, Hobby.Beauty, Hobby.Archery, Hobby.Games },
+                        },
+                        Сomplexity = 2,
+                        HideTarget = true
+                    },
+                    new Level
+                    {
+                        Type = LevelType.Hard,
+                        TableNumber = 5,
+                        Time = 120,
+                        Target = 11,
+                        MaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Jewelry, Hobby.Sex, Hobby.Skate },
+                        new List<Hobby> { Hobby.Guitar, Hobby.Archery, Hobby.Beauty, Hobby.Books, Hobby.Games, Hobby.TV, Hobby.Singing, Hobby.Money },
+                        new List<Hobby> { Hobby.Sex, Hobby.Guitar, Hobby.Skate },
+                        new List<Hobby> { Hobby.Cars, Hobby.Beauty, Hobby.Fashion, Hobby.Fishing, Hobby.Singing, Hobby.Work },
+                        new List<Hobby> { Hobby.Flowers, Hobby.Singing, Hobby.Books, Hobby.Cars, Hobby.Photo, Hobby.Football },
+                        },
+                        FemaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Money, Hobby.Skate, Hobby.Singing, Hobby.Photo, Hobby.Archery, Hobby.Beauty, Hobby.Cars },
+                        new List<Hobby> { Hobby.Music, Hobby.Skate, Hobby.TV, Hobby.Games, Hobby.Work, Hobby.Drink },
+                        new List<Hobby> { Hobby.Jewelry, Hobby.Football, Hobby.Animals, Hobby.Fishing, Hobby.Music, Hobby.Fashion, Hobby.Flowers, Hobby.Work },
+                        new List<Hobby> { Hobby.Games, Hobby.Pictures, Hobby.Singing, Hobby.Cars, Hobby.Drink, Hobby.Work, Hobby.Running },
+                        new List<Hobby> { Hobby.Guitar, Hobby.TV, Hobby.Jewelry, Hobby.Food, Hobby.Football, Hobby.Singing },
+                        },
+                        Сomplexity = 3,
+                        HideTarget = true
+                    },
+                    new Level
+                    {
+                        Type = LevelType.Hard,
+                        TableNumber = 5,
+                        Time = 100,
+                        Target = 13,
+                        MaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Money, Hobby.Photo, Hobby.Singing, Hobby.TV, Hobby.Guitar, Hobby.Music, Hobby.Flowers, Hobby.Food },
+                        new List<Hobby> { Hobby.Football, Hobby.Beauty, Hobby.Pictures, Hobby.Archery, Hobby.Jewelry, Hobby.Animals, Hobby.Work },
+                        new List<Hobby> { Hobby.Beauty, Hobby.Pictures, Hobby.Photo, Hobby.Singing, Hobby.Books, Hobby.Flowers },
+                        new List<Hobby> { Hobby.Money, Hobby.Jewelry, Hobby.Drink, Hobby.Flowers, Hobby.Work },
+                        new List<Hobby> { Hobby.Football, Hobby.Fishing, Hobby.Running, Hobby.Archery, Hobby.Photo, Hobby.Fashion, Hobby.Drink, Hobby.Money },
+                        },
+                        FemaleHobbies = new List<List<Hobby>>
+                        {
+                        new List<Hobby> { Hobby.Animals, Hobby.Beauty, Hobby.Cars, Hobby.Money, Hobby.Pictures, Hobby.Running, Hobby.TV, Hobby.Fashion },
+                        new List<Hobby> { Hobby.Singing, Hobby.Fashion, Hobby.Guitar, Hobby.Skate, Hobby.Running, Hobby.Cars },
+                        new List<Hobby> { Hobby.Animals, Hobby.Money, Hobby.Work, Hobby.Beauty, Hobby.Books, Hobby.Drink, Hobby.Food },
+                        new List<Hobby> { Hobby.Archery, Hobby.Beauty, Hobby.Photo, Hobby.Flowers, Hobby.Animals, Hobby.Books, Hobby.Fashion, Hobby.Music },
+                        new List<Hobby> { Hobby.Beauty, Hobby.Drink, Hobby.Sex, Hobby.Skate, Hobby.Running },
+                        },
+                        Сomplexity = 5,
+                        HideTarget = true
+                    },
+                    new Level
+                    {
+                        Type = LevelType.Hard,
+                        TableNumber = 6,
+                        Time = 180,
                         Target = 13,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -40,7 +138,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 6,
-                        Time = 120,
+                        Time = 180,
                         Target = 15,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -66,7 +164,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 6,
-                        Time = 120,
+                        Time = 160,
                         Target = 16,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -118,7 +216,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 140,
+                        Time = 240,
                         Target = 16,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -140,13 +238,14 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Pictures, Hobby.Music, Hobby.Animals, Hobby.Fashion },
                         new List<Hobby> { Hobby.Games, Hobby.Guitar, Hobby.Animals },
                         },
-                        Сomplexity = 1
+                        Сomplexity = 1,
+                        Formation = new List<List<int>> {new List<int> { 6, 4 }, new List<int> { 5, 1 }, new List<int> { 4, 3 }, new List<int> { 3, 6 }, new List<int> { 2, 2 }, new List<int> { 1, 0 }, new List<int> { 0, 5 } }
                     },
                     new Level
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 140,
+                        Time = 220,
                         Target = 19,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -174,7 +273,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 140,
+                        Time = 200,
                         Target = 17,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -196,13 +295,14 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Football, Hobby.Pictures, Hobby.Fishing, Hobby.Books },
                         new List<Hobby> { Hobby.Cars, Hobby.Guitar, Hobby.Skate, Hobby.Flowers, Hobby.Fashion, Hobby.Money, Hobby.Football, Hobby.Sex },
                         },
-                        Сomplexity = 5
+                        Сomplexity = 5,
+                        Formation = new List<List<int>> {new List<int> { 6, 1 }, new List<int> { 5, 2 }, new List<int> { 4, 0 }, new List<int> { 3, 3 }, new List<int> { 2, 4 }, new List<int> { 1, 6 }, new List<int> { 0, 5 } }
                     },
                     new Level
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 140,
+                        Time = 180,
                         Target = 16,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -224,13 +324,14 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Jewelry, Hobby.Football, Hobby.Music, Hobby.Skate },
                         new List<Hobby> { Hobby.Beauty, Hobby.Guitar, Hobby.Food, Hobby.Jewelry, Hobby.Music, Hobby.TV },
                         },
-                        Сomplexity = 7
+                        Сomplexity = 7,
+                        Formation = new List<List<int>> {new List<int> { 6, 0 }, new List<int> { 5, 2 }, new List<int> { 4, 4 }, new List<int> { 3, 5 }, new List<int> { 2, 3 }, new List<int> { 1, 6 }, new List<int> { 0, 1 } }
                     },
                     new Level
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 140,
+                        Time = 160,
                         Target = 19,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -252,13 +353,14 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Books, Hobby.Games, Hobby.Photo, Hobby.Beauty, Hobby.Singing, Hobby.Drink, Hobby.Skate, Hobby.Fishing },
                         new List<Hobby> { Hobby.Money, Hobby.Cars, Hobby.Games, Hobby.Work, Hobby.Singing, Hobby.Flowers, Hobby.Fishing, Hobby.Guitar },
                         },
-                        Сomplexity = 8
+                        Сomplexity = 8,
+                        Formation = new List<List<int>> {new List<int> { 6, 3 }, new List<int> { 5, 5 }, new List<int> { 4, 0 }, new List<int> { 3, 4 }, new List<int> { 2, 2 }, new List<int> { 1, 1 }, new List<int> { 0, 6 } }
                     },
                     new Level
                     {
                         Type = LevelType.Hard,
                         TableNumber = 8,
-                        Time = 140,
+                        Time = 300,
                         Target = 18,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -282,13 +384,14 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Running, Hobby.Cars, Hobby.Photo, Hobby.Music, Hobby.Fashion, Hobby.Sex },
                         new List<Hobby> { Hobby.Music, Hobby.Sex, Hobby.Football },
                         },
-                        Сomplexity = 1
+                        Сomplexity = 1,
+                        Formation = new List<List<int>> {new List<int> { 7, 3 }, new List<int> { 6, 7 }, new List<int> { 5, 4 }, new List<int> { 4, 0 }, new List<int> { 3, 2 }, new List<int> { 2, 5 }, new List<int> { 1, 1 }, new List<int> { 0, 6 } }
                     },
                     new Level
                     {
                         Type = LevelType.Hard,
                         TableNumber = 8,
-                        Time = 140,
+                        Time = 240,
                         Target = 22,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -312,13 +415,14 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Photo, Hobby.Games, Hobby.Food, Hobby.Fashion, Hobby.Beauty, Hobby.Fishing, Hobby.Sex, Hobby.Running },
                         new List<Hobby> { Hobby.Pictures, Hobby.Fashion, Hobby.Sex, Hobby.Singing, Hobby.Skate, Hobby.Money, Hobby.Archery },
                         },
-                        Сomplexity = 6
+                        Сomplexity = 6,
+                        Formation = new List<List<int>> {new List<int> { 7, 7 }, new List<int> { 6, 0 }, new List<int> { 5, 5 }, new List<int> { 4, 2 }, new List<int> { 3, 1 }, new List<int> { 2, 4 }, new List<int> { 1, 6 }, new List<int> { 0, 3 } }
                     },
                     new Level
                     {
                         Type = LevelType.Hard,
                         TableNumber = 8,
-                        Time = 140,
+                        Time = 200,
                         Target = 22,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -342,7 +446,9 @@ namespace Assets.Scripts
                         new List<Hobby> { Hobby.Fishing, Hobby.Beauty, Hobby.Cars, Hobby.Jewelry, Hobby.Books },
                         new List<Hobby> { Hobby.Cars, Hobby.Running, Hobby.Archery, Hobby.Jewelry, Hobby.Pictures },
                         },
-                        Сomplexity = 10
+                        Сomplexity = 10,
+                        Formation = new List<List<int>> { new List<int> { 7, 0 }, new List<int> { 6, 3 }, new List<int> { 5, 7 }, new List<int> { 4, 2 }, new List<int> { 3, 5 }, new List<int> { 2, 1 }, new List<int> { 1, 6 }, new List<int> { 0, 4 } },
+                        HideTarget = true
                     }
                 };
             }

@@ -9,12 +9,19 @@ namespace Assets.Scripts.Logic
 {
     public partial class Engine : Script
     {
+        public void Awake()
+        {
+            AdBuddizBinding.SetLogLevel(AdBuddizBinding.ABLogLevel.Info);
+            AdBuddizBinding.SetAndroidPublisherKey("bdc2f780-6d67-4ad9-9545-5092d50bf19a");
+            AdBuddizBinding.CacheAds();
+        }
+
         public void Start()
         {
             DetectLanguage();
             GetComponent<Menu>().Open();
 
-            //var level = GameData.HardLevels[10];
+            //var level = GameData.HardLevels[3];
             //level.Generator = true;
             //Level = level;
             //Level.Progress = 0;
@@ -128,20 +135,38 @@ namespace Assets.Scripts.Logic
                 }
 
                 tables.Add(new List<Person>());
+
+                var maleImage = GameData.GetNextMaleImage();
+                var femaleImage = GameData.GeNextFemaleImage();
+
                 boys.Add(new Person
                 {
-                    Name = GameData.GetNextMaleName(level.JapanNames),
-                    Image = GameData.GetNextMaleImage(),
+                    Name = GameData.GetNameByImage(maleImage, level.JapanNames),
+                    Image = maleImage,
                     Male = true,
                     Hobbies = level.MaleHobbies[i]
                 });
                 girls.Add(new Person
                 {
-                    Name = GameData.GetNextFemaleName(level.JapanNames),
-                    Image = GameData.GeNextFemaleImage(),
+                    Name = GameData.GetNameByImage(femaleImage, level.JapanNames),
+                    Image = femaleImage,
                     Male = false,
                     Hobbies = level.FemaleHobbies[i]
                 });
+            }
+
+            if (level.Formation != null)
+            {
+                for (var i = 0; i < level.Formation.Count; i++)
+                {
+                    tables[i] = new List<Person>
+                    {
+                        boys[level.Formation[i][0]],
+                        girls[level.Formation[i][1]]
+                    };
+                }
+
+                return Shuffle(tables);
             }
 
             for (var i = 0; i < level.TableNumber; i++)
@@ -154,7 +179,7 @@ namespace Assets.Scripts.Logic
 
             Analize(tables, out worst, out best, out max, out complexity);
 
-            if (max < Level.Target)
+            if (max != Level.Target)
             {
                 throw new Exception(Convert.ToString(max));
             }
@@ -170,6 +195,23 @@ namespace Assets.Scripts.Logic
                 {
                     table.Reverse();
                 }
+            }
+
+            if (Settings.Debug)
+            {
+                var formation = new List<string>();
+
+                foreach (var table in tables)
+                {
+                    var i = table[0].Male ? Level.MaleHobbies.IndexOf(table[0].Hobbies) : Level.FemaleHobbies.IndexOf(table[0].Hobbies);
+                    var j = table[1].Male ? Level.MaleHobbies.IndexOf(table[1].Hobbies) : Level.FemaleHobbies.IndexOf(table[1].Hobbies);
+
+                    formation.Add(table[0].Male
+                        ? string.Format("new List<int> {{ {0}, {1} }}", i, j)
+                        : string.Format("new List<int> {{ {0}, {1} }}", j, i));
+                }
+            
+                Debug.Log("Formation = new List<List<int>> {" + string.Join(", ", formation.ToArray()) + " }");
             }
 
             return tables.Shuffle();

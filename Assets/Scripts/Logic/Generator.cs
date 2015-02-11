@@ -81,18 +81,21 @@ namespace Assets.Scripts.Logic
 
             for (var j = 0; j < count; j++)
             {
+                var maleImage = GameData.GetNextMaleImage();
+                var femaleImage = GameData.GeNextFemaleImage();
+
                 var boy = new Person
                 {
-                    Name = GameData.GetNextMaleName(false),
-                    Image = GameData.GetNextMaleImage(),
+                    Name = GameData.GetNameByImage(maleImage, false),
+                    Image = maleImage,
                     Male = true,
                     Gay = false,
                     Hobbies = GenerateHobbies(CRandom.GetRandom(3, 9))
                 };
                 var girl = new Person
                 {
-                    Name = GameData.GetNextFemaleName(false),
-                    Image = GameData.GeNextFemaleImage(),
+                    Name = GameData.GetNameByImage(maleImage, false),
+                    Image = femaleImage,
                     Male = false,
                     Gay = false,
                     Hobbies = GenerateHobbies(CRandom.GetRandom(3, 9))

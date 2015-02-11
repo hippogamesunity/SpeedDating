@@ -48,11 +48,25 @@ namespace Assets.Scripts
 
         public void ScheduleFix()
         {
-            var nexts = Music.Where(i => i != AudioSource.clip).ToList();
-            var next = nexts[CRandom.GetRandom(0, nexts.Count)];
+            if (Time.timeScale > 0)
+            {
+                var nexts = Music.Where(i => i != AudioSource.clip).ToList();
+                var next = nexts[CRandom.GetRandom(0, nexts.Count)];
 
-            TaskScheduler.Kill(888);
-            TaskScheduler.CreateTask(() => PlayInGameNext(next), 888, AudioSource.clip.length - AudioSource.time);
+                if (AudioSource.isPlaying)
+                {
+                    TaskScheduler.Kill(888);
+                    TaskScheduler.CreateTask(() => PlayInGameNext(next), 888, AudioSource.clip.length - AudioSource.time);
+                }
+                else
+                {
+                    PlayInGameNext(next);
+                }
+            }
+            else
+            {
+                TaskScheduler.Kill(888);
+            }
         }
 
         private void PlayEffect(AudioClip clip)

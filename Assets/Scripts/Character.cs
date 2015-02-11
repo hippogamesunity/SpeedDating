@@ -147,9 +147,12 @@ namespace Assets.Scripts
                     Table = nearest.Table;
                     nearest.Table = table;
 
-                    Table.Refresh();
-                    nearest.Table.Refresh();
-                    
+                    if (Table != nearest.Table)
+                    {
+                        Table.Refresh();
+                        nearest.Table.Refresh();
+                    }
+
                     Flip();
                     nearest.Flip();
 

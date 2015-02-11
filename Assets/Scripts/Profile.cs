@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Common;
+﻿using System;
+using Assets.Scripts.Common;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -9,6 +10,7 @@ namespace Assets.Scripts
         private static readonly string ProgressHardKey = Md5.Encode("ProgressHardKey");
         private static readonly string ProgressSwapKey = Md5.Encode("ProgressSwapKey");
         private static readonly string MuteKey = Md5.Encode("MuteKey");
+        private static readonly string ShowAdTimeKey = Md5.Encode("ShowAdTimeKey");
 
         public static int ProgressEasy
         {
@@ -30,15 +32,13 @@ namespace Assets.Scripts
 
         public static bool Mute
         {
-            get
-            {
-                return PlayerPrefs.HasKey(MuteKey) && PlayerPrefs.GetInt(MuteKey) == 1;
-            }
-            set
-            {
-                PlayerPrefs.SetInt(MuteKey, value ? 1 : 0);
-                PlayerPrefs.Save();
-            }
+            get { return PlayerPrefs.HasKey(MuteKey) && PlayerPrefs.GetInt(MuteKey) == 1; }
+            set { PlayerPrefs.SetInt(MuteKey, value ? 1 : 0); PlayerPrefs.Save(); }
+        }
+        public static DateTime ShowAdTime
+        {
+            get { return PlayerPrefs.HasKey(ShowAdTimeKey) ? DateTime.Parse(PlayerPrefs.GetString(ShowAdTimeKey)) : DateTime.UtcNow.AddMinutes(10); }
+            set { PlayerPrefs.SetString(ShowAdTimeKey, Convert.ToString(value)); PlayerPrefs.Save(); }
         }
     }
 }

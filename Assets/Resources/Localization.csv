@@ -6,10 +6,10 @@
 %HardLevels%;Сложные уровни;Hard levels
 %SwapLevels%;Бонус уровни;Select level
 %Paused%;Пауза;Paused
-%PauseMessage%;Вы точно хотите выйти?;Do you wont to quit?
+%PauseMessage%;Нажмите Play, чтобы продолжить;Press play button to continue
 %Win%;Победа;Win
 %TimeUp%;Время вышло;Time is up
-%GameOver%;Игра окончена;Game over
+%GameOver%;Вы проиграли;You lose
 %LevelCompleted%;Супер, уровень пройден!;Congratulation, level completed!
 %LevelFailed%;Повезет в другой раз!;Better luck next time!
 %HowToPlay%;Подсказка;How to play

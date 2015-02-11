@@ -25,6 +25,21 @@ namespace Assets.Scripts
             }
         }
 
+        public static List<Level> GetLevels(LevelType levelType)
+        {
+            switch (levelType)
+            {
+                case LevelType.Easy:
+                    return EasyLevels;
+                case LevelType.Hard:
+                    return HardLevels;
+                case LevelType.Swap:
+                    return SwapLevels;
+                default:
+                    throw new Exception();
+            }
+        }
+
         public static void Shuffle()
         {
             _maleNamesEn = _maleNamesEn.Shuffle();
@@ -53,6 +68,35 @@ namespace Assets.Scripts
         public static string GeNextFemaleImage()
         {
             return GeNext(_femaleImages, ref _femaleImage);
+        }
+
+        public static string GetNameByImage(string image, bool japan)
+        {
+            switch (image)
+            {
+                case "m1": return "Mike";
+                case "m2": return "Steven";
+                case "m3": return "Luis";
+                case "m4": return "Robert";
+                case "m5": return "Ales";
+                case "m6": return "Daniel";
+                case "m7": return "Tony";
+                case "m8": return "Kevin";
+                case "m9": return "Alan";
+
+                case "f1": return "Lisa";
+                case "f2": return "Helen";
+                case "f3": return "Jessy";
+                case "f4": return "Amy";
+                case "f5": return "Emily";
+                case "f6": return "Mary";
+                case "f7": return "Rose";
+                case "f8": return "Diana";
+                case "f9": return "Kate";
+
+                default:
+                    throw new Exception();
+            }
         }
 
         private static List<string> _maleNamesEn = new List<string>

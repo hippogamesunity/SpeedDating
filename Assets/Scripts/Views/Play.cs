@@ -20,6 +20,8 @@ namespace Assets.Scripts.Views
         public Transform HourHand;
         public UITexture TimeIcon;
         public UITexture SwapIcon;
+        public GameObject RestartButton;
+        public GameObject NextButton;
 
         protected override void Initialize()
         {
@@ -27,7 +29,7 @@ namespace Assets.Scripts.Views
             ScoreDialog.Hide(0f);
             HelpDialog.Hide(0f);
 
-            Score.SetText("0/{0}", Engine.Level.Target);
+            Score.SetText("0/{0}", Engine.Level.HideTarget ? "?" : Convert.ToString(Engine.Level.Target));
 
             if (Engine.Level.Type == LevelType.Easy)
             {
@@ -90,7 +92,17 @@ namespace Assets.Scripts.Views
 
                 if (swapsleft >= 0)
                 {
-                    Timer.color = Color.white;
+                    if (swapsleft == 1)
+                    {
+                        var blink = (Mathf.Sin(4 * Time.time) + 1) / 2;
+
+                        Timer.color = new Color(1, blink, blink);
+                    }
+                    else
+                    {
+                        Timer.color = Color.white;
+                    }
+
                     Timer.SetText(Convert.ToString(swapsleft));
                 }
             }
@@ -105,6 +117,8 @@ namespace Assets.Scripts.Views
         {
             ScoreDialogTitle.SetLocalizedText(completed ? "%Win%" : Engine.Level.Type == LevelType.Easy ? "%TimeUp%" : "%GameOver%");
             ScoreDialogMessage.SetLocalizedText(completed ? "%LevelCompleted%" : "%LevelFailed%");
+            RestartButton.SetActive(!completed);
+            NextButton.SetActive(completed);
         }
 
         public void CloseDialog()
@@ -125,7 +139,7 @@ namespace Assets.Scripts.Views
 
         public void RefreshScore()
         {
-            Score.SetText("{0}/{1}", Convert.ToString(Engine.CalcScore()), Engine.Level.Target);
+            Score.SetText("{0}/{1}", Engine.CalcScore(), Engine.Level.HideTarget ? "?" : Convert.ToString(Engine.Level.Target));
         }
     }
 }

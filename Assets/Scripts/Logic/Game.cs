@@ -46,7 +46,26 @@ namespace Assets.Scripts.Logic
                 TaskScheduler.CreateTask(() => PauseGame(play.HelpDialog), TaskId, 1);
             }
         }
-        
+
+        public void PlayNext()
+        {
+            var levels = GameData.GetLevels(Level.Type);
+
+            if (Level.Progress < levels.Count - 1)
+            {
+                var progress = Level.Progress + 1;
+
+                Level = levels[progress];
+                Level.Progress = progress;
+
+                StartGame();
+            }
+            else
+            {
+                ExitGame();
+            }
+        }
+
         public void PauseGame(TweenPanel dialog)
         {
             Timeleft = Timeout - DateTime.Now;
@@ -93,6 +112,12 @@ namespace Assets.Scripts.Logic
 
             play.SetScoreDialog(score >= Level.Target);
             play.ShowDialog(play.ScoreDialog);
+
+            if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(5) && AdBuddizBinding.IsReadyToShowAd())
+            {
+                Profile.ShowAdTime = DateTime.UtcNow;
+                TaskScheduler.CreateTask(AdBuddizBinding.ShowAd, 1f);
+            }
         }
 
         public void ExitGame()
