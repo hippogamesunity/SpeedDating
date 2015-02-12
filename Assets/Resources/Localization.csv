@@ -16,8 +16,8 @@
 %HowToPlay%;Подсказка;How to play
 %TimeMode%;Пересаживай персонажей\nи найди им вторую половинку;How to find love?\nRepot characters between tables
 %SwapMode%;Пройди уровень с меньшим\nколичеством перемещений;Pass this level\nwith less swap actions
-%MemoMode1%;У тебя есть пара секунд, чтобы\nзапомнить, кто с кем сидит;You have a few seconds\nto memorize who sits with who
-%MemoMode2%;А теперь самое время\nвспомнить, кто с кем сидел;Now remember\nwho was sitting with who
+%MemoMode1%;У тебя есть пара секунд, чтобы\nзапомнить, кто с кем сидит;You have a few seconds\nto memorize who sits with whom
+%MemoMode2%;А теперь самое время\nвспомнить, кто с кем сидел;Now remember\nwho was sitting with whom
 %TeamLead%;руководитель;team lead
 %Developer%;разработчик;developer
 %Linguist%;лингвист;linguist
