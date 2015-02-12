@@ -3,6 +3,7 @@ using System.Linq;
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic;
 using Assets.Scripts.Views;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -10,10 +11,12 @@ namespace Assets.Scripts
     {
         public UIBasicSprite[] Hearts;
         public Progress Progress;
+        public GameObject Hud;
         private const float TweenTime = 0.4f;
 
         public void Start()
         {
+            Hud.SetActive(Engine.Level.Type != LevelType.Memo);
             Refresh();
         }
 

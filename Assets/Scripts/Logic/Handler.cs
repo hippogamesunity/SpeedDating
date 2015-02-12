@@ -73,7 +73,7 @@ namespace Assets.Scripts.Logic
 
         public void PlayHardLevel(int progress)
         {
-            Level = GameData.HardLevels[progress];
+            Level = Levels.HardLevels[progress];
             Level.Progress = progress;
 
             StartGame();
@@ -89,7 +89,7 @@ namespace Assets.Scripts.Logic
 
         public void PlaySwapLevel(int progress)
         {
-            Level = GameData.SwapLevels[progress];
+            Level = Levels.SwapLevels[progress];
             Level.Progress = progress;
 
             StartGame();
@@ -105,7 +105,7 @@ namespace Assets.Scripts.Logic
 
         public void PlayMemoLevel(int progress)
         {
-            Level = GameData.MemoLevels[progress];
+            Level = Levels.MemoLevels[progress];
             Level.Progress = progress;
             Level.Memorize = true;
 

@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    public partial class GameData
+    public partial class Levels
     {
         public static List<Level> MemoLevels
         {

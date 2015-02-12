@@ -16,7 +16,7 @@ namespace Assets.Scripts.Views
 
         protected override List<Level> LevelsList
         {
-            get { return GameData.MemoLevels; }
+            get { return Levels.MemoLevels; }
         }
     }
 }

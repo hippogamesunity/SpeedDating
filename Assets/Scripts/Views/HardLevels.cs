@@ -16,7 +16,7 @@ namespace Assets.Scripts.Views
 
         protected override List<Level> LevelsList
         {
-            get { return GameData.HardLevels; }
+            get { return Levels.HardLevels; }
         }
     }
 }

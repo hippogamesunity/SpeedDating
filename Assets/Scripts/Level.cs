@@ -10,7 +10,7 @@ namespace Assets.Scripts
         public int Time;
         public int Swaps;
         public string TableName = "RestaurantTable";
-        public string Background = "Paris";
+        public string Background = "CoffeeShop";
         public int Target;
         public bool Generator;
         public List<List<Hobby>> MaleHobbies;

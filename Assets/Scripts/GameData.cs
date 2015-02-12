@@ -32,11 +32,11 @@ namespace Assets.Scripts
                 case LevelType.Easy:
                     return EasyLevels;
                 case LevelType.Hard:
-                    return HardLevels;
+                    return Levels.HardLevels;
                 case LevelType.Swap:
-                    return SwapLevels;
+                    return Levels.SwapLevels;
                 case LevelType.Memo:
-                    return MemoLevels;
+                    return Levels.MemoLevels;
                 default:
                     throw new Exception();
             }
