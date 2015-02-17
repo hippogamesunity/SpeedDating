@@ -77,7 +77,7 @@ namespace Assets.Scripts
             switch (image)
             {
                 case "m1": return "Mike";
-                case "m2": return "Steven";
+                case "m2": return "Max";
                 case "m3": return "Luis";
                 case "m4": return "Robert";
                 case "m5": return "Alex";
@@ -85,16 +85,22 @@ namespace Assets.Scripts
                 case "m7": return "Tony";
                 case "m8": return "Kevin";
                 case "m9": return "Alan";
+                case "m10": return "Nate";
+                case "m11": return "Steven";
+                case "m12": return "Jake";
 
                 case "f1": return "Lisa";
                 case "f2": return "Helen";
                 case "f3": return "Jessy";
                 case "f4": return "Amy";
                 case "f5": return "Emily";
-                case "f6": return "Mary";
+                case "f6": return "Yuki";
                 case "f7": return "Rose";
                 case "f8": return "Diana";
                 case "f9": return "Kate";
+                case "f10": return "Alice";
+                case "f11": return "Jenny";
+                case "f12": return "Julia";
 
                 default:
                     throw new Exception();
@@ -207,7 +213,8 @@ namespace Assets.Scripts
             "m6",
             "m7",
             "m8",
-            "m9"
+            "m9",
+            "m10",
         };
 
         private static List<string> _femaleImages = new List<string>
@@ -220,7 +227,9 @@ namespace Assets.Scripts
             "f6",
             "f7",
             "f8",
-            "f9"
+            "f9",
+            "f10",
+            "f11"
         };
 
         private static int _maleName, _femaleName;

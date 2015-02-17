@@ -135,7 +135,7 @@ namespace Assets.Scripts.Logic
 
             Level.Background = "CoffeeShop";
 
-            if (Level.TableNumber >= 3)
+            if (Level.TableNumber >= 4)
             {
                 Level.Background = "BurgerKing";
             }
