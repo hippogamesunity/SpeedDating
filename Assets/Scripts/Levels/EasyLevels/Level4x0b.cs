@@ -11,17 +11,17 @@ namespace Assets.Scripts
             Target = 12,
             MaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.Animals, Hobby.Guitar, Hobby.Pictures, Hobby.Beauty, Hobby.Flowers, Hobby.Fashion, Hobby.Sex },
-                new List<Hobby> { Hobby.Fishing, Hobby.Music, Hobby.Photo, Hobby.Money, Hobby.Work },
-                new List<Hobby> { Hobby.Games, Hobby.Singing, Hobby.Cars, Hobby.Skate, Hobby.Guitar, Hobby.Sex },
-                new List<Hobby> { Hobby.Books, Hobby.Beauty, Hobby.Sex, Hobby.Animals, Hobby.Fishing, Hobby.Games }
+                new List<Hobby> { Hobby.H1, Hobby.H13, Hobby.H18, Hobby.H3, Hobby.H9, Hobby.H7, Hobby.H20 },
+                new List<Hobby> { Hobby.H8, Hobby.H16, Hobby.H17, Hobby.H15, Hobby.H24 },
+                new List<Hobby> { Hobby.H12, Hobby.H21, Hobby.H5, Hobby.H22, Hobby.H13, Hobby.H20 },
+                new List<Hobby> { Hobby.H4, Hobby.H3, Hobby.H20, Hobby.H1, Hobby.H8, Hobby.H12 }
             },
             FemaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.Games, Hobby.Fishing, Hobby.Books, Hobby.Singing, Hobby.Work, Hobby.Skate, Hobby.Football },
-                new List<Hobby> { Hobby.Beauty, Hobby.Money, Hobby.Food, Hobby.Football, Hobby.TV, Hobby.Animals, Hobby.Guitar, Hobby.Books },
-                new List<Hobby> { Hobby.Sex, Hobby.Fishing, Hobby.Guitar, Hobby.Singing, Hobby.Flowers },
-                new List<Hobby> { Hobby.Jewelry, Hobby.Photo, Hobby.Fishing, Hobby.Money, Hobby.Animals }
+                new List<Hobby> { Hobby.H12, Hobby.H8, Hobby.H4, Hobby.H21, Hobby.H24, Hobby.H22, Hobby.H11 },
+                new List<Hobby> { Hobby.H3, Hobby.H15, Hobby.H10, Hobby.H11, Hobby.H23, Hobby.H1, Hobby.H13, Hobby.H4 },
+                new List<Hobby> { Hobby.H20, Hobby.H8, Hobby.H13, Hobby.H21, Hobby.H9 },
+                new List<Hobby> { Hobby.H14, Hobby.H17, Hobby.H8, Hobby.H15, Hobby.H1 }
             },
             Сomplexity = 0
         };

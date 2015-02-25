@@ -40,7 +40,6 @@ namespace Assets.Scripts
 
             if (Engine.Level.Type != LevelType.Memo)
             {
-                Hobby.color = person.Male ? ColorHelper.GetColor(0, 120, 255) : ColorHelper.GetColor(200, 0, 200);
                 HobbyLoop();
             }
         }

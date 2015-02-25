@@ -11,17 +11,17 @@ namespace Assets.Scripts
             Target = 12,
             MaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.Money, Hobby.Archery, Hobby.Animals, Hobby.Football, Hobby.Drink, Hobby.Pictures, Hobby.TV },
-                new List<Hobby> { Hobby.Fashion, Hobby.Money, Hobby.Running, Hobby.Sex, Hobby.Flowers, Hobby.Photo, Hobby.Football },
-                new List<Hobby> { Hobby.Jewelry, Hobby.Money, Hobby.Books, Hobby.Football, Hobby.Beauty, Hobby.Music, Hobby.Photo, Hobby.Drink },
-                new List<Hobby> { Hobby.Fishing, Hobby.Beauty, Hobby.Food, Hobby.Photo, Hobby.Singing, Hobby.Animals, Hobby.Running }
+                new List<Hobby> { Hobby.H15, Hobby.H2, Hobby.H1, Hobby.H11, Hobby.H6, Hobby.H18, Hobby.H23 },
+                new List<Hobby> { Hobby.H7, Hobby.H15, Hobby.H19, Hobby.H20, Hobby.H9, Hobby.H17, Hobby.H11 },
+                new List<Hobby> { Hobby.H14, Hobby.H15, Hobby.H4, Hobby.H11, Hobby.H3, Hobby.H16, Hobby.H17, Hobby.H6 },
+                new List<Hobby> { Hobby.H8, Hobby.H3, Hobby.H10, Hobby.H17, Hobby.H21, Hobby.H1, Hobby.H19 }
             },
             FemaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.TV, Hobby.Money, Hobby.Cars, Hobby.Work, Hobby.Guitar, Hobby.Fishing, Hobby.Pictures },
-                new List<Hobby> { Hobby.Photo, Hobby.Drink, Hobby.Pictures, Hobby.TV, Hobby.Singing, Hobby.Flowers, Hobby.Guitar, Hobby.Beauty },
-                new List<Hobby> { Hobby.Books, Hobby.TV, Hobby.Drink, Hobby.Games, Hobby.Beauty, Hobby.Fashion, Hobby.Guitar },
-                new List<Hobby> { Hobby.Books, Hobby.Photo, Hobby.Running, Hobby.TV, Hobby.Money, Hobby.Animals, Hobby.Pictures, Hobby.Guitar },
+                new List<Hobby> { Hobby.H23, Hobby.H15, Hobby.H5, Hobby.H24, Hobby.H13, Hobby.H8, Hobby.H18 },
+                new List<Hobby> { Hobby.H17, Hobby.H6, Hobby.H18, Hobby.H23, Hobby.H21, Hobby.H9, Hobby.H13, Hobby.H3 },
+                new List<Hobby> { Hobby.H4, Hobby.H23, Hobby.H6, Hobby.H12, Hobby.H3, Hobby.H7, Hobby.H13 },
+                new List<Hobby> { Hobby.H4, Hobby.H17, Hobby.H19, Hobby.H23, Hobby.H15, Hobby.H1, Hobby.H18, Hobby.H13 },
             },
             Сomplexity = 5
         };

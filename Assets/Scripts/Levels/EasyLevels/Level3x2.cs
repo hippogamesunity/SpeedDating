@@ -11,15 +11,15 @@ namespace Assets.Scripts
             Target = 6,
             MaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.Animals, Hobby.Skate, Hobby.Running, Hobby.Books },
-                new List<Hobby> { Hobby.Music, Hobby.Photo, Hobby.Archery, Hobby.Drink, Hobby.Animals },
-                new List<Hobby> { Hobby.Fashion, Hobby.Football, Hobby.Work, Hobby.Sex, Hobby.Music }
+                new List<Hobby> { Hobby.H1, Hobby.H22, Hobby.H19, Hobby.H4 },
+                new List<Hobby> { Hobby.H16, Hobby.H17, Hobby.H2, Hobby.H6, Hobby.H1 },
+                new List<Hobby> { Hobby.H7, Hobby.H11, Hobby.H24, Hobby.H20, Hobby.H16 }
             },
             FemaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.Food, Hobby.Cars, Hobby.Books, Hobby.Music, Hobby.Archery, Hobby.Skate },
-                new List<Hobby> { Hobby.Beauty, Hobby.Fashion, Hobby.Animals, Hobby.Singing, Hobby.Football, Hobby.Photo },
-                new List<Hobby> { Hobby.Drink, Hobby.Skate, Hobby.Jewelry, Hobby.Beauty, Hobby.Singing, Hobby.Photo, Hobby.Fishing, Hobby.TV }
+                new List<Hobby> { Hobby.H10, Hobby.H5, Hobby.H4, Hobby.H16, Hobby.H2, Hobby.H22 },
+                new List<Hobby> { Hobby.H3, Hobby.H7, Hobby.H1, Hobby.H21, Hobby.H11, Hobby.H17 },
+                new List<Hobby> { Hobby.H6, Hobby.H22, Hobby.H14, Hobby.H3, Hobby.H21, Hobby.H17, Hobby.H8, Hobby.H23 }
             },
             Сomplexity = 2
         };

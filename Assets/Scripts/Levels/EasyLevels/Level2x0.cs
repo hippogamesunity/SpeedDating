@@ -11,13 +11,13 @@ namespace Assets.Scripts
             Target = 6,
             MaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.Animals, Hobby.Pictures, Hobby.Football, Hobby.Cars },
-                new List<Hobby> { Hobby.Books, Hobby.Food, Hobby.Games, Hobby.Drink },
+                new List<Hobby> { Hobby.H1, Hobby.H18, Hobby.H11, Hobby.H5 },
+                new List<Hobby> { Hobby.H4, Hobby.H10, Hobby.H12, Hobby.H6 },
             },
             FemaleHobbies = new List<List<Hobby>>
             {
-                new List<Hobby> { Hobby.Animals, Hobby.Pictures, Hobby.Football, Hobby.Books},
-                new List<Hobby> { Hobby.Books, Hobby.Food, Hobby.Games, Hobby.Pictures },
+                new List<Hobby> { Hobby.H1, Hobby.H18, Hobby.H11, Hobby.H4},
+                new List<Hobby> { Hobby.H4, Hobby.H10, Hobby.H12, Hobby.H18 },
             }
         };
     }
