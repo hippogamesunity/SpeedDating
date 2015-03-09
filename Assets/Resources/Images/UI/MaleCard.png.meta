@@ -1,9 +1,7 @@
 fileFormatVersion: 2
-guid: fc4ac454d1d25bb469ff18bb04f9a1c2
+guid: 8547325ff33c6ac4ca8aaec6d25993f4
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: ProgressBar
-    21300002: Progress
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -27,9 +25,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 2
-    aniso: 1
+    aniso: 16
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

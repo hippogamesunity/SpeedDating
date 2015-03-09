@@ -160,6 +160,9 @@ namespace Assets.Scripts.Logic
             play.SetScoreDialog(success);
             play.ShowDialog(play.ScoreDialog);
 
+            Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
+            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
+
             if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(5) && AdBuddizBinding.IsReadyToShowAd())
             {
                 Profile.ShowAdTime = DateTime.UtcNow;
