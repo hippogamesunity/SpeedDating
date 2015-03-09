@@ -1,16 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Common
 {
     public class TaskScheduler : Script
     {
-        public static event Action<int> TaskCompleted = id => { };
-        private static readonly List<int> Tasks = new List<int>();
-        private static readonly Dictionary<int, Action> Callbacks = new Dictionary<int, Action>();
+        private class Task
+        {
+            public long Id;
+            public Action Action;
+            public Action Callback;
+        }
+
+        private static readonly List<Task> Tasks = new List<Task>();
 
         private static TaskScheduler _instance;
 
@@ -19,65 +23,62 @@ namespace Assets.Scripts.Common
             get { return _instance ?? (_instance = new GameObject("TaskScheduler").AddComponent<TaskScheduler>()); }
         }
 
-        public static void CreateTask(Action task, int id, float delay)
+        public static void CreateTask(Action action, long id, float delay)
         {
-            Tasks.Add(id);
-            Instance.StartCoroutine(Coroutine(task, id, delay));
+            CreateTask(action, id, delay, null);
         }
 
-        public static int CreateTask(Action task, float delay)
+        public static long CreateTask(Action action, float delay)
         {
             var id = CRandom.GetRandom(999999);
 
-            Tasks.Add(id);
-            Instance.StartCoroutine(Coroutine(task, id, delay));
+            CreateTask(action, CRandom.GetRandom(999999), delay, null);
 
             return id;
         }
 
-        public static void CreateTask(Action task, float delay, Action callback)
+        public static void CreateTask(Action action, float delay, Action callback)
         {
-            Callbacks.Add(CreateTask(task, delay), callback);
+            CreateTask(action, CRandom.GetRandom(999999), delay, callback);
         }
 
-        public static void Kill(params int[] tasks)
+        public static void CreateTask(Action action, long id, float delay, Action callback)
         {
-            //Debug.Log("Killing task " + string.Join(", ", tasks.Select(i => Convert.ToString(i)).ToArray()));
+            var task = new Task { Id = id, Action = action, Callback = callback };
 
-            if (tasks == null)
+            Tasks.Add(task);
+            Instance.StartCoroutine(Coroutine(task, delay));
+        }
+
+        public static void Kill(params int[] ids)
+        {
+            if (ids == null)
             {
                 Tasks.Clear();
             }
             else
             {
-                foreach (var task in tasks)
+                foreach (var id in ids)
                 {
-                    if (Tasks.Contains(task))
-                    {
-                        Tasks.RemoveAll(i => i == task);
-                    }
+                    Tasks.RemoveAll(i => i.Id == id);
                 }
             }
         }
 
-        private static IEnumerator Coroutine(Action task, int id, float delay)
+        private static IEnumerator Coroutine(Task task, float delay)
         {
             yield return new WaitForSeconds(delay);
 
-            if (!Tasks.Contains(id)) yield break;
+            if (!Tasks.Contains(task)) yield break;
 
-            //Debug.Log("Running task " + id);
+            task.Action();
 
-            task();
-
-            if (Callbacks.ContainsKey(id))
+            if (task.Callback != null)
             {
-                Callbacks[id]();
+                task.Callback();
             }
 
-            Tasks.Remove(id);
-            Callbacks.Remove(id);
-            TaskCompleted(id);
+            Tasks.Remove(task);
         }
     }
 }

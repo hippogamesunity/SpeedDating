@@ -131,22 +131,6 @@ namespace Assets.Scripts.Logic
 
             RemoveUnusedHobbies(tables);
 
-            //TODO:
-
-            Level.Background = "CoffeeShop";
-
-            if (Level.TableNumber >= 4)
-            {
-                Level.Background = "BurgerKing";
-            }
-
-            if (Level.TableNumber >= 6)
-            {
-                Level.Background = "Paris";
-            }
-
-            // TODO:
-
             for (var i = 0; i < Level.TableNumber; i++)
             {
                 var table = PrefabsHelper.Instantiate(Level.TableName, Get<Play>().GameTransform);
@@ -336,7 +320,7 @@ namespace Assets.Scripts.Logic
                 case SystemLanguage.Russian:
                 case SystemLanguage.Ukrainian:
                 case SystemLanguage.Belarusian:
-                    Localization.language = "English"; // TODO:
+                    Localization.language = "Russian"; // TODO:
                     break;
                 default:
                     Localization.language = "English";
