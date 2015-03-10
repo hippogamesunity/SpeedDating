@@ -208,13 +208,13 @@ namespace Assets.Scripts
             "m1",
             "m2",
             "m3",
-            //"m4",
-            //"m5",
-            //"m6",
-            //"m7",
-            //"m8",
-            //"m9",
-            //"m10",
+            "m4",
+            "m5",
+            "m6",
+            "m7",
+            "m8",
+            "m9",
+            "m10",
         };
 
         private static List<string> _femaleImages = new List<string>
@@ -223,13 +223,12 @@ namespace Assets.Scripts
             "f2",
             "f3",
             "f4",
-            //"f5",
-            //"f6",
-            //"f7",
-            //"f8",
-            //"f9",
-            //"f10",
-            //"f11"
+            "f5",
+            "f6",
+            "f7",
+            "f8",
+            "f9",
+            "f10"
         };
 
         private static int _maleName, _femaleName;

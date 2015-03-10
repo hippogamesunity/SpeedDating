@@ -9,7 +9,8 @@ namespace Assets.Scripts
 {
     public class Character : GameButton
     {
-        public UISprite Image;
+        public UISprite MaleImage;
+        public UISprite FemaleImage;
         public UILabel Name;
         public UISprite Hobby;
         public Hobby[] HobbiesDebug;
@@ -19,6 +20,7 @@ namespace Assets.Scripts
         [HideInInspector] public Table Table;
         [HideInInspector] public bool Busy;
 
+        private UISprite _image;
         private Vector3 _delta;
         private int _hobby;
 
@@ -29,20 +31,26 @@ namespace Assets.Scripts
             HobbiesDebug = person.Hobbies.ToArray();
 
             Name.SetText(person.Name);
-            Image.spriteName = person.Image;
             Position = transform.localPosition;
 
             var tables = FindObjectsOfType<Table>().ToList();
 
             tables.Sort((a, b) => Vector2.Distance(transform.position, a.transform.position).CompareTo(Vector2.Distance(transform.position, b.transform.position)));
             Table = tables[0];
-            Flip();
-
+            
             if (Engine.Level.Type != LevelType.Memo)
             {
                 //Hobby.color = person.Male ? ColorHelper.GetColor(0, 120, 255) : ColorHelper.GetColor(200, 0, 200);
                 HobbyLoop();
             }
+
+            FemaleImage.enabled = MaleImage.enabled = false;
+
+            _image = person.Male ? MaleImage : FemaleImage;
+            _image.enabled = true;
+            _image.spriteName = person.Image;
+
+            Flip();
         }
 
         public new void Update()
@@ -86,13 +94,13 @@ namespace Assets.Scripts
                 switch (value)
                 {
                     case 0:
-                        Image.spriteName = Person.Image + "no";
+                        _image.spriteName = Person.Image + "no";
                         break;
                     case 1:
-                        Image.spriteName = Person.Image;
+                        _image.spriteName = Person.Image;
                         break;
                     default:
-                        Image.spriteName = Person.Image + "yes";
+                        _image.spriteName = Person.Image + "yes";
                         break;
                 }
             }
@@ -108,11 +116,11 @@ namespace Assets.Scripts
 
             if (down)
             {
-                Image.depth = 50;
+                _image.depth = 50;
             }
             else
             {
-                Image.depth = 0;
+                _image.depth = 0;
 
                 var buttons = FindObjectsOfType<Character>().ToList();
 
@@ -167,9 +175,7 @@ namespace Assets.Scripts
 
         private void Flip()
         {
-            Image.flip = Table.transform.position.x > Position.x
-                ? UIBasicSprite.Flip.Nothing
-                : UIBasicSprite.Flip.Horizontally;
+            _image.flip = Table.transform.position.x < Position.x ? UIBasicSprite.Flip.Horizontally : UIBasicSprite.Flip.Nothing;
         }
     }
 }
