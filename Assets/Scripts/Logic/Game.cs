@@ -115,6 +115,7 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressEasy == Level.Progress)
                     {
                         Profile.ProgressEasy++;
+                        Profile.Credits++;
                     }
                 }
             }
@@ -127,6 +128,7 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressHard == Level.Progress)
                     {
                         Profile.ProgressHard++;
+                        Profile.Credits += 2;
                     }
                 }
             }
@@ -139,6 +141,7 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressSwap == Level.Progress)
                     {
                         Profile.ProgressSwap++;
+                        Profile.Credits++;
                     }
                 }
             }
@@ -151,6 +154,7 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressMemo == Level.Progress)
                     {
                         Profile.ProgressMemo++;
+                        Profile.Credits++;
                     }
                 }
             }
