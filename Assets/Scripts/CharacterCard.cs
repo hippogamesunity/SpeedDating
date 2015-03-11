@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Scripts.Common;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -8,7 +9,7 @@ namespace Assets.Scripts
         public CharacterId Id;
         public UISprite Image;
         public UILabel Name;
-        public UISprite Frame;
+        public UITexture Frame;
         public GameButton Button;
 
         public void OnEnable()
@@ -23,17 +24,17 @@ namespace Assets.Scripts
             {
                 case CharacterState.Unlocked:
                     Name.SetLocalizedText(cname);
-                    Frame.spriteName = "UnlockedFrame";
+                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/UnlockedFrame");
                     Button.ListenerMethodUp = "ShowStory";
                     break;
                 case CharacterState.Locked:
                     Name.SetLocalizedText("%Locked%");
-                    Frame.spriteName = "LockedFrame";
+                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/LockedFrame");
                     Button.ListenerMethodUp = "OfferUnlock";
                     break;
                 case CharacterState.ForSale:
                     Name.SetLocalizedText("%Purchase%");
-                    Frame.spriteName = "ForSaleFrame";
+                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/ForSaleFrame");
                     Button.ListenerMethodUp = "OfferPurchase";
                     break;
             }

@@ -15,8 +15,12 @@ namespace Assets.Scripts.Logic
             AdBuddizBinding.SetAndroidPublisherKey("bdc2f780-6d67-4ad9-9545-5092d50bf19a");
             AdBuddizBinding.CacheAds();
 
-            //PlayerPrefs.DeleteAll();
-            //PlayerPrefs.Save();
+            #if UNITY_EDITOR
+
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+
+            #endif
         }
 
         public void Start()
