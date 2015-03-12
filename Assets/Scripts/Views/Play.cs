@@ -134,12 +134,20 @@ namespace Assets.Scripts.Views
             dialog.Show();
         }
 
-        public void SetScoreDialog(bool completed)
+        public void SetScoreDialog(bool completed, int coins)
         {
             ScoreDialogTitle.SetLocalizedText(completed ? "%Win%" : Engine.Level.Type == LevelType.Easy ? "%TimeUp%" : "%GameOver%");
-            ScoreDialogMessage.SetLocalizedText(completed ? "%LevelCompleted%" : "%LevelFailed%");
             RestartButton.SetActive(!completed);
             NextButton.SetActive(completed);
+
+            if (completed)
+            {
+                ScoreDialogMessage.SetLocalizedText(coins > 0 ? "%LevelCompleted%" : "%LevelPassed%", coins);
+            }
+            else
+            {
+                ScoreDialogMessage.SetLocalizedText("%LevelFailed%");
+            }
         }
 
         public void CloseDialog()

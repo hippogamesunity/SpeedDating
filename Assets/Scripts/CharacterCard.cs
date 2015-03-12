@@ -14,28 +14,28 @@ namespace Assets.Scripts
 
         public void OnEnable()
         {
-            var state = Profile.GetCharacterState(Id);
-            var cname = Convert.ToString(Id);
+            Refresh();
+        }
 
-            Image.spriteName = cname;
-            Button.Params = cname;
+        public void Refresh()
+        {
+            var state = Profile.GetCharacterState(Id);
+            var id = Convert.ToString(Id);
+
+            Image.spriteName = id;
+            Button.Params = id;
 
             switch (state)
             {
                 case CharacterState.Unlocked:
-                    Name.SetLocalizedText(cname);
-                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/UnlockedFrame");
-                    Button.ListenerMethodUp = "ShowStory";
+                    Image.color = Color.white;
+                    Name.SetLocalizedText(GameData.GetNameById(id));
+                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrame");
                     break;
                 case CharacterState.Locked:
-                    Name.SetLocalizedText("%Locked%");
-                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/LockedFrame");
-                    Button.ListenerMethodUp = "OfferUnlock";
-                    break;
-                case CharacterState.ForSale:
-                    Name.SetLocalizedText("%Purchase%");
-                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/ForSaleFrame");
-                    Button.ListenerMethodUp = "OfferPurchase";
+                    Image.color = ColorHelper.GetColor(0, 0, 0, 150);
+                    Name.SetLocalizedText(GameData.GetNameById(id));
+                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrameLocked");
                     break;
             }
         }

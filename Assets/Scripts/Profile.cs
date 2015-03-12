@@ -6,13 +6,14 @@ namespace Assets.Scripts
 {
     public static class Profile
     {
-        private static readonly string ProgressEasyKey = Md5.Encode("ProgressEasyKey");
-        private static readonly string ProgressHardKey = Md5.Encode("ProgressHardKey");
-        private static readonly string ProgressSwapKey = Md5.Encode("ProgressSwapKey");
-        private static readonly string ProgressMemoKey = Md5.Encode("ProgressMemoKey");
-        private static readonly string MuteKey = Md5.Encode("MuteKey");
-        private static readonly string ShowAdTimeKey = Md5.Encode("ShowAdTimeKey");
-        private static readonly string CreditsKey = Md5.Encode("CreditsKey");
+        private static readonly string ProgressEasyKey = Md5.Encode("ProgressEasy");
+        private static readonly string ProgressHardKey = Md5.Encode("ProgressHard");
+        private static readonly string ProgressSwapKey = Md5.Encode("ProgressSwap");
+        private static readonly string ProgressMemoKey = Md5.Encode("ProgressMemo");
+        private static readonly string MuteKey = Md5.Encode("Mute");
+        private static readonly string ShowAdTimeKey = Md5.Encode("ShowAdTime");
+        private static readonly string CreditsKey = Md5.Encode("Credits");
+        private static readonly string PremiumKey = Md5.Encode("Premium");
 
         public static int ProgressEasy
         {
@@ -50,22 +51,23 @@ namespace Assets.Scripts
             set { PlayerPrefs.SetString(ShowAdTimeKey, Convert.ToString(value)); PlayerPrefs.Save(); }
         }
 
-        public static int Credits
+        public static int Coins
         {
             get { return PlayerPrefs.HasKey(CreditsKey) ? PlayerPrefs.GetInt(CreditsKey) : 0; }
             set { PlayerPrefs.SetInt(CreditsKey, value); PlayerPrefs.Save(); }
+        }
+
+        public static bool Premium
+        {
+            get { return PlayerPrefs.HasKey(PremiumKey) && PlayerPrefs.GetInt(PremiumKey) == 1; }
+            set { PlayerPrefs.SetInt(PremiumKey, 1); PlayerPrefs.Save(); }
         }
 
         public static CharacterState GetCharacterState(CharacterId id)
         {
             var key = Md5.Encode(Convert.ToString(id));
 
-            if (PlayerPrefs.HasKey(key))
-            {
-                return PlayerPrefs.GetString(key).ToEnum<CharacterState>();
-            }
-
-            return Settings.BonusCharacters.Contains(id) ? CharacterState.ForSale : CharacterState.Unlocked;
+            return PlayerPrefs.HasKey(key) ? PlayerPrefs.GetString(key).ToEnum<CharacterState>() : CharacterState.Locked;
         }
 
         public static void SetCharacterState(CharacterId id, CharacterState state)

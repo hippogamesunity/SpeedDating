@@ -11,7 +11,7 @@ namespace Assets.Scripts.Views
 
         protected override void Initialize()
         {
-            EnableButton(HardLevelsButton, Profile.ProgressEasy >= GameData.EasyLevels.Count || Settings.Debug);
+            EnableButton(HardLevelsButton, Profile.Premium || Settings.Debug);
             EnableButton(MaxLevelsButton, false);
 
             RankingsButton.Enabled = false;

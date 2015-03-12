@@ -11,7 +11,8 @@
 %Win%;Победа;Win
 %TimeUp%;Время вышло;Time is up
 %GameOver%;Вы проиграли;You lose
-%LevelCompleted%;Супер, уровень пройден!;Congratulation, level completed!
+%LevelPassed%;Супер, уровень пройден!;Congratulation, level completed!
+%LevelCompleted%;Отлично! Ваша награда: {0} монет;Great! Take your reward: {0} coins
 %LevelFailed%;Повезет в другой раз!;Better luck next time!
 %HowToPlay%;Подсказка;How to play
 %TimeMode%;Пересаживай персонажей\nи найди им вторую половинку;How to find love?\nRepot characters between tables
@@ -33,6 +34,9 @@
 %Characters%;Персонажи;Characters
 %Locked%;Недоступно;Locked
 %Purchase%;Купить;Buy
+%Premium%;Premium;Premium
+%Unlock%;Unlock {0} story for {1};Unlock {0} story for {1}
+%SelectCard%;Select card to unlock;Select card to unlock
 
 %f1Story%;f1Story;f1Story
 %f2Story%;f2Story;f2Story

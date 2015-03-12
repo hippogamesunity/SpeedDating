@@ -10,6 +10,39 @@ namespace Assets.Scripts
     {
         public static readonly List<Hobby> Hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().ToList();
 
+        public static List<CharacterId> PremiumCharacters = new List<CharacterId>
+        {
+            CharacterId.f9,
+            CharacterId.f10,
+            CharacterId.m9,
+            CharacterId.m10
+        };
+
+        public static Dictionary<CharacterId, int> CharacterPrice = new Dictionary<CharacterId, int>
+        {
+            { CharacterId.f1, 2 },
+            { CharacterId.f2, 2 },
+            { CharacterId.f3, 2 },
+            { CharacterId.f4, 2 },
+            { CharacterId.f5, 2 },
+            { CharacterId.f6, 2 },
+            { CharacterId.f7, 2 },
+            { CharacterId.f8, 2 },
+            { CharacterId.f9, 0 },
+            { CharacterId.f10, 0 },
+
+            { CharacterId.m1, 2 },
+            { CharacterId.m2, 2 },
+            { CharacterId.m3, 2 },
+            { CharacterId.m4, 2 },
+            { CharacterId.m5, 2 },
+            { CharacterId.m6, 2 },
+            { CharacterId.m7, 2 },
+            { CharacterId.m8, 2 },
+            { CharacterId.m9, 0 },
+            { CharacterId.m10, 0 }
+        }; 
+
         public static List<Level> EasyLevels
         {
             get
@@ -44,22 +77,8 @@ namespace Assets.Scripts
 
         public static void Shuffle()
         {
-            _maleNamesEn = _maleNamesEn.Shuffle();
-            _femaleNamesEn = _femaleNamesEn.Shuffle();
-            _maleNamesJp = _maleNamesEn.Shuffle();
-            _femaleNamesJp = _femaleNamesEn.Shuffle();
             _maleImages = _maleImages.Shuffle();
             _femaleImages = _femaleImages.Shuffle();
-        }
-
-        public static string GetNextMaleName(bool japan)
-        {
-            return GeNext(japan ? _maleNamesJp : _maleNamesEn, ref _maleName);
-        }
-
-        public static string GetNextFemaleName(bool japan)
-        {
-            return GeNext(japan ? _femaleNamesJp : _femaleNamesEn, ref _femaleName);
         }
 
         public static string GetNextMaleImage()
@@ -72,9 +91,14 @@ namespace Assets.Scripts
             return GeNext(_femaleImages, ref _femaleImage);
         }
 
-        public static string GetNameByImage(string image, bool japan)
+        public static string GetNameById(CharacterId id)
         {
-            switch (image)
+            return GetNameById(Convert.ToString(id));
+        }
+
+        public static string GetNameById(string id)
+        {
+            switch (id)
             {
                 case "m1": return "Mike";
                 case "m2": return "Max";
@@ -86,8 +110,6 @@ namespace Assets.Scripts
                 case "m8": return "Kevin";
                 case "m9": return "Alan";
                 case "m10": return "Nate";
-                case "m11": return "Steven";
-                case "m12": return "Jake";
 
                 case "f1": return "Lisa";
                 case "f2": return "Helen";
@@ -99,109 +121,11 @@ namespace Assets.Scripts
                 case "f8": return "Diana";
                 case "f9": return "Kate";
                 case "f10": return "Alice";
-                case "f11": return "Jenny";
-                case "f12": return "Julia";
 
                 default:
                     throw new Exception();
             }
         }
-
-        private static List<string> _maleNamesEn = new List<string>
-        {
-            "James",
-            "John",
-            "Robert",
-            "Michael",
-            "William",
-            "David",
-            "Richard",
-            "Charles",
-            "Joseph",
-            "Thomas",
-            "Chris",
-            "Daniel",
-            "Paul",
-            "Mark",
-            "Donald",
-            "George",
-            "Kenneth",
-            "Steven",
-            "Edward",
-            "Brian"
-        };
-
-        private static List<string> _femaleNamesEn = new List<string>
-        {
-            "Mary",
-            "Patricia",
-            "Linda",
-            "Barbara",
-            "Elizabeth",
-            "Jennifer",
-            "Maria",
-            "Susan",
-            "Margaret",
-            "Dorothy",
-            "Lisa",
-            "Nancy",
-            "Karen",
-            "Betty",
-            "Helen",
-            "Sandra",
-            "Donna",
-            "Carol",
-            "Sharon",
-            "Kate"
-        };
-
-        private static List<string> _maleNamesJp = new List<string>
-        {
-            "Haruto",
-            "Yuto",
-            "Sota",
-            "Yuki",
-            "Hayato",
-            "Haruki",
-            "Ryusei",
-            "Koki",
-            "Sora",
-            "Sosuke",
-            "Riku",
-            "Soma",
-            "Ryota",
-            "Rui",
-            "Kaito",
-            "Haru",
-            "Kota",
-            "Yusei",
-            "Yuito",
-            "Yuma"
-        };
-
-        private static List<string> _femaleNamesJp = new List<string>
-        {
-            "Yui",
-            "Rio",
-            "Yuna",
-            "Hina",
-            "Koharu",
-            "Hinata",
-            "Mei",
-            "Mio",
-            "Saki",
-            "Miyu",
-            "Kokona",
-            "Haruka",
-            "Rin",
-            "Akari",
-            "Yuna",
-            "Honoka",
-            "Momoka",
-            "Aoi",
-            "Ichika",
-            "Sakura"
-        };
 
         private static List<string> _maleImages = new List<string>
         {

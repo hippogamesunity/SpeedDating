@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: a67c733c074eded44ae2842739c05793
+guid: b384dce7d0d209443a6ad21eba6aab0e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: UnlockedCard
-    21300002: UnlockedFrame
+    21300000: ForSaleFrame
+    21300002: CardLocked
+    21300004: CardFraeLocked
+    21300006: CardFrameLocked
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

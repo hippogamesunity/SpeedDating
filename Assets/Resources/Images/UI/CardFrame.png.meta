@@ -3,6 +3,7 @@ guid: 8547325ff33c6ac4ca8aaec6d25993f4
 TextureImporter:
   fileIDToRecycleName:
     21300000: LockedFrame
+    21300002: CardFrame
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

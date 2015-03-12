@@ -3,6 +3,7 @@ guid: 98facd958ad2ad4438444f59c8274ffc
 TextureImporter:
   fileIDToRecycleName:
     21300000: TeamButton
+    21300002: CharactersButton
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

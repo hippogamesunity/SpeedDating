@@ -105,6 +105,7 @@ namespace Assets.Scripts.Logic
 
             var score = CalcScore();
             var success = false;
+            var coins = 0;
 
             if (Level.Type == LevelType.Easy)
             {
@@ -115,7 +116,7 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressEasy == Level.Progress)
                     {
                         Profile.ProgressEasy++;
-                        Profile.Credits++;
+                        coins = 1;
                     }
                 }
             }
@@ -128,7 +129,7 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressHard == Level.Progress)
                     {
                         Profile.ProgressHard++;
-                        Profile.Credits += 2;
+                        coins = 2;
                     }
                 }
             }
@@ -141,7 +142,7 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressSwap == Level.Progress)
                     {
                         Profile.ProgressSwap++;
-                        Profile.Credits++;
+                        coins = 1;
                     }
                 }
             }
@@ -154,14 +155,18 @@ namespace Assets.Scripts.Logic
                     if (Profile.ProgressMemo == Level.Progress)
                     {
                         Profile.ProgressMemo++;
-                        Profile.Credits++;
+                        coins = 1;
                     }
                 }
             }
 
+            Profile.Coins += coins;
+
+            Get<Engine>().RefreshCoins();
+
             var play = Get<Play>();
 
-            play.SetScoreDialog(success);
+            play.SetScoreDialog(success, coins);
             play.ShowDialog(play.ScoreDialog);
 
             Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);

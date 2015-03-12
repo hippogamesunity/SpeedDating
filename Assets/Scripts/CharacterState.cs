@@ -3,7 +3,6 @@
     public enum CharacterState
     {
         Unlocked,
-        Locked,
-        ForSale
+        Locked
     }
 }

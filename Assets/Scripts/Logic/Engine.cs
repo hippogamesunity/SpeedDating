@@ -12,13 +12,16 @@ namespace Assets.Scripts.Logic
         public void Awake()
         {
             AdBuddizBinding.SetLogLevel(AdBuddizBinding.ABLogLevel.Info);
-            AdBuddizBinding.SetAndroidPublisherKey("bdc2f780-6d67-4ad9-9545-5092d50bf19a");
+            AdBuddizBinding.SetAndroidPublisherKey(PlanformDependedSettings.AdBuddiz);
+            AdBuddizBinding.SetIOSPublisherKey(PlanformDependedSettings.AdBuddiz);
             AdBuddizBinding.CacheAds();
 
             #if UNITY_EDITOR
 
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
+            Profile.Coins = 5;
+            RefreshCoins();
 
             #endif
         }
@@ -202,14 +205,14 @@ namespace Assets.Scripts.Logic
 
                 boys.Add(new Person
                 {
-                    Name = GameData.GetNameByImage(maleImage, level.JapanNames),
+                    Name = GameData.GetNameById(maleImage),
                     Image = maleImage,
                     Male = true,
                     Hobbies = level.MaleHobbies[i]
                 });
                 girls.Add(new Person
                 {
-                    Name = GameData.GetNameByImage(femaleImage, level.JapanNames),
+                    Name = GameData.GetNameById(femaleImage),
                     Image = femaleImage,
                     Male = false,
                     Hobbies = level.FemaleHobbies[i]

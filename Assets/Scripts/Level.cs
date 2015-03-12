@@ -16,7 +16,6 @@ namespace Assets.Scripts
         public List<List<Hobby>> MaleHobbies;
         public List<List<Hobby>> FemaleHobbies;
         public List<List<int>> Formation;
-        public bool JapanNames;
         public int Сomplexity = 0;
         public bool HideTarget;
 

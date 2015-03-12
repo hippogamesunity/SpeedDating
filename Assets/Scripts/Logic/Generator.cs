@@ -86,7 +86,7 @@ namespace Assets.Scripts.Logic
 
                 var boy = new Person
                 {
-                    Name = GameData.GetNameByImage(maleImage, false),
+                    Name = GameData.GetNameById(maleImage),
                     Image = maleImage,
                     Male = true,
                     Gay = false,
@@ -94,7 +94,7 @@ namespace Assets.Scripts.Logic
                 };
                 var girl = new Person
                 {
-                    Name = GameData.GetNameByImage(maleImage, false),
+                    Name = GameData.GetNameById(maleImage),
                     Image = femaleImage,
                     Male = false,
                     Gay = false,

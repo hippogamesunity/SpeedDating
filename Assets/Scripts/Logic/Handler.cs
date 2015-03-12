@@ -163,9 +163,9 @@ namespace Assets.Scripts.Logic
             }
             else if (ViewBase.Current is Team)
             {
-                GetComponent<Characters1>().Open();
+                GetComponent<Characters>().Open();
             }
-            else if (ViewBase.Current is Characters1 || ViewBase.Current is Characters2)
+            else if (ViewBase.Current is Characters)
             {
                 GetComponent<Menu>().Open();
             }
@@ -177,24 +177,17 @@ namespace Assets.Scripts.Logic
             GetComponent<AudioPlayer>().Refresh();
         }
 
-        public void ShowCharacters1()
+        public void ShowCharacters()
         {
-            if (ViewBase.Current is Menu || ViewBase.Current is Characters2)
+            if (ViewBase.Current is Menu)
             {
-                GetComponent<Characters1>().Open();
+                GetComponent<Characters>().Open();
             }
         }
 
-        public void ShowCharacters2()
-        {
-            if (ViewBase.Current is Characters1)
-            {
-                GetComponent<Characters2>().Open();
-            }
-        }
         public void OpenTeam()
         {
-            if (ViewBase.Current is Characters1 || ViewBase.Current is Characters2)
+            if (ViewBase.Current is Characters)
             {
                 GetComponent<Team>().Open();
             }
@@ -209,6 +202,16 @@ namespace Assets.Scripts.Logic
                 view.Page = view.Page == 0 ? 1 : 0;
                 view.Open();
             }
+        }
+
+        public void RefreshCoins()
+        {
+            Find<Coins>().Refresh();
+        }
+
+        public void RefreshPremium()
+        {
+            Get<Menu>().Refresh();
         }
     }
 }

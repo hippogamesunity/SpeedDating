@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: 69ba104950f6ac4408312f816cdb76cb
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: ChairTemplate
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,7 +26,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0

@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: 858cb803ee066e64baa96afa86900945
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: HobbyFrame
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,7 +26,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 2
-    aniso: 16
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0

@@ -26,6 +26,7 @@ public class TweenPanel : MonoBehaviour
 
     public void Show(TweenDirection direction)
     {
+        Hide(direction, 0);
         Tween(true, DefaultTimeout, direction);
     }
 
