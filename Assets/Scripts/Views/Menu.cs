@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Common;
+using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
     public class Menu : ViewBase
     {
-        public GameObject PremiumButton;
+        public GameButton PremiumButton;
 
         public void Start()
         {
@@ -13,7 +14,9 @@ namespace Assets.Scripts.Views
 
         public void Refresh()
         {
-            PremiumButton.SetActive(!Profile.Premium);
+            PremiumButton.GetComponent<UITexture>().mainTexture =
+                Resources.Load<Texture2D>(Profile.Premium ? "Images/UI/ButtonLongInactive" : "Images/UI/ButtonLong");
+            PremiumButton.Enabled = !Profile.Premium;
         }
 
         public void BuyPremium()

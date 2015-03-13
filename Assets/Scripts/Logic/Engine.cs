@@ -20,7 +20,7 @@ namespace Assets.Scripts.Logic
 
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
-            Profile.Coins = 5;
+            Profile.Coins = 15;
             RefreshCoins();
 
             #endif
@@ -179,7 +179,7 @@ namespace Assets.Scripts.Logic
 
         private static List<List<Person>> InitializeTables(Level level)
         {
-            GameData.Shuffle();
+            GameData.Initialize();
 
             var tables = new List<List<Person>>();
             var boys = new List<Person>();

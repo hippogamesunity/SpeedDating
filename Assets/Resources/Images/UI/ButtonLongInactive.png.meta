@@ -3,6 +3,7 @@ guid: 0a0fd660209ba0844b6ab913aff091e5
 TextureImporter:
   fileIDToRecycleName:
     21300000: ButtonLongDisabled
+    21300002: ButtonLongInactive
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

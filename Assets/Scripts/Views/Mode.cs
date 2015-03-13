@@ -21,7 +21,7 @@ namespace Assets.Scripts.Views
         private void EnableButton(GameButton button, bool enable)
         {
             button.Enabled = enable;
-            button.GetComponent<UITexture>().mainTexture = Resources.Load<Texture2D>(enable ? "Images/UI/ButtonLong" : "Images/UI/ButtonLongDisabled");
+            button.GetComponent<UITexture>().mainTexture = Resources.Load<Texture2D>(enable ? "Images/UI/ButtonLong" : "Images/UI/ButtonLongInactive");
         }
     }
 }

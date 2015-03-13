@@ -163,7 +163,7 @@ namespace Assets.Scripts.Logic
             }
             else if (ViewBase.Current is Team)
             {
-                GetComponent<Characters>().Open();
+                GetComponent<Mode>().Open();
             }
             else if (ViewBase.Current is Characters)
             {
@@ -187,7 +187,7 @@ namespace Assets.Scripts.Logic
 
         public void OpenTeam()
         {
-            if (ViewBase.Current is Characters)
+            if (ViewBase.Current is Mode)
             {
                 GetComponent<Team>().Open();
             }

@@ -89,6 +89,10 @@ namespace Assets.Scripts
             {
                 case SkuPremium:
                     Profile.Premium = true;
+                    Profile.UnlockCharacter(CharacterId.m9);
+                    Profile.UnlockCharacter(CharacterId.m10);
+                    Profile.UnlockCharacter(CharacterId.f9);
+                    Profile.UnlockCharacter(CharacterId.f10);
                     break;
                 case SkuCredits:
                     Profile.Coins += 10;

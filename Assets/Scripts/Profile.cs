@@ -63,18 +63,18 @@ namespace Assets.Scripts
             set { PlayerPrefs.SetInt(PremiumKey, 1); PlayerPrefs.Save(); }
         }
 
-        public static CharacterState GetCharacterState(CharacterId id)
+        public static bool CharacterUnlocked(CharacterId id)
         {
             var key = Md5.Encode(Convert.ToString(id));
 
-            return PlayerPrefs.HasKey(key) ? PlayerPrefs.GetString(key).ToEnum<CharacterState>() : CharacterState.Locked;
+            return PlayerPrefs.HasKey(key);
         }
 
-        public static void SetCharacterState(CharacterId id, CharacterState state)
+        public static void UnlockCharacter(CharacterId id)
         {
             var key = Md5.Encode(Convert.ToString(id));
 
-            PlayerPrefs.SetString(key, Convert.ToString(state));
+            PlayerPrefs.SetString(key, Md5.Encode(Convert.ToString(id)));
             PlayerPrefs.Save();
         }
     }

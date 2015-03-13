@@ -19,12 +19,10 @@ namespace Assets.Scripts.Common
             {
                 text = string.Format(text, args);
 
-                text = text.Replace("[grey]", "[505050]");
-                text = text.Replace("[red]", "[c83232]");
-                text = text.Replace("[blue]", "[006464]");
-                text = text.Replace("[green]", "[009600]");
-                text = text.Replace("[violet]", "[c832c8]");
-                text = text.Replace("[orange]", "[ce9000]");
+                text = text.Replace("[red]", "[FF0000]");
+                text = text.Replace("[green]", "[00FF00]");
+                text = text.Replace("[blue]", "[00A0FF]");
+                text = text.Replace("[yellow]", "[FFFF00]");
             }
 
             var scale = label.transform.localScale;

@@ -10,6 +10,10 @@ namespace Assets.Scripts
     {
         public static readonly List<Hobby> Hobbies = Enum.GetValues(typeof(Hobby)).Cast<Hobby>().ToList();
 
+        private static List<string> _maleImages, _femaleImages;
+        private static int _maleName, _femaleName;
+        private static int _maleImage, _femaleImage;
+
         public static List<CharacterId> PremiumCharacters = new List<CharacterId>
         {
             CharacterId.f9,
@@ -31,15 +35,15 @@ namespace Assets.Scripts
             { CharacterId.f9, 0 },
             { CharacterId.f10, 0 },
 
-            { CharacterId.m1, 2 },
+            { CharacterId.m1, 1 },
             { CharacterId.m2, 2 },
-            { CharacterId.m3, 2 },
-            { CharacterId.m4, 2 },
-            { CharacterId.m5, 2 },
-            { CharacterId.m6, 2 },
-            { CharacterId.m7, 2 },
-            { CharacterId.m8, 2 },
-            { CharacterId.m9, 0 },
+            { CharacterId.m3, 3 },
+            { CharacterId.m4, 4 },
+            { CharacterId.m5, 5 },
+            { CharacterId.m6, 6 },
+            { CharacterId.m7, 7 },
+            { CharacterId.m8, 8 },
+            { CharacterId.m9, 10 },
             { CharacterId.m10, 0 }
         }; 
 
@@ -75,8 +79,40 @@ namespace Assets.Scripts
             }
         }
 
-        public static void Shuffle()
+        public static void Initialize()
         {
+            _maleImages = new List<string>
+            {
+                "m1",
+                "m2",
+                "m3",
+                "m4",
+                "m5",
+                "m6",
+                "m7",
+                "m8"
+            };
+
+            _femaleImages = new List<string>
+            {
+                "f1",
+                "f2",
+                "f3",
+                "f4",
+                "f5",
+                "f6",
+                "f7",
+                "f8"
+            };
+
+            if (Profile.Premium)
+            {
+                _maleImages.Add("m9");
+                _maleImages.Add("m10");
+                _femaleImages.Add("f9");
+                _femaleImages.Add("f10");
+            }
+
             _maleImages = _maleImages.Shuffle();
             _femaleImages = _femaleImages.Shuffle();
         }
@@ -126,37 +162,6 @@ namespace Assets.Scripts
                     throw new Exception();
             }
         }
-
-        private static List<string> _maleImages = new List<string>
-        {
-            "m1",
-            "m2",
-            "m3",
-            "m4",
-            "m5",
-            "m6",
-            "m7",
-            "m8",
-            "m9",
-            "m10",
-        };
-
-        private static List<string> _femaleImages = new List<string>
-        {
-            "f1",
-            "f2",
-            "f3",
-            "f4",
-            "f5",
-            "f6",
-            "f7",
-            "f8",
-            "f9",
-            "f10"
-        };
-
-        private static int _maleName, _femaleName;
-        private static int _maleImage, _femaleImage;
 
         private static string GeNext(IList<string> list, ref int index)
         {

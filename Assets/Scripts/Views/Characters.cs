@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic;
+using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
@@ -8,9 +9,7 @@ namespace Assets.Scripts.Views
     {
         public TweenPanel[] Pages;
         public UILabel StoryText;
-        public UILabel PriceText;
-        public UITexture CoinsIcon;
-        public GameButton UnlockButton;
+        public GameButton BuyButton;
 
         public static CharacterId Selected;
 
@@ -18,31 +17,34 @@ namespace Assets.Scripts.Views
         {
             Pages[0].Show(0f);
             Pages[1].Hide(TweenDirection.Right, 0);
-            StoryText.enabled = true;
             StoryText.SetLocalizedText("%SelectCard%");
-            PriceText.enabled = CoinsIcon.enabled = false;
-            UnlockButton.Enabled = false;
+            SetBuyButton(false);
         }
 
         public void SelectCharacterCard(object character)
         {
             Selected = character.ToString().ToEnum<CharacterId>();
 
-            var locked = true;
-
-            if (Profile.GetCharacterState(Selected) == CharacterState.Locked)
+            if (Profile.CharacterUnlocked(Selected))
             {
-                PriceText.SetLocalizedText("%Unlock%", GameData.GetNameById(Selected), GameData.CharacterPrice[Selected]);
+                StoryText.SetLocalizedText(string.Format("%{0}Story%", Selected), GameData.GetNameById(Selected));
+                SetBuyButton(false);
             }
             else
             {
-                StoryText.SetLocalizedText(string.Format("%{0}Story%", Selected));
-                locked = false;
-            }
+                if (GameData.PremiumCharacters.Contains(Selected))
+                {
+                    StoryText.SetLocalizedText("%PremiumCharacter%");
+                    SetBuyButton(false);
+                }
+                else
+                {
+                    var price = GameData.CharacterPrice[Selected];
 
-            StoryText.enabled = !locked;
-            PriceText.enabled = CoinsIcon.enabled = locked;
-            UnlockButton.Enabled = locked;
+                    StoryText.SetLocalizedText("%Unlock%", GameData.GetNameById(Selected), price, GetCoinsLocale(price));
+                    SetBuyButton(Profile.Coins >= price);
+                }
+            }
         }
 
         public void UnlockCharacter()
@@ -52,7 +54,7 @@ namespace Assets.Scripts.Views
             if (Profile.Coins >= price)
             {
                 Profile.Coins -= price;
-                Profile.SetCharacterState(Selected, CharacterState.Unlocked);
+                Profile.UnlockCharacter(Selected);
                 Get<Engine>().RefreshCoins();
                 FindObjectsOfType<CharacterCard>().Single(i => i.Id == Selected).Refresh();
                 SelectCharacterCard(Selected);
@@ -71,6 +73,30 @@ namespace Assets.Scripts.Views
                 Pages[1].Hide();
                 Pages[0].Show();
             }
+        }
+
+        public static string GetCoinsLocale(int count)
+        {
+            var last = count % 10;
+
+            switch (last)
+            {
+                case 1:
+                    return Localization.Get("%Coins1%");
+                case 2:
+                case 3:
+                case 4:
+                    return Localization.Get("%Coins2%");
+                default:
+                    return Localization.Get("%Coins5%");
+            }
+        }
+
+        private void SetBuyButton(bool enable)
+        {
+            BuyButton.Enabled = enable;
+            BuyButton.GetComponent<UITexture>().mainTexture =
+                Resources.Load<Texture2D>(enable ? "Images/UI/ButtonLong" : "Images/UI/ButtonLongInactive");
         }
     }
 }

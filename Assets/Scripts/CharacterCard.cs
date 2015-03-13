@@ -19,24 +19,22 @@ namespace Assets.Scripts
 
         public void Refresh()
         {
-            var state = Profile.GetCharacterState(Id);
             var id = Convert.ToString(Id);
 
             Image.spriteName = id;
             Button.Params = id;
 
-            switch (state)
+            if (Profile.CharacterUnlocked(Id))
             {
-                case CharacterState.Unlocked:
-                    Image.color = Color.white;
-                    Name.SetLocalizedText(GameData.GetNameById(id));
-                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrame");
-                    break;
-                case CharacterState.Locked:
-                    Image.color = ColorHelper.GetColor(0, 0, 0, 150);
-                    Name.SetLocalizedText(GameData.GetNameById(id));
-                    Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrameLocked");
-                    break;
+                Image.color = Color.white;
+                Name.SetLocalizedText(GameData.GetNameById(id));
+                Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrame");
+            }
+            else
+            {
+                Image.color = ColorHelper.GetColor(0, 0, 0, 150);
+                Name.SetLocalizedText(GameData.GetNameById(id));
+                Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrame");
             }
         }
     }

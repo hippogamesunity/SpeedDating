@@ -142,7 +142,7 @@ namespace Assets.Scripts.Views
 
             if (completed)
             {
-                ScoreDialogMessage.SetLocalizedText(coins > 0 ? "%LevelCompleted%" : "%LevelPassed%", coins);
+                ScoreDialogMessage.SetLocalizedText(coins > 0 ? "%LevelCompleted%" : "%LevelPassed%", coins, Characters.GetCoinsLocale(coins));
             }
             else
             {
