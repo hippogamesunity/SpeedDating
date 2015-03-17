@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public class GameShop : Script
     {
-        public const string SkuPremium = "speeddating.premium";
+        public const string SkuDeluxe = "speeddating.deluxe";
         public const string SkuCredits = "speeddating.credits";
         private OpenIABClient _openIabClient;
 
@@ -35,7 +35,7 @@ namespace Assets.Scripts
 
             _openIabClient.MapSku(PlanformDependedSettings.StoreName, new Dictionary<string, string>
             {
-                { SkuPremium, SkuPremium },
+                { SkuDeluxe, SkuDeluxe },
                 { SkuCredits, SkuCredits }
             });
         }
@@ -48,7 +48,7 @@ namespace Assets.Scripts
 
             #else
 
-            _openIabClient.PurchaseProduct(_sku);
+            _openIabClient.PurchaseProduct(sku);
 
             #endif
         }
@@ -87,7 +87,7 @@ namespace Assets.Scripts
         {
             switch (sku)
             {
-                case SkuPremium:
+                case SkuDeluxe:
                     Profile.Premium = true;
                     Profile.UnlockCharacter(CharacterId.m9);
                     Profile.UnlockCharacter(CharacterId.m10);

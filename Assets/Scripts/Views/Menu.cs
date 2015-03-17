@@ -23,7 +23,7 @@ namespace Assets.Scripts.Views
         {
             if (!Profile.Premium)
             {
-                Get<GameShop>().Buy(GameShop.SkuPremium);
+                Get<GameShop>().Buy(GameShop.SkuDeluxe);
             }
         }
     }

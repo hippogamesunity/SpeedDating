@@ -7,16 +7,16 @@ namespace Assets.Scripts
 
         #if UNITY_ANDROID
 
-        public const string StorePublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs6fjnOEqE8xpY2OLiQuw/eqdVOM+ESSrRhmXGutEfpghQJ7RcPjpo6o0/0grWoJ6ARGfWOLXUqIWTAu+WFuEi7f83wnZ4TgX9FsEP81W4vhvFrdcOS4ua5QxQnefNwxS91HLfIEDNw5Pmr6t8e5wZjRJOpObXx0HJHO8VwgZ5RjYj3KFtASX8s8NlwRM8BgkeTlp2kt5yoejzKltvAFI4mfLS3iwEOV9BAPKP/7A2Uz538qUIcMct+IGZyS16Vms6Z23opNMPrU+cP0QYeOSlqjNEf7LlxUusaNzmmw80l+ISLdrJ4jmkSGu4lQr7quzZtYXsqDOLXmdAA7pPJcMmwIDAQAB";
-        public const string StorePublicKeyXml = "<RSAKeyValue><Modulus>s6fjnOEqE8xpY2OLiQuw/eqdVOM+ESSrRhmXGutEfpghQJ7RcPjpo6o0/0grWoJ6ARGfWOLXUqIWTAu+WFuEi7f83wnZ4TgX9FsEP81W4vhvFrdcOS4ua5QxQnefNwxS91HLfIEDNw5Pmr6t8e5wZjRJOpObXx0HJHO8VwgZ5RjYj3KFtASX8s8NlwRM8BgkeTlp2kt5yoejzKltvAFI4mfLS3iwEOV9BAPKP/7A2Uz538qUIcMct+IGZyS16Vms6Z23opNMPrU+cP0QYeOSlqjNEf7LlxUusaNzmmw80l+ISLdrJ4jmkSGu4lQr7quzZtYXsqDOLXmdAA7pPJcMmw==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
-        public const string AdBuddiz = "c4ea4c1c-f9a9-4313-88f5-ce78e889b2ec";
+        public const string StorePublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArE3aMNkBBEbxigYLgtfAWFJcQhitM7a7CbBo5NaH55dw2gS6/Q/lzBxuDtTw9LIpVJsIiJCyx1WJUYj6V9Ca08fzIPRDqw7PJG7IZM6ggPFnlXYB0CxfhXW8xEqeKWrZCyzK6yHeOYonInDgyunJ+PHJ+DijWpZabS5GqrxjanFlNdRu9DuSOEXm1jdSeMBcTAtn/ycIjb22lLUSp2zb3njm/e+tSQHqHzh5xUc8wf75yl9rYKgrnanJZo6qRIjcuwMEfR3+3ZTHlWwvFEyvHSM9opyT38CKh+pTblVyVdj12Wt/dK8G5iI5rFWwsxJbYJHfavlbRyN9aazlX5rYFQIDAQAB";
+        public const string StorePublicKeyXml = "<RSAKeyValue><Modulus>rE3aMNkBBEbxigYLgtfAWFJcQhitM7a7CbBo5NaH55dw2gS6/Q/lzBxuDtTw9LIpVJsIiJCyx1WJUYj6V9Ca08fzIPRDqw7PJG7IZM6ggPFnlXYB0CxfhXW8xEqeKWrZCyzK6yHeOYonInDgyunJ+PHJ+DijWpZabS5GqrxjanFlNdRu9DuSOEXm1jdSeMBcTAtn/ycIjb22lLUSp2zb3njm/e+tSQHqHzh5xUc8wf75yl9rYKgrnanJZo6qRIjcuwMEfR3+3ZTHlWwvFEyvHSM9opyT38CKh+pTblVyVdj12Wt/dK8G5iI5rFWwsxJbYJHfavlbRyN9aazlX5rYFQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+        public const string AdBuddiz = "bdc2f780-6d67-4ad9-9545-5092d50bf19a";
         public static string StoreName = OpenIAB_Android.STORE_GOOGLE;
         public const string StoreLink = "https://play.google.com/store/apps/details?id=com.SpeedDating";
         
         #elif UNITY_IPHONE
 
-        public const string StorePublicKey = "";
-        public const string AdBuddiz = "";
+        public const string StorePublicKey = "41f95fc5fdbe455a963a21b411f9024f";
+        public const string AdBuddiz = "e25543d7-2db3-40b8-bb08-d8896a4d2145";
         public static string StoreName = OpenIAB_iOS.STORE;
         public const string StoreLink = "itms-apps://itunes.apple.com/app/id_";
 
