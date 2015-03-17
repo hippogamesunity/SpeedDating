@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 87410accc8fc4084ca1c230be1a096f3
+guid: 9525be7c872d0b34c96c40612490f7bb
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: BurgerKing
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +25,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: 16
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

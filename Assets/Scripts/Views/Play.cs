@@ -52,13 +52,15 @@ namespace Assets.Scripts.Views
                 HourHand.gameObject.SetActive(false);
                 HelpDialogMessage.SetLocalizedText("%SwapMode%");
             }
-            if (Engine.Level.Type == LevelType.Memo)
+            else if (Engine.Level.Type == LevelType.Memo)
             {
                 TimeIcon.enabled = true;
                 SwapIcon.enabled = false;
                 HourHand.gameObject.SetActive(true);
                 HelpDialogMessage.SetLocalizedText(Engine.Level.Memorize ? "%MemoMode1%" : "%MemoMode2%");
             }
+
+            Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + GameData.GetBackground(Engine.Level));
         }
 
         protected override void Cleanup()

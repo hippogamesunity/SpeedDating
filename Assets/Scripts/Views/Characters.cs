@@ -58,6 +58,7 @@ namespace Assets.Scripts.Views
                 Get<Engine>().RefreshCoins();
                 FindObjectsOfType<CharacterCard>().Single(i => i.Id == Selected).Refresh();
                 SelectCharacterCard(Selected);
+                Get<AudioPlayer>().Blink();
             }
         }
 

@@ -38,9 +38,9 @@
 %Unlock%;Купить карточку {0} за [yellow]{1} {2}[-];Buy {0} card for [yellow]{1} {2}[-]
 %SelectCard%;Выберите карточку персонажа;Select card to unlock
 %PremiumCharacter%;Этот персонаж доступен только в [yellow]premium[-] версии игры;This character is only avaiable in [yellow]premium[-] version
-%Coins1%;монету;coin
-%Coins2%;монеты;coins
-%Coins5%;монет;coins
+%Coins1%;самоцвет;gem
+%Coins2%;самоцвета;gems
+%Coins5%;самоцветов;gems
 %f1Story%;{0} легко находит общий язык с парнями и любит активно проводить время. Очень редко появляется дома;f1Story
 %f2Story%;{0} отличница. Учеба у нее на первом месте, поэтому она проводит много времени дома, выполняя домашнее задание;f2Story
 %f3Story%;{0} постоянно витает в облаках. Мечтает стать феей и научиться летать на единороге. Живет со своим любимым котом;f3Story

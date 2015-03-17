@@ -16,11 +16,11 @@ namespace Assets.Scripts.Logic
             AdBuddizBinding.SetIOSPublisherKey(PlanformDependedSettings.AdBuddiz);
             AdBuddizBinding.CacheAds();
 
-            #if UNITY_EDITOR
+            #if UNITY_EDITOR || UNITY_WEBPLAYER
 
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
-            Profile.Coins = 15;
+            Profile.Coins = 25;
             RefreshCoins();
 
             #endif
@@ -142,8 +142,6 @@ namespace Assets.Scripts.Logic
             {
                 var table = PrefabsHelper.Instantiate(Level.TableName, Get<Play>().GameTransform);
                 var characters = table.GetComponentsInChildren<Character>();
-
-                Get<Play>().Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + Level.Background);
 
                 characters[0].Initialize(tables[i][0]);
                 characters[1].Initialize(tables[i][1]);

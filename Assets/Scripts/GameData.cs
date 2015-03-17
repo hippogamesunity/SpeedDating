@@ -163,6 +163,21 @@ namespace Assets.Scripts
             }
         }
 
+        public static string GetBackground(Level level)
+        {
+            switch (level.TableNumber)
+            {
+                case 1:
+                case 4:
+                    return "CoffeeShop";
+                case 2:
+                case 5:
+                    return "Attic";
+                default:
+                    return "SushiBar";
+            }
+        }
+
         private static string GeNext(IList<string> list, ref int index)
         {
             var result = list[index];
@@ -183,11 +198,11 @@ namespace Assets.Scripts
         {
             { 2, 1.00f },
             { 3, 1.00f },
-            { 4, 0.75f },
-            { 5, 0.75f },
-            { 6, 0.75f },
-            { 7, 0.65f },
-            { 8, 0.60f },
+            { 4, 0.90f },
+            { 5, 0.85f },
+            { 6, 0.80f },
+            { 7, 0.70f },
+            { 8, 0.70f },
         };
 
         public static readonly Dictionary<int, List<Vector2>> TablePositions = new Dictionary<int, List<Vector2>>
@@ -201,27 +216,27 @@ namespace Assets.Scripts
             {
                 3, new List<Vector2>
                 {
-                    new Vector2(-400, 40), new Vector2(400, 40), new Vector2(0, -120)
+                    new Vector2(-400, 40), new Vector2(400, 40), new Vector2(0, -180)
                 }
             },
             {
                 4, new List<Vector2>
                 {
-                    new Vector2(-240, 80), new Vector2(240, 80), new Vector2(-440, -240), new Vector2(440, -240)
+                    new Vector2(-150, 100), new Vector2(350, 100), new Vector2(-400, -240), new Vector2(100, -240)
                 }
             },
             {
                 5, new List<Vector2>
                 {
-                    new Vector2(-280, 80), new Vector2(280, 80), new Vector2(0, -120), new Vector2(-440, -260), new Vector2(440, -260)
+                    new Vector2(-320, 100), new Vector2(320, 100), new Vector2(0, -80), new Vector2(-480, -240), new Vector2(480, -240)
                 }
             },
             {
                 6, new List<Vector2>
                 {
                     new Vector2(-180, 100), new Vector2(180, 100),
-                    new Vector2(-500, -60), new Vector2(500, -60),
-                    new Vector2(-180, -260), new Vector2(180, -260)
+                    new Vector2(-500, -40), new Vector2(500, -40),
+                    new Vector2(-180, -240), new Vector2(180, -240)
                 }
             },
             {

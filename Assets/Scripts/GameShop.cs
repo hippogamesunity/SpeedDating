@@ -42,7 +42,7 @@ namespace Assets.Scripts
 
         public void Buy(string sku)
         {
-            #if UNITY_EDITOR
+            #if UNITY_EDITOR || UNITY_WEBPLAYER
 
             Purchased(sku);
 
@@ -62,7 +62,7 @@ namespace Assets.Scripts
 
         private void Purchased(Purchase purchase)
         {
-            #if UNITY_IPHONE
+            #if UNITY_IPHONE || UNITY_WEBPLAYER
 
             var verified = true;
 
@@ -100,6 +100,7 @@ namespace Assets.Scripts
             }
 
             Refresh();
+            Get<AudioPlayer>().Blink();
         }
 
         private static void RestoreCompleted()

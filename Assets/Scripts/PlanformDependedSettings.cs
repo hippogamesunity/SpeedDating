@@ -13,14 +13,19 @@ namespace Assets.Scripts
         public static string StoreName = OpenIAB_Android.STORE_GOOGLE;
         public const string StoreLink = "https://play.google.com/store/apps/details?id=com.SpeedDating";
         
-        #endif
-
-        #if UNITY_IPHONE
+        #elif UNITY_IPHONE
 
         public const string StorePublicKey = "";
         public const string AdBuddiz = "";
         public static string StoreName = OpenIAB_iOS.STORE;
         public const string StoreLink = "itms-apps://itunes.apple.com/app/id_";
+
+        #else
+
+        public const string StorePublicKey = null;
+        public const string AdBuddiz = null;
+        public static string StoreName = null;
+        public const string StoreLink = null;
         
         #endif
     }

@@ -245,7 +245,7 @@ namespace Assets.Scripts.Common
 
             #endif
 
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID || UNITY_WEBPLAYER
 
             if (_sku == null || inventory.HasPurchase(_sku))
             {
