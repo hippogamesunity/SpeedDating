@@ -21,8 +21,9 @@ namespace Assets.Scripts.Common
 
                 text = text.Replace("[red]", "[FF0000]");
                 text = text.Replace("[green]", "[00FF00]");
-                text = text.Replace("[blue]", "[00A0FF]");
+                text = text.Replace("[blue]", "[00D0FF]");
                 text = text.Replace("[yellow]", "[FFFF00]");
+                text = text.Replace("[pink]", "[FF6699]");
             }
 
             var scale = label.transform.localScale;

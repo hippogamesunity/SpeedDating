@@ -7,46 +7,6 @@ namespace Assets.Scripts.Logic
 {
     public partial class Engine
     {
-        public void ShowModes()
-        {
-            if (ViewBase.Current is Menu)
-            {
-                GetComponent<Mode>().Open();
-            }
-        }
-
-        public void ShowEasyLevels()
-        {
-            if (ViewBase.Current is Mode)
-            {
-                GetComponent<EasyLevels>().Open();
-            }
-        }
-
-        public void ShowHardLevels()
-        {
-            if (ViewBase.Current is Mode)
-            {
-                GetComponent<HardLevels>().Open();
-            }
-        }
-
-        public void ShowSwapLevels()
-        {
-            if (ViewBase.Current is Mode)
-            {
-                GetComponent<SwapLevels>().Open();
-            }
-        }
-
-        public void ShowMemoLevels()
-        {
-            if (ViewBase.Current is Mode)
-            {
-                GetComponent<MemoLevels>().Open();
-            }
-        }
-
         public void PlayEasyLevel(object level)
         {
             if (ViewBase.Current is EasyLevels)
@@ -124,7 +84,7 @@ namespace Assets.Scripts.Logic
 
                 if (formation == Level.FormationHash)
                 {
-                    TaskScheduler.CreateTask(Find<AudioPlayer>().Success, TaskId, 0f);
+                    TaskScheduler.CreateTask(Find<AudioPlayer>().PlaySuccess, TaskId, 0f);
                     TaskScheduler.CreateTask(Find<Engine>().CompleteGame, TaskId, 1f);
                 }
             }
@@ -169,49 +129,10 @@ namespace Assets.Scripts.Logic
             {
                 GetComponent<Menu>().Open();
             }
-        }
-
-        public void Mute()
-        {
-            Profile.Mute = !Profile.Mute;
-            GetComponent<AudioPlayer>().Refresh();
-        }
-
-        public void ShowCharacters()
-        {
-            if (ViewBase.Current is Menu)
+            else if (ViewBase.Current is Deluxe)
             {
-                GetComponent<Characters>().Open();
+                GetComponent<Menu>().Open();
             }
-        }
-
-        public void OpenTeam()
-        {
-            if (ViewBase.Current is Mode)
-            {
-                GetComponent<Team>().Open();
-            }
-        }
-
-        public void ShowLevelPage(object index)
-        {
-            if (ViewBase.Current is EasyLevels)
-            {
-                var view = GetComponent<EasyLevels>();
-
-                view.Page = view.Page == 0 ? 1 : 0;
-                view.Open();
-            }
-        }
-
-        public void RefreshCoins()
-        {
-            Find<Coins>().Refresh();
-        }
-
-        public void RefreshPremium()
-        {
-            Get<Menu>().Refresh();
         }
     }
 }

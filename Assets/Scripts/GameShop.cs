@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Common;
-using Assets.Scripts.Logic;
+using Assets.Scripts.Views;
 using OnePF;
 
 namespace Assets.Scripts
@@ -88,11 +88,7 @@ namespace Assets.Scripts
             switch (sku)
             {
                 case SkuDeluxe:
-                    Profile.Premium = true;
-                    Profile.UnlockCharacter(CharacterId.m9);
-                    Profile.UnlockCharacter(CharacterId.m10);
-                    Profile.UnlockCharacter(CharacterId.f9);
-                    Profile.UnlockCharacter(CharacterId.f10);
+                    Profile.Deluxe = true;
                     break;
                 case SkuCredits:
                     Profile.Coins += 10;
@@ -100,7 +96,7 @@ namespace Assets.Scripts
             }
 
             Refresh();
-            Get<AudioPlayer>().Blink();
+            Get<AudioPlayer>().PlaySuccess();
         }
 
         private static void RestoreCompleted()
@@ -109,8 +105,7 @@ namespace Assets.Scripts
 
         private void Refresh()
         {
-            Get<Engine>().RefreshPremium();
-            Get<Engine>().RefreshCoins();
+            Get<Menu>().Open();
         }
     }
 }

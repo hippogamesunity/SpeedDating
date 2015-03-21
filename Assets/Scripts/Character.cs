@@ -158,17 +158,18 @@ namespace Assets.Scripts
 
                     Table = nearest.Table;
                     nearest.Table = table;
+                    
+                    Flip();
+                    nearest.Flip();
 
                     if (Table != nearest.Table)
                     {
                         Table.Refresh();
                         nearest.Table.Refresh();
+                        Find<Engine>().Swapped();
                     }
 
-                    Flip();
-                    nearest.Flip();
-
-                    Find<Engine>().Swapped();
+                    //Find<AudioPlayer>().PlaySwap();
                 }
             }
         }

@@ -132,16 +132,34 @@ namespace Assets.Scripts.Common
                     TweenColor.Begin(gameObject, TweenTimeDown, ColorDown);
                 }
 
-                TweenScale.Begin(gameObject, TweenTimeDown, ScaleDown * Vector3.one);
+                if (GetComponent<TweenScale>() != null)
+                {
+                    var animationCurve = GetComponent<TweenScale>().animationCurve;
+
+                    TweenScale.Begin(gameObject, TweenTimeDown, ScaleDown * Vector3.one).animationCurve = animationCurve;
+                }
+                else
+                {
+                    TweenScale.Begin(gameObject, TweenTimeDown, ScaleDown * Vector3.one);
+                }
             }
             else
             {
                 if (!DisableTweenColor)
                 {
-                    TweenColor.Begin(gameObject, TweenTimeDown, ColorDown);
+                    TweenColor.Begin(gameObject, TweenTimeUp, ColorDown);
                 }
 
-                TweenScale.Begin(gameObject, TweenTimeUp, Vector3.one);
+                if (GetComponent<TweenScale>() != null)
+                {
+                    var animationCurve = GetComponent<TweenScale>().animationCurve;
+
+                    TweenScale.Begin(gameObject, TweenTimeUp, Vector3.one).animationCurve = animationCurve;
+                }
+                else
+                {
+                    TweenScale.Begin(gameObject, TweenTimeUp, Vector3.one);
+                }
             }
         }
 

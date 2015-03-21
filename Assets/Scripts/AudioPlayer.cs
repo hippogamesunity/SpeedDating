@@ -11,6 +11,7 @@ namespace Assets.Scripts
         public AudioClip[] Music;
         public AudioClip BlinkSound;
         public AudioClip SuccessSound;
+        public AudioClip SwapSound;
         public UITexture MuteButton;
 
         public void Awake()
@@ -36,14 +37,19 @@ namespace Assets.Scripts
             PlayInGameNext(Music[Convert.ToInt32(index)]);
         }
 
-        public void Blink()
+        public void PlayBlink()
         {
             PlayEffect(BlinkSound);
         }
 
-        public void Success()
+        public void PlaySuccess()
         {
             PlayEffect(SuccessSound);
+        }
+
+        public void PlaySwap()
+        {
+            PlayEffect(SwapSound);
         }
 
         public void ScheduleFix()

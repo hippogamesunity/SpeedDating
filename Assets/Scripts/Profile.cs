@@ -13,7 +13,7 @@ namespace Assets.Scripts
         private static readonly string MuteKey = Md5.Encode("Mute");
         private static readonly string ShowAdTimeKey = Md5.Encode("ShowAdTime");
         private static readonly string CreditsKey = Md5.Encode("Credits");
-        private static readonly string PremiumKey = Md5.Encode("Premium");
+        private static readonly string DeluxeKey = Md5.Encode("Deluxe");
 
         public static int ProgressEasy
         {
@@ -57,10 +57,10 @@ namespace Assets.Scripts
             set { PlayerPrefs.SetInt(CreditsKey, value); PlayerPrefs.Save(); }
         }
 
-        public static bool Premium
+        public static bool Deluxe
         {
-            get { return PlayerPrefs.HasKey(PremiumKey) && PlayerPrefs.GetInt(PremiumKey) == 1; }
-            set { PlayerPrefs.SetInt(PremiumKey, 1); PlayerPrefs.Save(); }
+            get { return PlayerPrefs.HasKey(DeluxeKey) && PlayerPrefs.GetInt(DeluxeKey) == 1; }
+            set { PlayerPrefs.SetInt(DeluxeKey, value ? 1 : 0); PlayerPrefs.Save(); }
         }
 
         public static bool CharacterUnlocked(CharacterId id)

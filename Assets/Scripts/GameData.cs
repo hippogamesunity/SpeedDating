@@ -14,7 +14,7 @@ namespace Assets.Scripts
         private static int _maleName, _femaleName;
         private static int _maleImage, _femaleImage;
 
-        public static List<CharacterId> PremiumCharacters = new List<CharacterId>
+        public static List<CharacterId> DeluxeCharacters = new List<CharacterId>
         {
             CharacterId.f9,
             CharacterId.f10,
@@ -32,8 +32,8 @@ namespace Assets.Scripts
             { CharacterId.f6, 2 },
             { CharacterId.f7, 2 },
             { CharacterId.f8, 2 },
-            { CharacterId.f9, 0 },
-            { CharacterId.f10, 0 },
+            { CharacterId.f9, 4 },
+            { CharacterId.f10, 4 },
 
             { CharacterId.m1, 1 },
             { CharacterId.m2, 2 },
@@ -43,8 +43,8 @@ namespace Assets.Scripts
             { CharacterId.m6, 6 },
             { CharacterId.m7, 7 },
             { CharacterId.m8, 8 },
-            { CharacterId.m9, 10 },
-            { CharacterId.m10, 0 }
+            { CharacterId.m9, 4 },
+            { CharacterId.m10, 4 }
         }; 
 
         public static List<Level> EasyLevels
@@ -105,7 +105,7 @@ namespace Assets.Scripts
                 "f8"
             };
 
-            if (Profile.Premium)
+            if (Profile.Deluxe)
             {
                 _maleImages.Add("m9");
                 _maleImages.Add("m10");
@@ -163,19 +163,11 @@ namespace Assets.Scripts
             }
         }
 
-        public static string GetBackground(Level level)
+        public static string GetBackground()
         {
-            switch (level.TableNumber)
-            {
-                case 1:
-                case 4:
-                    return "CoffeeShop";
-                case 2:
-                case 5:
-                    return "Attic";
-                default:
-                    return "SushiBar";
-            }
+            var backs = new List<string> { "CoffeeShop", "Attic", "SushiBar" };
+
+            return backs[CRandom.GetRandom(backs.Count)];
         }
 
         private static string GeNext(IList<string> list, ref int index)

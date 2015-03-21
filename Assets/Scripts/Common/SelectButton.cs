@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Scripts.Common
 {
     public class SelectButton : GameButton
     {
         public event Action Selected = () => { };
-        public event Action Unselected = () => { };
         public event Action Confirmed = () => { };
 
         public int Tag = 0;
@@ -16,13 +14,18 @@ namespace Assets.Scripts.Common
         public bool Pressed
         {
             get { return SelectedButtons.ContainsKey(Tag) && SelectedButtons[Tag] == this; }
-            set { if (Pressed != value) OnPress(value); }
+            set { if (value) Select(); else Unselect(); }
         }
 
         protected override void OnPress(bool down)
         {
-            if (!enabled || !down) return;
+            if (!enabled || !down || Pressed) return;
 
+            Select();
+        }
+
+        private void Select()
+        {
             ActionUp();
             Selected();
 
@@ -35,12 +38,21 @@ namespace Assets.Scripts.Common
                 else if (SelectedButtons[Tag] != null)
                 {
                     SelectedButtons[Tag].Tween(false);
-                    SelectedButtons[Tag].Unselected();
                 }
             }
 
-            Tween(true);
             SelectedButtons[Tag] = this;
+            Tween(true);
+        }
+
+        private void Unselect()
+        {
+            if (SelectedButtons.ContainsKey(Tag) && SelectedButtons[Tag] == this)
+            {
+                SelectedButtons.Remove(Tag);
+            }
+
+            Tween(false);
         }
     }
 }

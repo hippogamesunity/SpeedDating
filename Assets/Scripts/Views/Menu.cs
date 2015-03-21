@@ -1,30 +1,44 @@
-﻿using Assets.Scripts.Common;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
     public class Menu : ViewBase
     {
-        public GameButton PremiumButton;
+        public GameObject DeluxeButton;
 
-        public void Start()
+        public void ShowModes()
         {
-            Refresh();
-        }
-
-        public void Refresh()
-        {
-            PremiumButton.GetComponent<UITexture>().mainTexture =
-                Resources.Load<Texture2D>(Profile.Premium ? "Images/UI/ButtonLongInactive" : "Images/UI/ButtonLong");
-            PremiumButton.Enabled = !Profile.Premium;
-        }
-
-        public void BuyPremium()
-        {
-            if (!Profile.Premium)
+            if (Current is Menu)
             {
-                Get<GameShop>().Buy(GameShop.SkuDeluxe);
+                GetComponent<Mode>().Open();
             }
+        }
+
+        public void ShowCharacters()
+        {
+            if (Current is Menu)
+            {
+                GetComponent<Characters>().Open();
+            }
+        }
+
+        public void ShowDeluxe()
+        {
+            if (Current is Menu)
+            {
+                GetComponent<Deluxe>().Open();
+            }
+        }
+
+        public void Mute()
+        {
+            Profile.Mute = !Profile.Mute;
+            GetComponent<AudioPlayer>().Refresh();
+        }
+
+        protected override void Initialize()
+        {
+            DeluxeButton.SetActive(!Profile.Deluxe);
         }
     }
 }

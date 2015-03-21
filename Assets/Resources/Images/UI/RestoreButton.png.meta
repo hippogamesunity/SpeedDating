@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 45f66b6f1857f9242b9fe3c3667a7070
+guid: a1788da2247a041488d5743b96e64788
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: ScoreBackground
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,7 +25,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 2
-    aniso: 1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0

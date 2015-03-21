@@ -10,7 +10,7 @@ namespace Assets.Scripts
         public UISprite Image;
         public UILabel Name;
         public UITexture Frame;
-        public GameButton Button;
+        public SelectButton Button;
 
         public void OnEnable()
         {
@@ -27,15 +27,14 @@ namespace Assets.Scripts
             if (Profile.CharacterUnlocked(Id))
             {
                 Image.color = Color.white;
-                Name.SetLocalizedText(GameData.GetNameById(id));
-                Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrame");
+                Name.color = Id >= CharacterId.f1 ? ColorHelper.GetColor(255, 100, 150) : ColorHelper.GetColor(0, 210, 255);
             }
             else
             {
-                Image.color = ColorHelper.GetColor(0, 0, 0, 150);
-                Name.SetLocalizedText(GameData.GetNameById(id));
-                Frame.mainTexture = Resources.Load<Texture2D>("Images/UI/CardFrame");
+                Image.color = Name.color = ColorHelper.GetColor(0, 0, 0, 150);
             }
+
+            Name.SetText(GameData.GetNameById(id));
         }
     }
 }

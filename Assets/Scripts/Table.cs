@@ -71,15 +71,14 @@ namespace Assets.Scripts
             if (Engine.CalcScore() >= Engine.Level.Target && Engine.Level.Target != -1)
             {
                 Engine.State = GameState.Ready;
-                TaskScheduler.CreateTask(Find<AudioPlayer>().Success, Engine.TaskId, 0.5f);
+                TaskScheduler.CreateTask(Find<AudioPlayer>().PlaySuccess, Engine.TaskId, 0.5f);
                 TaskScheduler.CreateTask(Find<Engine>().CompleteGame, Engine.TaskId, 2f);
             }
             else if (sympathy >= 3)
             {
-                TaskScheduler.CreateTask(Find<AudioPlayer>().Blink, Engine.TaskId, 0.5f);
+                TaskScheduler.CreateTask(Find<AudioPlayer>().PlayBlink, Engine.TaskId, 0.5f);
             }
-
-            if (Engine.Level.Type == LevelType.Swap)
+            else if (Engine.Level.Type == LevelType.Swap)
             {
                 var swapsleft = Engine.Level.Swaps - Engine.Swaps;
 

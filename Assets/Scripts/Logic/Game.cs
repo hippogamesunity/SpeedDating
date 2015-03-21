@@ -101,7 +101,7 @@ namespace Assets.Scripts.Logic
 
         public void CompleteGame()
         {
-            State = GameState.Paused;
+            State = GameState.Ready;
 
             var score = CalcScore();
             var success = false;
@@ -113,10 +113,10 @@ namespace Assets.Scripts.Logic
                 {
                     success = true;
 
-                    if (Profile.ProgressEasy == Level.Progress)
+                    if (Profile.ProgressEasy <= Level.Progress)
                     {
                         Profile.ProgressEasy++;
-                        coins = 1;
+                        coins = Level.TableNumber;
                     }
                 }
             }
@@ -126,10 +126,10 @@ namespace Assets.Scripts.Logic
                 {
                     success = true;
 
-                    if (Profile.ProgressHard == Level.Progress)
+                    if (Profile.ProgressHard <= Level.Progress)
                     {
                         Profile.ProgressHard++;
-                        coins = 2;
+                        coins = Level.TableNumber;
                     }
                 }
             }
@@ -139,10 +139,10 @@ namespace Assets.Scripts.Logic
                 {
                     success = true;
 
-                    if (Profile.ProgressSwap == Level.Progress)
+                    if (Profile.ProgressSwap <= Level.Progress)
                     {
                         Profile.ProgressSwap++;
-                        coins = 1;
+                        coins = Level.TableNumber;
                     }
                 }
             }
@@ -152,25 +152,23 @@ namespace Assets.Scripts.Logic
                 {
                     success = true;
 
-                    if (Profile.ProgressMemo == Level.Progress)
+                    if (Profile.ProgressMemo <= Level.Progress)
                     {
                         Profile.ProgressMemo++;
-                        coins = 1;
+                        coins = Level.TableNumber;
                     }
                 }
             }
 
             Profile.Coins += coins;
 
-            Get<Engine>().RefreshCoins();
-
             var play = Get<Play>();
 
             play.SetScoreDialog(success, coins);
             play.ShowDialog(play.ScoreDialog);
 
-            Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
-            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
+            //Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
+            //Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
 
             if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(5) && AdBuddizBinding.IsReadyToShowAd())
             {
@@ -181,7 +179,7 @@ namespace Assets.Scripts.Logic
 
         public void ExitGame()
         {
-            if (State != GameState.Paused) return;
+            if (State != GameState.Paused && State != GameState.Ready) return;
 
             TaskScheduler.Kill(TaskId);
 

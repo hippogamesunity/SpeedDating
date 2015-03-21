@@ -14,7 +14,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 3,
-                        Swaps = 2,
                         Target = 6,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -34,7 +33,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 3,
-                        Swaps = 2,
                         Target = 8,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -54,7 +52,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 4,
-                        Swaps = 10,
                         Target = 10,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -76,7 +73,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 4,
-                        Swaps = 8,
                         Target = 12,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -98,7 +94,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 4,
-                        Swaps = 7,
                         Target = 9,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -120,7 +115,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 4,
-                        Swaps = 6,
                         Target = 11,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -142,7 +136,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 4,
-                        Swaps = 5,
                         Target = 10,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -164,7 +157,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 5,
-                        Swaps = 10,
                         Target = 14,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -188,7 +180,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 5,
-                        Swaps = 10,
                         Target = 12,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -236,7 +227,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 5,
-                        Swaps = 12,
                         Target = 15,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -260,7 +250,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 5,
-                        Swaps = 12,
                         Target = 11,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -284,7 +273,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 5,
-                        Swaps = 12,
                         Target = 15,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -308,7 +296,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 5,
-                        Swaps = 14,
                         Target = 14,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -333,7 +320,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 6,
-                        Swaps = 24,
                         Target = 14,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -359,7 +345,6 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Swap,
                         TableNumber = 6,
-                        Swaps = 24,
                         Target = 18,
                         MaleHobbies = new List<List<Hobby>>
                         {

@@ -9,9 +9,49 @@ namespace Assets.Scripts.Views
         public GameButton MaxLevelsButton;
         public GameButton RankingsButton;
 
+        public void ShowEasyLevels()
+        {
+            if (Current is Mode)
+            {
+                GetComponent<EasyLevels>().Open();
+            }
+        }
+
+        public void ShowHardLevels()
+        {
+            if (Current is Mode)
+            {
+                GetComponent<HardLevels>().Open();
+            }
+        }
+
+        public void ShowSwapLevels()
+        {
+            if (Current is Mode)
+            {
+                GetComponent<SwapLevels>().Open();
+            }
+        }
+
+        public void ShowMemoLevels()
+        {
+            if (Current is Mode)
+            {
+                GetComponent<MemoLevels>().Open();
+            }
+        }
+
+        public void OpenTeam()
+        {
+            if (Current is Mode)
+            {
+                GetComponent<Team>().Open();
+            }
+        }
+
         protected override void Initialize()
         {
-            EnableButton(HardLevelsButton, Profile.Premium || Settings.Debug);
+            EnableButton(HardLevelsButton, Profile.Deluxe || Settings.Debug);
             EnableButton(MaxLevelsButton, false);
 
             RankingsButton.Enabled = false;

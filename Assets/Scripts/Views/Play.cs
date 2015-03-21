@@ -22,6 +22,7 @@ namespace Assets.Scripts.Views
         public UITexture SwapIcon;
         public GameObject RestartButton;
         public GameObject NextButton;
+        public Reward Reward;
 
         protected override void Initialize()
         {
@@ -60,7 +61,7 @@ namespace Assets.Scripts.Views
                 HelpDialogMessage.SetLocalizedText(Engine.Level.Memorize ? "%MemoMode1%" : "%MemoMode2%");
             }
 
-            Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + GameData.GetBackground(Engine.Level));
+            Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + GameData.GetBackground());
         }
 
         protected override void Cleanup()
@@ -144,10 +145,12 @@ namespace Assets.Scripts.Views
 
             if (completed)
             {
-                ScoreDialogMessage.SetLocalizedText(coins > 0 ? "%LevelCompleted%" : "%LevelPassed%", coins, Characters.GetCoinsLocale(coins));
+                Reward.Initialize(coins, "+");
+                ScoreDialogMessage.SetLocalizedText(coins > 0 ? "%LevelCompleted%" : "%LevelPassed%");
             }
             else
             {
+                Reward.Hide();
                 ScoreDialogMessage.SetLocalizedText("%LevelFailed%");
             }
         }

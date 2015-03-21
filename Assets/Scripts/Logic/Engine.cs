@@ -21,7 +21,6 @@ namespace Assets.Scripts.Logic
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
             Profile.Coins = 25;
-            RefreshCoins();
 
             #endif
         }
@@ -80,8 +79,6 @@ namespace Assets.Scripts.Logic
             {
                 Destroy(table.gameObject);
             }
-
-            GameData.EasyLevels.Shuffle();
 
             List<List<Person>> tables;
 
@@ -246,7 +243,51 @@ namespace Assets.Scripts.Logic
                 throw new Exception(Convert.ToString(max));
             }
 
-            return Shuffle(worst);
+            var suffle = Shuffle(worst);
+
+            if (level.Type == LevelType.Swap)
+            {
+                level.Swaps = CalcSwaps(suffle, best, max);
+            }
+
+            return suffle;
+        }
+
+        private static int CalcSwaps(IEnumerable<List<Person>> current, List<List<Person>> best, int max)
+        {
+            var temp = new List<List<Person>>();
+
+            foreach (var i in current)
+            {
+                temp.Add(new List<Person>());
+
+                foreach (var j in i)
+                {
+                    temp.Last().Add(j);
+                }
+            }
+
+            for (var i = 0; i < temp.Count; i++)
+            {
+                var a = temp[i][0];
+                var b = best.Single(j => j.Contains(a)).Single(j => j != a);
+                var c = temp.Single(j => j.Contains(b));
+                var d = temp.IndexOf(c);
+                var e = temp[d].IndexOf(b);
+                var f = temp[i][1];
+
+                temp[i][1] = b;
+                temp[d][e] = f;
+
+                Debug.Log(a.Name + "+" + b.Name + "=" + CalcScore(temp));
+
+                if (CalcScore(temp) == max)
+                {
+                    return i + 1;
+                }
+            }
+
+            throw new NotImplementedException();
         }
 
         private static List<List<Person>> Shuffle(List<List<Person>> tables)

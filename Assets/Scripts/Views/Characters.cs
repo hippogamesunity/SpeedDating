@@ -1,29 +1,29 @@
 ﻿using System.Linq;
 using Assets.Scripts.Common;
-using Assets.Scripts.Logic;
 using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
     public class Characters : ViewBase
     {
-        public TweenPanel[] Pages;
+        public GameObject[] Pages;
         public UILabel StoryText;
         public GameButton BuyButton;
+        public Coins Coins;
+        public Reward Reward;
 
         public static CharacterId Selected;
 
         protected override void Initialize()
         {
-            Pages[0].Show(0f);
-            Pages[1].Hide(TweenDirection.Right, 0);
-            StoryText.SetLocalizedText("%SelectCard%");
-            SetBuyButton(false);
+            Coins.Refresh();
+            Unselect();
         }
 
         public void SelectCharacterCard(object character)
         {
             Selected = character.ToString().ToEnum<CharacterId>();
+            Reward.Hide();
 
             if (Profile.CharacterUnlocked(Selected))
             {
@@ -32,16 +32,17 @@ namespace Assets.Scripts.Views
             }
             else
             {
-                if (GameData.PremiumCharacters.Contains(Selected))
+                if (GameData.DeluxeCharacters.Contains(Selected) && !Profile.Deluxe)
                 {
-                    StoryText.SetLocalizedText("%PremiumCharacter%");
+                    StoryText.SetLocalizedText("%DeluxeCharacter%");
                     SetBuyButton(false);
                 }
                 else
                 {
                     var price = GameData.CharacterPrice[Selected];
 
-                    StoryText.SetLocalizedText("%Unlock%", GameData.GetNameById(Selected), price, GetCoinsLocale(price));
+                    StoryText.SetLocalizedText("%Unlock%", GameData.GetNameById(Selected));
+                    Reward.Initialize(price);
                     SetBuyButton(Profile.Coins >= price);
                 }
             }
@@ -55,25 +56,44 @@ namespace Assets.Scripts.Views
             {
                 Profile.Coins -= price;
                 Profile.UnlockCharacter(Selected);
-                Get<Engine>().RefreshCoins();
+                Coins.Refresh(spring: true);
+                Get<AudioPlayer>().PlayBlink();
                 FindObjectsOfType<CharacterCard>().Single(i => i.Id == Selected).Refresh();
                 SelectCharacterCard(Selected);
-                Get<AudioPlayer>().Blink();
             }
         }
 
         public void NextPage()
         {
-            if (Pages[0].Displayed)
+            const float speed = 0.2f;
+
+            var hide = Pages[0].activeSelf ? Pages[0] : Pages[1];
+            var show = Pages[0].activeSelf ? Pages[1] : Pages[0];
+
+            Unselect();
+
+            foreach (var card in hide.GetComponentsInChildren<CharacterCard>())
             {
-                Pages[0].Hide();
-                Pages[1].Show();
+                TweenRotation.Begin(card.gameObject, speed, Quaternion.Euler(0, 90, 0));
+                card.Button.Pressed = false;
             }
-            else
+
+            TaskScheduler.CreateTask(() =>
             {
-                Pages[1].Hide();
-                Pages[0].Show();
-            }
+                hide.SetActive(false);
+                show.SetActive(true);
+
+                foreach (var card in hide.GetComponentsInChildren<CharacterCard>(true))
+                {
+                    card.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                }
+
+                foreach (var card in show.GetComponentsInChildren<CharacterCard>(true))
+                {
+                    card.transform.localRotation = Quaternion.Euler(0, 90, 0);
+                    TweenRotation.Begin(card.gameObject, speed, Quaternion.Euler(0, 0, 0));
+                }
+            }, speed);
         }
 
         public static string GetCoinsLocale(int count)
@@ -98,6 +118,13 @@ namespace Assets.Scripts.Views
             BuyButton.Enabled = enable;
             BuyButton.GetComponent<UITexture>().mainTexture =
                 Resources.Load<Texture2D>(enable ? "Images/UI/ButtonLong" : "Images/UI/ButtonLongInactive");
+        }
+
+        private void Unselect()
+        {
+            StoryText.SetLocalizedText("%SelectCard%");
+            Reward.Hide();
+            SetBuyButton(false);
         }
     }
 }
