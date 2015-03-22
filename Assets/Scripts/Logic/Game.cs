@@ -27,8 +27,10 @@ namespace Assets.Scripts.Logic
             }
         }
 
-        public void StartGame()
+        public void StartGame(bool restart = false)
         {
+            Level.Restart = restart;
+
             TaskScheduler.Kill(TaskId++);
 
             State = GameState.Ready;
@@ -50,7 +52,7 @@ namespace Assets.Scripts.Logic
                 Level.Memorize = true;
             }
 
-            StartGame();
+            StartGame(restart: true);
         }
 
         public void PlayNext()

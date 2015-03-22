@@ -11,7 +11,6 @@ namespace Assets.Scripts.Views
         public GameButton BuyButton;
         public Coins Coins;
         public Reward Reward;
-
         public static CharacterId Selected;
 
         protected override void Initialize()
@@ -94,6 +93,8 @@ namespace Assets.Scripts.Views
                     TweenRotation.Begin(card.gameObject, speed, Quaternion.Euler(0, 0, 0));
                 }
             }, speed);
+
+            Get<AudioPlayer>().PlaySwap();
         }
 
         public static string GetCoinsLocale(int count)
@@ -116,8 +117,7 @@ namespace Assets.Scripts.Views
         private void SetBuyButton(bool enable)
         {
             BuyButton.Enabled = enable;
-            BuyButton.GetComponent<UITexture>().mainTexture =
-                Resources.Load<Texture2D>(enable ? "Images/UI/ButtonLong" : "Images/UI/ButtonLongInactive");
+            BuyButton.GetComponent<UITexture>().mainTexture = Resources.Load<Texture2D>(enable ? "Images/UI/ButtonLong" : "Images/UI/ButtonLongInactive");
         }
 
         private void Unselect()

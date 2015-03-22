@@ -22,6 +22,15 @@ namespace Assets.Scripts.Logic
             PlayerPrefs.Save();
             Profile.Coins = 25;
 
+            var levels = new List<Level>();
+
+            levels.AddRange(GameData.EasyLevels);
+            levels.AddRange(Levels.HardLevels);
+            levels.AddRange(Levels.SwapLevels);
+            levels.AddRange(Levels.MemoLevels);
+
+            Debug.Log("Gems=" + levels.Sum(i => i.TableNumber));
+
             #endif
         }
 
@@ -267,6 +276,8 @@ namespace Assets.Scripts.Logic
                 }
             }
 
+            var swaps = 0;
+
             for (var i = 0; i < temp.Count; i++)
             {
                 var a = temp[i][0];
@@ -276,6 +287,13 @@ namespace Assets.Scripts.Logic
                 var e = temp[d].IndexOf(b);
                 var f = temp[i][1];
 
+                if (b.Name == f.Name)
+                {
+                    continue;
+                }
+
+                swaps++;
+
                 temp[i][1] = b;
                 temp[d][e] = f;
 
@@ -283,7 +301,7 @@ namespace Assets.Scripts.Logic
 
                 if (CalcScore(temp) == max)
                 {
-                    return i + 1;
+                    return swaps;
                 }
             }
 

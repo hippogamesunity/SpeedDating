@@ -24,27 +24,27 @@ namespace Assets.Scripts
 
         public static Dictionary<CharacterId, int> CharacterPrice = new Dictionary<CharacterId, int>
         {
-            { CharacterId.f1, 2 },
-            { CharacterId.f2, 2 },
-            { CharacterId.f3, 2 },
-            { CharacterId.f4, 2 },
-            { CharacterId.f5, 2 },
-            { CharacterId.f6, 2 },
-            { CharacterId.f7, 2 },
-            { CharacterId.f8, 2 },
-            { CharacterId.f9, 4 },
-            { CharacterId.f10, 4 },
+            { CharacterId.f1, 5 },
+            { CharacterId.f2, 5 },
+            { CharacterId.f3, 10 },
+            { CharacterId.f4, 10 },
+            { CharacterId.f5, 15 },
+            { CharacterId.f6, 15 },
+            { CharacterId.f7, 20 },
+            { CharacterId.f8, 20 },
+            { CharacterId.f9, 25 },
+            { CharacterId.f10, 25 },
 
-            { CharacterId.m1, 1 },
-            { CharacterId.m2, 2 },
-            { CharacterId.m3, 3 },
-            { CharacterId.m4, 4 },
-            { CharacterId.m5, 5 },
-            { CharacterId.m6, 6 },
-            { CharacterId.m7, 7 },
-            { CharacterId.m8, 8 },
-            { CharacterId.m9, 4 },
-            { CharacterId.m10, 4 }
+            { CharacterId.m1, 5 },
+            { CharacterId.m2, 5 },
+            { CharacterId.m3, 10 },
+            { CharacterId.m4, 10 },
+            { CharacterId.m5, 15 },
+            { CharacterId.m6, 15 },
+            { CharacterId.m7, 20 },
+            { CharacterId.m8, 20 },
+            { CharacterId.m9, 25 },
+            { CharacterId.m10, 25 }
         }; 
 
         public static List<Level> EasyLevels

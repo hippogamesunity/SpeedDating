@@ -22,5 +22,6 @@ namespace Assets.Scripts
         public bool Memorize;
         public string FormationHash;
         public List<List<Person>> Tables;
+        public bool Restart;
     }
 }

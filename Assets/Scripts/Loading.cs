@@ -6,6 +6,11 @@ namespace Assets.Scripts
     {
         public GameObject Panel;
 
+        public void Awake()
+        {
+            Panel.GetComponent<UIPanel>().alpha = 1;
+        }
+
         public void Open(float duration)
         {
             TweenAlpha.Begin(Panel, duration, 1);

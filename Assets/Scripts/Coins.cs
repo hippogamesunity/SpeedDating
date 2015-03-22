@@ -10,11 +10,6 @@ namespace Assets.Scripts
 
         private float _delta;
 
-        public void OnEnable()
-        {
-            Refresh();
-        }
-
         public void Update()
         {
             Icon.transform.localPosition = new Vector3(Icon.transform.localPosition.x, _delta * Mathf.Sin(30 * Time.time));

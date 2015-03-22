@@ -12,7 +12,7 @@ namespace Assets.Scripts
         public UITexture Frame;
         public SelectButton Button;
 
-        public void OnEnable()
+        public void Awake()
         {
             Refresh();
         }

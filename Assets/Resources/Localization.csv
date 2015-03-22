@@ -20,7 +20,7 @@ KEY;Russian;English
 %LevelFailed%;Повезет в другой раз!;Better luck next time!
 %HowToPlay%;Подсказка;How to play
 %TimeMode%;Пересаживай персонажей\nи найди им вторую половинку;How to find love?\nReplace characters between tables
-%SwapMode%;Пройди уровень с меньшим\nколичеством перемещений;Pass this level\nwith less swap actions
+%SwapMode%;Пройди уровень с минимальным\nколичеством перемещений;Pass this level\nwith minimum swap actions
 %MemoMode1%;У тебя есть пара секунд, чтобы\nзапомнить, кто с кем сидит;You have a few seconds\nto memorize who sits with whom
 %MemoMode2%;А теперь самое время\nвспомнить, кто с кем сидел;Now remember\nwho was sitting with whom
 %TeamLead%;руководитель;team lead
@@ -37,23 +37,23 @@ KEY;Russian;English
 %Unlock%;Купить карточку [yellow]{0}[-] за\n;Buy [yellow]{0}[-] card for\n
 %SelectCard%;Выберите карточку персонажа;Select card to unlock
 %DeluxeCharacter%;Этот персонаж доступен только в [yellow]deluxe[-] версии игры;This character is only available in [yellow]deluxe[-] version
-%f1Story%;[pink]{0}[-] легко находит общий язык с парнями и любит активно проводить время. Очень редко появляется дома;gets on well with guys and likes outdoor activities
-%f2Story%;[pink]{0}[-] отличница. Учеба у нее на первом месте, поэтому она проводит много времени дома, выполняя домашнее задание;is nerdy. Studying for her is on the first place, that’s why she spends most of the time at home and does her homework. 
-%f3Story%;[pink]{0}[-] постоянно витает в облаках. Мечтает стать феей и научиться летать на единороге. Живет со своим любимым котом; is a day-dreamer. She wishes to be come an elf and have her own unicorn. Lives with her fave cat. 
-%f4Story%;[pink]{0}[-] очень общительная и энергичная девушка. Катается на скейте, слушает тяжелую музыку и играет в компьютерные игры; is very sociable and active girl. Likes skating, hard rock and play computer games
-%f5Story%;[pink]{0}[-] обожает механику. Постояно проводит время в гараже со своим велосипедом, а иногда и помогает папе чинить машину; is a gearhead. Always hangs in the garage with her cycle and sometimes helps her father with car repairing
-%f6Story%;[pink]{0}[-] принцесса. Любит красиво наряжаться, очень воспитанная и эрудированная. Уже выбрала свадебное платье;is a true princess. Likes to dress up, is very educated and smart
-%f7Story%;[pink]{0}[-] рассеянная и забывчивая. Никогда не может найти свои штаны, но зато очень вкусно готовит, особенно блинчики; is ditzy. Never knows where her stuff is, but cooks damn good, especially pancackes
-%f8Story%;[pink]{0}[-] настоящая леди. Любит все английское. Читает газету The Times, смеется над несмешными шутками и всегда носит жемчуг;acts like a real lady. Likes everything royal. She reads the Times, understands English jokes and always wear pearls
-%f9Story%;[pink]{0}[-] очень милая и обаятельная девушка. Любит читать романы, вышивать крестиком и выращивает мандарины в горшке;is very nice and attractive. Likes novels, crochet and raise tangerine tree
-%f10Story%;[pink]{0}[-] обладает весьма непростым характером. Занимается спортом, обожает аниме и хорошо рисует. Часто участвует в косплеях;is a complicated person. Likes sports, goes for anime and paints well. Often participates in cosplay
-%m1Story%;[blue]{0}[-] душа любой компании. Он любит дурачиться и знает все анекдоты в мире;is a life of every party. Likes to fool around and knows all the funny jokes
-%m2Story%;[blue]{0}[-] скромный и застенчивый парень. У него не так много друзей, но каждого из них он по-настоящему ценит;is a shy guy. He has not so much friends, but each of them he really appreciates
-%m3Story%;[blue]{0}[-] модный стиляга. Он любит знакомиться с новыми людьми и умеет деликатно обращаться с девушками;is a pretty-boy. Likes to meet new people and knows how to woo a girl
-%m4Story%;[blue]{0}[-] всегда был задирой и забиякой. Тем не менее, он умеет располагать к себе людей и обладает качествами лидера;is a bully for life. Still he has charm and is a born leader
-%m5Story%;[blue]{0}[-] добрый и отзывчивый парень, он всегда готов поддержать своих друзей. Является капитаном футбольной команды;is a man of heart. Always up to support his friends. A captain of a football team 
-%m6Story%;[blue]{0}[-] меланхолик. Он всегда на своей волне, поэтому с ним непросто найти общий язык;is gloomy and a little bit odd. So it’s difficult to be on the same way
-%m7Story%;[blue]{0}[-] очень веселый и общительный парень, с которым можно болтать бесконечно;is a good fellow. With him you can talk by the hour
-%m8Story%;[blue]{0}[-] любит классический рок и играет на гитаре в своей группе. Вокруг него постоянно толпы поклонниц; likes classic rock and plays guitar in his own band. Always surrounded by groupies
-%m9Story%;[blue]{0}[-] влюблен в спортивные мотоциклы и любит совершать безбашенные поступки. Всегда носит кожаную куртку и перчатки; never parts with his sport bike and likes to commit badass tricks
-%m10Story%;[blue]{0}[-] с детства занимается боевыми искусствами и всегда сможет постоять за свою девушку;do martial arts since childhood and always can stand up for a girl
+%f1Story%;[pink]{0}[-] легко находит общий язык с парнями и любит активно проводить время. Очень редко появляется дома;[pink]{0}[-] gets on well with guys and likes outdoor activities
+%f2Story%;[pink]{0}[-] отличница. Учеба у нее на первом месте, поэтому она проводит много времени дома, выполняя домашнее задание;[pink]{0}[-] is nerdy. Studying for her is on the first place, that’s why she spends most of the time at home and does her homework. 
+%f3Story%;[pink]{0}[-] постоянно витает в облаках. Мечтает стать феей и научиться летать на единороге. Живет со своим любимым котом;[pink]{0}[-] is a day-dreamer. She wishes to be come an elf and have her own unicorn. Lives with her fave cat. 
+%f4Story%;[pink]{0}[-] очень общительная и энергичная девушка. Катается на скейте, слушает тяжелую музыку и играет в компьютерные игры;[pink]{0}[-] is very sociable and active girl. Likes skating, hard rock and play computer games
+%f5Story%;[pink]{0}[-] обожает механику. Постояно проводит время в гараже со своим велосипедом, а иногда и помогает папе чинить машину;[pink]{0}[-] is a gearhead. Always hangs in the garage with her cycle and sometimes helps her father with car repairing
+%f6Story%;[pink]{0}[-] принцесса. Любит красиво наряжаться, очень воспитанная и эрудированная. Уже выбрала свадебное платье;[pink]{0}[-] is a true princess. Likes to dress up, is very educated and smart
+%f7Story%;[pink]{0}[-] рассеянная и забывчивая. Никогда не может найти свои штаны, но зато очень вкусно готовит, особенно блинчики;[pink]{0}[-] is ditzy. Never knows where her stuff is, but cooks damn good, especially pancackes
+%f8Story%;[pink]{0}[-] настоящая леди. Любит все английское. Читает газету The Times, смеется над несмешными шутками и всегда носит жемчуг;[pink]{0}[-] acts like a real lady. Likes everything royal. She reads the Times, understands English jokes and always wear pearls
+%f9Story%;[pink]{0}[-] очень милая и обаятельная девушка. Любит читать романы, вышивать крестиком и выращивает мандарины в горшке;[pink]{0}[-] is very nice and attractive. Likes novels, crochet and raise tangerine tree
+%f10Story%;[pink]{0}[-] обладает весьма непростым характером. Занимается спортом, обожает аниме и хорошо рисует. Часто участвует в косплеях;[pink]{0}[-] is a complicated person. Likes sports, goes for anime and paints well. Often participates in cosplay
+%m1Story%;[blue]{0}[-] душа любой компании. Он любит дурачиться и знает все анекдоты в мире;[blue]{0}[-] is a life of every party. Likes to fool around and knows all the funny jokes
+%m2Story%;[blue]{0}[-] скромный и застенчивый парень. У него не так много друзей, но каждого из них он по-настоящему ценит;[blue]{0}[-] is a shy guy. He has not so much friends, but each of them he really appreciates
+%m3Story%;[blue]{0}[-] модный стиляга. Он любит знакомиться с новыми людьми и умеет деликатно обращаться с девушками;[blue]{0}[-] is a pretty-boy. Likes to meet new people and knows how to woo a girl
+%m4Story%;[blue]{0}[-] всегда был задирой и забиякой. Тем не менее, он умеет располагать к себе людей и обладает качествами лидера;[blue]{0}[-] is a bully for life. Still he has charm and is a born leader
+%m5Story%;[blue]{0}[-] добрый и отзывчивый парень, он всегда готов поддержать своих друзей. Является капитаном футбольной команды;[blue]{0}[-] is a man of heart. Always up to support his friends. A captain of a football team 
+%m6Story%;[blue]{0}[-] меланхолик. Он всегда на своей волне, поэтому с ним непросто найти общий язык;[blue]{0}[-] is gloomy and a little bit odd. So it’s difficult to be on the same way
+%m7Story%;[blue]{0}[-] очень веселый и общительный парень, с которым можно болтать бесконечно;[blue]{0}[-] is a good fellow. With him you can talk by the hour
+%m8Story%;[blue]{0}[-] любит классический рок и играет на гитаре в своей группе. Вокруг него постоянно толпы поклонниц;[blue]{0}[-] likes classic rock and plays guitar in his own band. Always surrounded by groupies
+%m9Story%;[blue]{0}[-] влюблен в спортивные мотоциклы и любит совершать безбашенные поступки. Всегда носит кожаную куртку и перчатки;[blue]{0}[-] never parts with his sport bike and likes to commit badass tricks
+%m10Story%;[blue]{0}[-] с детства занимается боевыми искусствами и всегда сможет постоять за свою девушку;[blue]{0}[-] do martial arts since childhood and always can stand up for a girl
