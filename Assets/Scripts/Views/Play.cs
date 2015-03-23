@@ -90,7 +90,7 @@ namespace Assets.Scripts.Views
 
                     HourHand.rotation = Quaternion.Euler(0, 0, 360 * p - 360);
 
-                    if (p < 0.25)
+                    if (p < 0.25 && timespan.TotalSeconds <= 10)
                     {
                         var blink = (Mathf.Sin(4 * Time.time) + 1) / 2;
 

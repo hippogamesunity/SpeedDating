@@ -38,9 +38,12 @@ namespace Assets.Scripts
             tables.Sort((a, b) => Vector2.Distance(transform.position, a.transform.position).CompareTo(Vector2.Distance(transform.position, b.transform.position)));
             Table = tables[0];
             
-            if (Engine.Level.Type != LevelType.Memo)
+            if (Engine.Level.Type == LevelType.Memo)
             {
-                //Hobby.color = person.Male ? ColorHelper.GetColor(0, 120, 255) : ColorHelper.GetColor(200, 0, 200);
+                Hobby.enabled = false;
+            }
+            else
+            {
                 HobbyLoop();
             }
 
@@ -65,7 +68,7 @@ namespace Assets.Scripts
 
         public void HobbyLoop()
         {
-            var duration = 2 + CRandom.GetRandom(200) / 100f;
+            var duration = 2 + 1 * CRandom.GetRandom(200) / 100f;
 
             if (Person.Hobbies.Count == 0)
             {
