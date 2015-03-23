@@ -67,16 +67,14 @@ namespace Assets.Scripts.Views
                 {
                     button.Enabled = true;
                     image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");
-                    text.color = ColorHelper.GetColor(255, 255, 255);
-                    text.applyGradient = true;
                 }
                 else
                 {
                     if (LevelsList.Count > index)
                     {
                         image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelLockedButton");
-                        text.color = ColorHelper.GetColor(180, 180, 180);
-                        text.applyGradient = false;
+                        image.width = 100;
+                        image.height = 100;
                     }
                     else
                     {
