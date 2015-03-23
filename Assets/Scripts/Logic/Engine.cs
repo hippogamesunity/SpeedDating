@@ -16,7 +16,7 @@ namespace Assets.Scripts.Logic
             AdBuddizBinding.SetIOSPublisherKey(PlanformDependedSettings.AdBuddiz);
             AdBuddizBinding.CacheAds();
 
-            #if UNITY_EDITOR || UNITY_WEBPLAYER
+            #if UNITY_EDITOR
 
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();

@@ -23,7 +23,7 @@ KEY;Russian;English
 %SwapMode%;Пройди уровень с минимальным\nколичеством перемещений;Pass this level\nwith minimum swap actions
 %MemoMode1%;У тебя есть пара секунд, чтобы\nзапомнить, кто с кем сидит;You have a few seconds\nto memorize who sits with whom
 %MemoMode2%;А теперь самое время\nвспомнить, кто с кем сидел;Now remember\nwho was sitting with whom
-%TeamLead%;руководитель;team lead
+%TeamLead%;босс;team lead
 %Developer%;разработчик;developer
 %Artist%;художник;artist
 %Mode%;Режим;Mode

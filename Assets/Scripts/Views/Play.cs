@@ -61,7 +61,7 @@ namespace Assets.Scripts.Views
                 HelpDialogMessage.SetLocalizedText(Engine.Level.Memorize ? "%MemoMode1%" : "%MemoMode2%");
             }
 
-            if (!Engine.Level.Restart)
+            if (!Engine.Level.LockBackground)
             {
                 Background.mainTexture = Resources.Load<Texture2D>("Images/Background/" + GameData.GetBackground());
             }

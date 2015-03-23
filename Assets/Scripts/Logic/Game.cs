@@ -27,9 +27,9 @@ namespace Assets.Scripts.Logic
             }
         }
 
-        public void StartGame(bool restart = false)
+        public void StartGame(bool lockBackground = false)
         {
-            Level.Restart = restart;
+            Level.LockBackground = lockBackground;
 
             TaskScheduler.Kill(TaskId++);
 
@@ -52,7 +52,7 @@ namespace Assets.Scripts.Logic
                 Level.Memorize = true;
             }
 
-            StartGame(restart: true);
+            StartGame(lockBackground: true);
         }
 
         public void PlayNext()
@@ -209,7 +209,7 @@ namespace Assets.Scripts.Logic
         public void PlayMemo()
         {
             Level.Memorize = false;
-            StartGame();
+            StartGame(lockBackground: true);
         }
     }
 }
