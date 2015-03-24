@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Assets.Scripts.Common;
+using Assets.Scripts.Common.Tweens;
 using UnityEngine;
 
 namespace Assets.Scripts.Views
@@ -15,7 +16,6 @@ namespace Assets.Scripts.Views
 
         protected override void Initialize()
         {
-            Coins.Refresh();
             Unselect();
         }
 

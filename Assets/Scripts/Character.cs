@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Common;
+using Assets.Scripts.Common.Tweens;
 using Assets.Scripts.Logic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Assets.Scripts
         public UILabel Name;
         public UISprite Hobby;
         public Hobby[] HobbiesDebug;
+        public PositionSpring PositionSpring;
 
         [HideInInspector] public Person Person;
         [HideInInspector] public Vector3 Position;
@@ -111,6 +113,8 @@ namespace Assets.Scripts
 
         protected override void OnPress(bool down)
         {
+            const float tweenTime = 0.2f;
+
             if (Engine.State != GameState.Playing || Busy || !Engine.CanShift || Engine.Level.Memorize) return;
 
             base.OnPress(down);
@@ -141,7 +145,7 @@ namespace Assets.Scripts
 
                 if (nearest == null || nearest.Busy)
                 {
-                    TweenPosition.Begin(gameObject, 0.5f, Position);
+                    TweenPosition.Begin(gameObject, tweenTime, Position);
                 }
                 else
                 {
@@ -149,8 +153,8 @@ namespace Assets.Scripts
                     nearest.transform.parent = transform.parent;
                     transform.parent = transformParent;
 
-                    TweenPosition.Begin(gameObject, 0.5f, nearest.Position);
-                    TweenPosition.Begin(nearest.gameObject, 0.5f, Position);
+                    TweenPosition.Begin(gameObject, tweenTime, nearest.Position);
+                    TweenPosition.Begin(nearest.gameObject, tweenTime, Position);
 
                     var pos = Position;
                     
@@ -172,8 +176,10 @@ namespace Assets.Scripts
                         Find<Engine>().Swapped();
                     }
 
-                    //Find<AudioPlayer>().PlaySwap();
+                    TaskScheduler.CreateTask(() => nearest.PositionSpring.enabled = true, tweenTime);
                 }
+
+                TaskScheduler.CreateTask(() => PositionSpring.enabled = true, tweenTime);
             }
         }
 

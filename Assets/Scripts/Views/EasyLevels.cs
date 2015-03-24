@@ -67,14 +67,14 @@ namespace Assets.Scripts.Views
                 {
                     button.Enabled = true;
                     image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelButton");
+                    image.width = image.height = 128;
                 }
                 else
                 {
                     if (LevelsList.Count > index)
                     {
                         image.mainTexture = Resources.Load<Texture2D>("Images/UI/LevelLockedButton");
-                        image.width = 100;
-                        image.height = 100;
+                        image.width = image.height = 100;
                     }
                     else
                     {

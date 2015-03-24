@@ -18,18 +18,18 @@ namespace Assets.Scripts.Logic
 
             #if UNITY_EDITOR
 
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
-            Profile.Coins = 25;
+            //PlayerPrefs.DeleteAll();
+            //PlayerPrefs.Save();
+            //Profile.Coins = 25;
 
-            var levels = new List<Level>();
+            //var levels = new List<Level>();
 
-            levels.AddRange(GameData.EasyLevels);
-            levels.AddRange(Levels.HardLevels);
-            levels.AddRange(Levels.SwapLevels);
-            levels.AddRange(Levels.MemoLevels);
+            //levels.AddRange(GameData.EasyLevels);
+            //levels.AddRange(Levels.HardLevels);
+            //levels.AddRange(Levels.SwapLevels);
+            //levels.AddRange(Levels.MemoLevels);
 
-            Debug.Log("Gems=" + levels.Sum(i => i.TableNumber));
+            //Debug.Log("Gems=" + levels.Sum(i => i.TableNumber));
 
             #endif
         }

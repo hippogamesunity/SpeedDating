@@ -12,8 +12,6 @@ namespace Assets.Scripts.Common.Tweens
         public void Start()
         {
             _rotation = 2 * Mathf.Rad2Deg * transform.localRotation.z;
-
-            Debug.Log(_rotation);
         }
 
         public void Update()

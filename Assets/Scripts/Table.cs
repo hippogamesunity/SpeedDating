@@ -37,11 +37,9 @@ namespace Assets.Scripts
 
             TaskScheduler.CreateTask(() =>
             {
-                const float delay = 2.8f;
-
                 Progress.Show(TweenTime);
-                Progress.Animate(delay);
-                TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), Engine.TaskId, delay);
+                Progress.Animate(Settings.SwapDelay);
+                TaskScheduler.CreateTask(() => ShowSympathy(characters[0], characters[1], sympathy), Engine.TaskId, Settings.SwapDelay);
             }, Engine.TaskId, TweenTime);
         }
 
