@@ -72,9 +72,11 @@ namespace Assets.Scripts.Common
             return (T) Enum.Parse(typeof(T), value);
         }
 
-        public static List<T> Shuffle<T>(this IEnumerable<T> source)
+        public static List<T> Shuffle<T>(this List<T> source)
         {
-            return source.OrderBy(i => CRandom.GetRandom(100000)).ToList();
+            source.Sort((i, j) => CRandom.GetRandom(3) - 1);
+
+            return source;
         }
     }
 }
