@@ -129,19 +129,24 @@ namespace Assets.Scripts
             {
                 _image.depth = 0;
 
-                var buttons = FindObjectsOfType<Character>().ToList();
+                var characters = FindObjectsOfType<Character>().ToList();
 
-                buttons.Remove(this);
+                characters.Remove(this);
 
-                var distances = new Dictionary<Character, float>();
+                Character nearest = null;
+                var minDistance = float.MaxValue;
 
-                foreach (var button in buttons)
+                foreach (var character in characters)
                 {
-                    distances.Add(button, Vector2.Distance(transform.parent.localPosition / transform.parent.localScale.x
-                        + transform.localPosition, button.transform.parent.localPosition / button.transform.parent.localScale.x + button.transform.localPosition));
-                }
+                    var distance = Vector2.Distance(transform.parent.localPosition / transform.parent.localScale.x
+                        + transform.localPosition, character.transform.parent.localPosition / character.transform.parent.localScale.x + character.transform.localPosition);
 
-                var nearest = distances.OrderBy(i => i.Value).FirstOrDefault(i => i.Value < 200).Key;
+                    if (distance < 200 && distance < minDistance)
+                    {
+                        nearest = character;
+                        minDistance = distance;
+                    }
+                }
 
                 if (nearest == null || nearest.Busy)
                 {
