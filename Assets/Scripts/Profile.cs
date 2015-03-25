@@ -47,7 +47,15 @@ namespace Assets.Scripts
 
         public static DateTime ShowAdTime
         {
-            get { return PlayerPrefs.HasKey(ShowAdTimeKey) ? DateTime.Parse(PlayerPrefs.GetString(ShowAdTimeKey)) : DateTime.UtcNow.AddMinutes(10); }
+            get
+            {
+                if (PlayerPrefs.HasKey(ShowAdTimeKey))
+                {
+                    return DateTime.Parse(PlayerPrefs.GetString(ShowAdTimeKey));
+                }
+
+                return (ShowAdTime = DateTime.UtcNow.AddMinutes(10));
+            }
             set { PlayerPrefs.SetString(ShowAdTimeKey, Convert.ToString(value)); PlayerPrefs.Save(); }
         }
 

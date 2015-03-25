@@ -169,10 +169,10 @@ namespace Assets.Scripts.Logic
             play.SetScoreDialog(success, coins);
             play.ShowDialog(play.ScoreDialog);
 
-            //Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
-            //Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
+            Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
+            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
 
-            if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(5) && AdBuddizBinding.IsReadyToShowAd())
+            if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(5) && AdBuddizBinding.IsReadyToShowAd() && Profile.Deluxe)
             {
                 Profile.ShowAdTime = DateTime.UtcNow;
                 TaskScheduler.CreateTask(AdBuddizBinding.ShowAd, 1f);

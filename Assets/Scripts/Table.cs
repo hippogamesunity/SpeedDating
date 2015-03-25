@@ -61,6 +61,11 @@ namespace Assets.Scripts
             
             Find<Play>().RefreshScore();
 
+            if (sympathy >= 3)
+            {
+                TaskScheduler.CreateTask(() => character1.PositionSpring.enabled = character2.PositionSpring.enabled = true, 0.5f);
+            }
+
             if (FindObjectsOfType<Character>().Any(i => i.Busy))
             {
                 return;
