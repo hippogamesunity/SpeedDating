@@ -78,24 +78,29 @@ namespace Assets.Scripts
 
         public void HobbyLoop()
         {
-            var duration = 2 + 1 * CRandom.GetRandom(200) / 100f;
+            Hobby.alpha = 0;
 
             if (Person.Hobbies.Count == 0)
             {
-                Hobby.enabled = false;
+                return;
             }
-            else if (Engine.State == GameState.Playing)
+
+            if (Engine.State != GameState.Playing)
             {
-                Hobby.spriteName = Convert.ToString(Person.Hobbies[_hobby++]);
-
-                if (_hobby == Person.Hobbies.Count)
-                {
-                    _hobby = 0;
-                }
-
-                TweenAlpha.Begin(Hobby.gameObject, 0.4f, 1);
-                TaskScheduler.CreateTask(() => TweenAlpha.Begin(Hobby.gameObject, 0.4f, 0), Engine.TaskId, duration);
+                TaskScheduler.CreateTask(HobbyLoop, Engine.TaskId, 1 + CRandom.GetRandom(200) / 100f);
+                return;
             }
+
+            if (_hobby == Person.Hobbies.Count)
+            {
+                _hobby = 0;
+            }
+
+            var duration = 2 + 1 * CRandom.GetRandom(200) / 100f;
+
+            Hobby.spriteName = Convert.ToString(Person.Hobbies[_hobby++]);
+            TweenAlpha.Begin(Hobby.gameObject, 0.4f, 1);
+            TaskScheduler.CreateTask(() => TweenAlpha.Begin(Hobby.gameObject, 0.4f, 0), Engine.TaskId, duration);
 
             TaskScheduler.CreateTask(HobbyLoop, Engine.TaskId, duration + 1);
         }

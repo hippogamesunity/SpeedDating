@@ -61,7 +61,11 @@ namespace Assets.Scripts
 
             if (sympathy >= 3)
             {
-                TaskScheduler.CreateTask(() => character1.PositionSpring.enabled = character2.PositionSpring.enabled = true, 0.5f);
+                TaskScheduler.CreateTask(() =>
+                {
+                    character1.PositionSpring.enabled = character2.PositionSpring.enabled = true;
+                    Find<AudioPlayer>().PlayBlink();
+                }, 0.5f);
             }
 
             if (FindObjectsOfType<Character>().Any(i => i.Busy) || Engine.State != GameState.Playing)
@@ -76,10 +80,6 @@ namespace Assets.Scripts
                 Engine.State = GameState.Ready;
                 TaskScheduler.CreateTask(Find<AudioPlayer>().PlaySuccess, Engine.TaskId, 0.5f);
                 TaskScheduler.CreateTask(Find<Engine>().CompleteGame, Engine.TaskId, 2f);
-            }
-            else if (sympathy >= 3)
-            {
-                TaskScheduler.CreateTask(Find<AudioPlayer>().PlayBlink, Engine.TaskId, 0.5f);
             }
             else if (Engine.Level.Type == LevelType.Swap)
             {
