@@ -10,6 +10,7 @@ namespace Assets.Scripts.Views
         public TweenPanel PauseDialog;
         public TweenPanel ScoreDialog;
         public TweenPanel HelpDialog;
+        public TweenPanel ShopTipDialog;
         public UILabel ScoreDialogTitle;
         public UILabel ScoreDialogMessage;
         public UILabel HelpDialogMessage;
@@ -26,9 +27,10 @@ namespace Assets.Scripts.Views
 
         protected override void Initialize()
         {
-            PauseDialog.Hide(0f);
-            ScoreDialog.Hide(0f);
-            HelpDialog.Hide(0f);
+            foreach (var dialog in new[] { PauseDialog, ScoreDialog, HelpDialog, ShopTipDialog })
+            {
+                dialog.Hide(0f);
+            }
 
             if (Engine.Level.Type == LevelType.Memo)
             {

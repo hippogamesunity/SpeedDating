@@ -57,6 +57,18 @@ namespace Assets.Scripts.Logic
 
         public void PlayNext()
         {
+            if (Level.Type == LevelType.Easy && GameData.EasyLevels.IndexOf(Level) == 1)
+            {
+                var play = Get<Play>();
+
+                if (play.ScoreDialog.Displayed)
+                {
+                    play.ScoreDialog.Hide(TweenDirection.Left);
+                    play.ShowDialog(play.ShopTipDialog);
+                    return;
+                }
+            }
+
             var levels = GameData.GetLevels(Level.Type);
 
             if (Level.Progress < levels.Count - 1)

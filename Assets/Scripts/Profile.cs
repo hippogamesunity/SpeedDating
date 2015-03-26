@@ -6,6 +6,7 @@ namespace Assets.Scripts
 {
     public static class Profile
     {
+        private static readonly string PasswordKey = Md5.Encode("Password");
         private static readonly string ProgressEasyKey = Md5.Encode("ProgressEasy");
         private static readonly string ProgressHardKey = Md5.Encode("ProgressHard");
         private static readonly string ProgressSwapKey = Md5.Encode("ProgressSwap");
@@ -17,32 +18,32 @@ namespace Assets.Scripts
 
         public static int ProgressEasy
         {
-            get { return PlayerPrefs.HasKey(ProgressEasyKey) ? PlayerPrefs.GetInt(ProgressEasyKey) : 0; }
-            set { PlayerPrefs.SetInt(ProgressEasyKey, value); PlayerPrefs.Save(); }
+            get { return GetValueInt(ProgressEasyKey); }
+            set { SetValue(ProgressEasyKey, value); }
         }
 
         public static int ProgressHard
         {
-            get { return PlayerPrefs.HasKey(ProgressHardKey) ? PlayerPrefs.GetInt(ProgressHardKey) : 0; }
-            set { PlayerPrefs.SetInt(ProgressHardKey, value); PlayerPrefs.Save(); }
+            get { return GetValueInt(ProgressHardKey); }
+            set { SetValue(ProgressHardKey, value); }
         }
 
         public static int ProgressSwap
         {
-            get { return PlayerPrefs.HasKey(ProgressSwapKey) ? PlayerPrefs.GetInt(ProgressSwapKey) : 0; }
-            set { PlayerPrefs.SetInt(ProgressSwapKey, value); PlayerPrefs.Save(); }
+            get { return GetValueInt(ProgressSwapKey); }
+            set { SetValue(ProgressSwapKey, value); }
         }
 
         public static int ProgressMemo
         {
-            get { return PlayerPrefs.HasKey(ProgressMemoKey) ? PlayerPrefs.GetInt(ProgressMemoKey) : 0; }
-            set { PlayerPrefs.SetInt(ProgressMemoKey, value); PlayerPrefs.Save(); }
+            get { return GetValueInt(ProgressMemoKey); }
+            set { SetValue(ProgressMemoKey, value); }
         }
 
         public static bool Mute
         {
-            get { return PlayerPrefs.HasKey(MuteKey) && PlayerPrefs.GetInt(MuteKey) == 1; }
-            set { PlayerPrefs.SetInt(MuteKey, value ? 1 : 0); PlayerPrefs.Save(); }
+            get { return GetValueInt(MuteKey) == 1; }
+            set { SetValue(MuteKey, value ? 1 : 0); }
         }
 
         public static DateTime ShowAdTime
@@ -51,39 +52,72 @@ namespace Assets.Scripts
             {
                 if (PlayerPrefs.HasKey(ShowAdTimeKey))
                 {
-                    return DateTime.Parse(PlayerPrefs.GetString(ShowAdTimeKey));
+                    return DateTime.Parse(GetValue(ShowAdTimeKey));
                 }
 
                 return (ShowAdTime = DateTime.UtcNow.AddMinutes(10));
             }
-            set { PlayerPrefs.SetString(ShowAdTimeKey, Convert.ToString(value)); PlayerPrefs.Save(); }
+            set { SetValue(ShowAdTimeKey, Convert.ToString(value)); }
         }
 
         public static int Coins
         {
-            get { return PlayerPrefs.HasKey(CreditsKey) ? PlayerPrefs.GetInt(CreditsKey) : 0; }
-            set { PlayerPrefs.SetInt(CreditsKey, value); PlayerPrefs.Save(); }
+            get { return GetValueInt(CreditsKey); }
+            set { SetValue(CreditsKey, value); }
         }
 
         public static bool Deluxe
         {
-            get { return PlayerPrefs.HasKey(DeluxeKey) && PlayerPrefs.GetInt(DeluxeKey) == 1; }
-            set { PlayerPrefs.SetInt(DeluxeKey, value ? 1 : 0); PlayerPrefs.Save(); }
+            get { return GetValueInt(DeluxeKey) == 1; }
+            set { SetValue(DeluxeKey, value ? 1 : 0); }
         }
 
         public static bool CharacterUnlocked(CharacterId id)
         {
             var key = Md5.Encode(Convert.ToString(id));
 
-            return PlayerPrefs.HasKey(key);
+            return GetValueInt(key) == 1;
         }
 
         public static void UnlockCharacter(CharacterId id)
         {
             var key = Md5.Encode(Convert.ToString(id));
 
-            PlayerPrefs.SetString(key, Md5.Encode(Convert.ToString(id)));
+            SetValue(key, 1);
+        }
+
+        private static string Password
+        {
+            get
+            {
+                if (!PlayerPrefs.HasKey(PasswordKey))
+                {
+                    PlayerPrefs.SetString(PasswordKey, Md5.Encode(Convert.ToString(CRandom.GetRandom(1000000))));
+                }
+
+                return PlayerPrefs.GetString(PasswordKey);
+            }
+        }
+
+        private static void SetValue(string key, string value)
+        {
+            PlayerPrefs.SetString(key, B64X.Encrypt(value, Md5.Encode(key + Password)));
             PlayerPrefs.Save();
+        }
+
+        private static void SetValue(string key, int value)
+        {
+            SetValue(key, Convert.ToString(value));
+        }
+
+        private static string GetValue(string key)
+        {
+            return PlayerPrefs.HasKey(key) ? B64X.Decrypt(PlayerPrefs.GetString(key), Md5.Encode(key + Password)) : null;
+        }
+
+        private static int GetValueInt(string key)
+        {
+            return PlayerPrefs.HasKey(key) ? int.Parse(GetValue(key)) : 0;
         }
     }
 }

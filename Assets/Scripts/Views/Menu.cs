@@ -14,11 +14,11 @@ namespace Assets.Scripts.Views
             }
         }
 
-        public void ShowCharacters()
+        public void ShowShop()
         {
-            if (Current is Menu)
+            if (Current is Menu || Current is Play)
             {
-                GetComponent<Characters>().Open();
+                GetComponent<Shop>().Open();
             }
         }
 

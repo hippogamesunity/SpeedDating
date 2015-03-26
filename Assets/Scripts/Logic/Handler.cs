@@ -125,7 +125,7 @@ namespace Assets.Scripts.Logic
             {
                 GetComponent<Mode>().Open();
             }
-            else if (ViewBase.Current is Characters)
+            else if (ViewBase.Current is Shop)
             {
                 GetComponent<Menu>().Open();
             }

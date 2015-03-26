@@ -58,18 +58,18 @@ namespace Assets.Scripts
             }, Engine.TaskId, TweenTime);
 
             character1.Busy = character2.Busy = false;
-            
-            Find<Play>().RefreshScore();
 
             if (sympathy >= 3)
             {
                 TaskScheduler.CreateTask(() => character1.PositionSpring.enabled = character2.PositionSpring.enabled = true, 0.5f);
             }
 
-            if (FindObjectsOfType<Character>().Any(i => i.Busy))
+            if (FindObjectsOfType<Character>().Any(i => i.Busy) || Engine.State != GameState.Playing)
             {
                 return;
             }
+
+            Find<Play>().RefreshScore();
 
             if (Engine.CalcScore() >= Engine.Level.Target && Engine.Level.Target != -1)
             {

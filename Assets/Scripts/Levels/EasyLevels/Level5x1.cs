@@ -7,7 +7,7 @@ namespace Assets.Scripts
         public static Level Level5x1 = new Level
         {
             TableNumber = 5,
-            Time = 80,
+            Time = 60,
             Target = 12,
             MaleHobbies = new List<List<Hobby>>
             {

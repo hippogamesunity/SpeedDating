@@ -23,8 +23,11 @@ KEY;Russian;English
 %SwapMode%;Пройди уровень с минимальным\nколичеством перемещений;Pass this level\nwith minimum swap actions
 %MemoMode1%;У тебя есть пара секунд, чтобы\nзапомнить, кто с кем сидит;You have a few seconds\nto memorize who sits with whom
 %MemoMode2%;А теперь самое время\nвспомнить, кто с кем сидел;Now remember\nwho was sitting with whom
-%TeamLead%;босс;team lead
+%ShopTip%;Кстати...;By the way...
+%ShopTipMessage%;Вы можете расплатиться кристаллами в магазинчике карточек;You can pay crystals in the card shop
+%TeamLead%;руководитель проекта;team lead
 %Developer%;разработчик;developer
+%Assistant%;помощник;assistant
 %Artist%;художник;artist
 %Mode%;Режим;Mode
 %Easy%;Легкий;Easy
@@ -57,3 +60,47 @@ KEY;Russian;English
 %m8Story%;[blue]{0}[-] любит классический рок и играет на гитаре в своей группе. Вокруг него постоянно толпы поклонниц;[blue]{0}[-] likes classic rock and plays guitar in his own band. Always surrounded by groupies
 %m9Story%;[blue]{0}[-] влюблен в спортивные мотоциклы и любит совершать безбашенные поступки. Всегда носит кожаную куртку и перчатки;[blue]{0}[-] never parts with his sport bike and likes to commit badass tricks
 %m10Story%;[blue]{0}[-] с детства занимается боевыми искусствами и всегда сможет постоять за свою девушку;[blue]{0}[-] does martial arts since childhood and always can stand up for a girl
+
+%m1name%;Mike;Mike
+%m2name%;Max;Max
+%m3name%;Luis;Luis
+%m4name%;Robert;Robert
+%m5name%;Alex;Alex
+%m6name%;Daniel;Daniel
+%m7name%;Tony;Tony
+%m8name%;Kevin;Kevin
+%m9name%;Alan;Alan
+%m10name%;Nate;Nate
+				
+%f1name%;Lisa;Lisa
+%f2name%;Helen;Helen
+%f3name%;Jessy;Jessy
+%f4name%;Amy;Amy
+%f5name%;Emily;Emily
+%f6name%;Yuki;Yuki
+%f7name%;Rose;Rose
+%f8name%;Diana;Diana
+%f9name%;Kate;Kate
+%f10name%;Alice;Alice
+
+%m1name_%;Майк;Mike
+%m2name_%;Макс;Max
+%m3name_%;Луис;Luis
+%m4name_%;Роберт;Robert
+%m5name_%;Алекс;Alex
+%m6name_%;Дэниэл;Daniel
+%m7name_%;Тони;Tony
+%m8name_%;Кевин;Kevin
+%m9name_%;Алан;Alan
+%m10name_%;Нэйт;Nate
+				
+%f1name_%;Лиза;Lisa
+%f2name_%;Элен;Helen
+%f3name_%;Джесси;Jessy
+%f4name_%;Эми;Amy
+%f5name_%;Эмили;Emily
+%f6name_%;Юки;Yuki
+%f7name_%;Роуз;Rose
+%f8name_%;Диана;Diana
+%f9name_%;Кейт;Kate
+%f10name_%;Элис;Alice

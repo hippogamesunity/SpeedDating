@@ -14,7 +14,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 4,
-                        Time = 120,
+                        Time = 40,
                         Target = 10,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -37,7 +37,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 5,
-                        Time = 120,
+                        Time = 60,
                         Target = 12,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -62,7 +62,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 5,
-                        Time = 120,
+                        Time = 60,
                         Target = 11,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -87,7 +87,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 5,
-                        Time = 100,
+                        Time = 60,
                         Target = 13,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -112,7 +112,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 6,
-                        Time = 180,
+                        Time = 60,
                         Target = 13,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -138,7 +138,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 6,
-                        Time = 180,
+                        Time = 60,
                         Target = 15,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -164,7 +164,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 6,
-                        Time = 160,
+                        Time = 80,
                         Target = 16,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -190,7 +190,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 6,
-                        Time = 140,
+                        Time = 80,
                         Target = 13,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -216,7 +216,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 240,
+                        Time = 100,
                         Target = 16,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -245,7 +245,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 220,
+                        Time = 100,
                         Target = 19,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -274,7 +274,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 200,
+                        Time = 120,
                         Target = 17,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -303,7 +303,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 180,
+                        Time = 120,
                         Target = 16,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -332,7 +332,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 7,
-                        Time = 160,
+                        Time = 140,
                         Target = 19,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -361,7 +361,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 8,
-                        Time = 300,
+                        Time = 160,
                         Target = 18,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -392,7 +392,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 8,
-                        Time = 240,
+                        Time = 160,
                         Target = 22,
                         MaleHobbies = new List<List<Hobby>>
                         {
@@ -423,7 +423,7 @@ namespace Assets.Scripts
                     {
                         Type = LevelType.Hard,
                         TableNumber = 8,
-                        Time = 200,
+                        Time = 160,
                         Target = 22,
                         MaleHobbies = new List<List<Hobby>>
                         {

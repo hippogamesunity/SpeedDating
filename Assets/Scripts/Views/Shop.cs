@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
-    public class Characters : ViewBase
+    public class Shop : ViewBase
     {
         public GameObject[] Pages;
         public UILabel StoryText;

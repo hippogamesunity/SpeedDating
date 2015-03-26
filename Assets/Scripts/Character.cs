@@ -60,7 +60,15 @@ namespace Assets.Scripts
 
         public new void Update()
         {
-            if (Busy || Engine.State == GameState.Paused) return;
+            if (Busy || Engine.State != GameState.Playing)
+            {
+                if (_down)
+                {
+                    OnPress(false);
+                }
+
+                return;
+            }
 
             if (_down)
             {
@@ -76,7 +84,7 @@ namespace Assets.Scripts
             {
                 Hobby.enabled = false;
             }
-            else
+            else if (Engine.State == GameState.Playing)
             {
                 Hobby.spriteName = Convert.ToString(Person.Hobbies[_hobby++]);
 
@@ -115,7 +123,7 @@ namespace Assets.Scripts
         {
             const float tweenTime = 0.2f;
 
-            if (Engine.State != GameState.Playing || Busy || !Engine.CanShift || Engine.Level.Memorize) return;
+            if ((Engine.State != GameState.Playing && down) || Busy || !Engine.CanShift || Engine.Level.Memorize) return;
 
             base.OnPress(down);
 
