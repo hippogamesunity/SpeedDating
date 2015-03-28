@@ -89,8 +89,9 @@ namespace Assets.Scripts.Logic
 
             if ((DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(2) && AdBuddizBinding.IsReadyToShowAd() && !Profile.Deluxe) || Settings.Debug)
             {
+                Debug.Log("AdBuddizBinding.ShowAd()");
+                AdBuddizBinding.ShowAd();
                 Profile.ShowAdTime = DateTime.UtcNow;
-                TaskScheduler.CreateTask(AdBuddizBinding.ShowAd, 1f);
             }
         }
 

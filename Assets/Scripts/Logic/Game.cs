@@ -53,7 +53,6 @@ namespace Assets.Scripts.Logic
             }
 
             StartGame(restart: true);
-            ShowAd();
         }
 
         public void PlayNext()
@@ -98,8 +97,6 @@ namespace Assets.Scripts.Logic
             {
                 ExitGame();
             }
-
-            ShowAd();
         }
 
         public void PauseGame(TweenPanel dialog)
@@ -183,6 +180,8 @@ namespace Assets.Scripts.Logic
 
             play.SetScoreDialog(success, coins);
             play.ShowDialog(play.ScoreDialog);
+
+            ShowAd();
         }
 
         public void ExitGame()

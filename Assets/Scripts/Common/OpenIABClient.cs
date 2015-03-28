@@ -9,7 +9,7 @@ namespace Assets.Scripts.Common
     public class OpenIABClient : IDisposable
     // ReSharper restore InconsistentNaming
     {
-        public static bool EnableLog = true;
+        public static bool EnableLog = false;
 
         public event Action<Purchase> Purchased = purchase => { };
         public event Action<Purchase> Consumed = purchase => { };
