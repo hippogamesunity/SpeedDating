@@ -53,6 +53,7 @@ namespace Assets.Scripts.Logic
             }
 
             StartGame(restart: true);
+            ShowAd();
         }
 
         public void PlayNext()
