@@ -184,7 +184,7 @@ namespace Assets.Scripts.Logic
             Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
             Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
 
-            if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(5) && AdBuddizBinding.IsReadyToShowAd() && Profile.Deluxe)
+            if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(2) && AdBuddizBinding.IsReadyToShowAd() && !Profile.Deluxe)
             {
                 Profile.ShowAdTime = DateTime.UtcNow;
                 TaskScheduler.CreateTask(AdBuddizBinding.ShowAd, 1f);
