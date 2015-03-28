@@ -25,7 +25,7 @@ namespace Assets.Scripts
         public static Dictionary<CharacterId, int> CharacterPrice = new Dictionary<CharacterId, int>
         {
             { CharacterId.f1, 5 },
-            { CharacterId.f2, 5 },
+            { CharacterId.f2, 10 },
             { CharacterId.f3, 10 },
             { CharacterId.f4, 10 },
             { CharacterId.f5, 15 },
@@ -36,7 +36,7 @@ namespace Assets.Scripts
             { CharacterId.f10, 25 },
 
             { CharacterId.m1, 5 },
-            { CharacterId.m2, 5 },
+            { CharacterId.m2, 10 },
             { CharacterId.m3, 10 },
             { CharacterId.m4, 10 },
             { CharacterId.m5, 15 },
@@ -186,9 +186,13 @@ namespace Assets.Scripts
                 }
             },
             {
+                //4, new List<Vector2>
+                //{
+                //    new Vector2(-150, 100), new Vector2(350, 100), new Vector2(-400, -240), new Vector2(100, -240)
+                //}
                 4, new List<Vector2>
                 {
-                    new Vector2(-150, 100), new Vector2(350, 100), new Vector2(-400, -240), new Vector2(100, -240)
+                    new Vector2(-120, 140), new Vector2(400, 40), new Vector2(-420, -140), new Vector2(100, -240)
                 }
             },
             {

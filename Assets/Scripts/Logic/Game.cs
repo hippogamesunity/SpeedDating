@@ -97,6 +97,8 @@ namespace Assets.Scripts.Logic
             {
                 ExitGame();
             }
+
+            ShowAd();
         }
 
         public void PauseGame(TweenPanel dialog)
@@ -180,15 +182,6 @@ namespace Assets.Scripts.Logic
 
             play.SetScoreDialog(success, coins);
             play.ShowDialog(play.ScoreDialog);
-
-            Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
-            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
-
-            if (DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(2) && AdBuddizBinding.IsReadyToShowAd() && !Profile.Deluxe)
-            {
-                Profile.ShowAdTime = DateTime.UtcNow;
-                TaskScheduler.CreateTask(AdBuddizBinding.ShowAd, 1f);
-            }
         }
 
         public void ExitGame()
