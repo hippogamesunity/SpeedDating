@@ -55,7 +55,7 @@ namespace Assets.Scripts
                     return DateTime.Parse(GetValue(ShowAdTimeKey));
                 }
 
-                return (ShowAdTime = DateTime.UtcNow.AddMinutes(10));
+                return (ShowAdTime = DateTime.UtcNow.AddSeconds(200));
             }
             set { SetValue(ShowAdTimeKey, Convert.ToString(value)); }
         }

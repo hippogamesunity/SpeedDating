@@ -4,7 +4,7 @@
 @interface UnityAdBuddizDelegate : NSObject <AdBuddizDelegate>
 @end
 
-static UnityAdBuddizDelegate *delegate = [[[UnityAdBuddizDelegate alloc] init] autorelease];
+static UnityAdBuddizDelegate *delegate = [[UnityAdBuddizDelegate alloc] init];
 
 void _setLogLevel(const char* level) {
     

@@ -82,19 +82,6 @@ namespace Assets.Scripts.Logic
             }
         }
 
-        public static void ShowAd()
-        {
-            Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
-            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
-
-            if ((DateTime.UtcNow > Profile.ShowAdTime.AddMinutes(2) && AdBuddizBinding.IsReadyToShowAd() && !Profile.Deluxe) || Settings.Debug)
-            {
-                Debug.Log("AdBuddizBinding.ShowAd()");
-                AdBuddizBinding.ShowAd();
-                Profile.ShowAdTime = DateTime.UtcNow;
-            }
-        }
-
         private void BeginGame()
         {
             foreach (var table in FindObjectsOfType<Table>())

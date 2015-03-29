@@ -115,6 +115,38 @@ namespace Assets.Scripts.Logic
 
         public void CompleteGame()
         {
+            Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
+            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
+
+            if (DateTime.UtcNow > Profile.ShowAdTime.AddSeconds(200) || Settings.Debug)
+            {
+                if (AdBuddizBinding.IsReadyToShowAd() && !Profile.Deluxe)
+                {
+                    Debug.Log("AdBuddizBinding.ShowAd()");
+                    AdBuddizBinding.ShowAd();
+                    Profile.ShowAdTime = DateTime.UtcNow;
+                    TaskScheduler.CreateTask(CompleteGameNoAds, 0.2f);
+                }
+            }
+            else
+            {
+                CompleteGameNoAds();
+            }
+        }
+
+        public void ShowAd()
+        {
+            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
+
+            if (AdBuddizBinding.IsReadyToShowAd())
+            {
+                Debug.Log("AdBuddizBinding.ShowAd()");
+                AdBuddizBinding.ShowAd();
+            }
+        }
+
+        public void CompleteGameNoAds()
+        {
             State = GameState.Ready;
 
             var score = CalcScore();
@@ -180,8 +212,6 @@ namespace Assets.Scripts.Logic
 
             play.SetScoreDialog(success, coins);
             play.ShowDialog(play.ScoreDialog);
-
-            ShowAd();
         }
 
         public void ExitGame()
