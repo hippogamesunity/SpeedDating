@@ -127,6 +127,10 @@ namespace Assets.Scripts.Logic
                     Profile.ShowAdTime = DateTime.UtcNow;
                     TaskScheduler.CreateTask(CompleteGameNoAds, 0.2f);
                 }
+                else
+                {
+                    CompleteGameNoAds();
+                }
             }
             else
             {
