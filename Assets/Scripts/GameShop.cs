@@ -106,6 +106,7 @@ namespace Assets.Scripts
         private void Refresh()
         {
             Get<Menu>().Open();
+            Get<AudioPlayer>().PlaySuccess();
         }
     }
 }
