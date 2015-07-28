@@ -4,6 +4,7 @@ using System.Linq;
 using Assets.Scripts.Common;
 using Assets.Scripts.Views;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 namespace Assets.Scripts.Logic
 {
@@ -11,10 +12,10 @@ namespace Assets.Scripts.Logic
     {
         public void Awake()
         {
-            AdBuddizBinding.SetLogLevel(AdBuddizBinding.ABLogLevel.Info);
-            AdBuddizBinding.SetAndroidPublisherKey(PlanformDependedSettings.AdBuddiz);
-            AdBuddizBinding.SetIOSPublisherKey(PlanformDependedSettings.AdBuddiz);
-            AdBuddizBinding.CacheAds();
+            if (Advertisement.isSupported)
+            {
+                Advertisement.Initialize(PlanformDependedSettings.UnityAdsId);
+            }
 
             #if UNITY_EDITOR
 

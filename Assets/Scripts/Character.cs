@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Common;
 using Assets.Scripts.Common.Tweens;
@@ -96,12 +95,11 @@ namespace Assets.Scripts
                 _hobby = 0;
             }
 
-            var duration = 2 + 1 * CRandom.GetRandom(200) / 100f;
+            var duration = 3 + CRandom.GetRandom(300) / 100f;
 
             Hobby.spriteName = Convert.ToString(Person.Hobbies[_hobby++]);
             TweenAlpha.Begin(Hobby.gameObject, 0.4f, 1);
             TaskScheduler.CreateTask(() => TweenAlpha.Begin(Hobby.gameObject, 0.4f, 0), Engine.TaskId, duration);
-
             TaskScheduler.CreateTask(HobbyLoop, Engine.TaskId, duration + 1);
         }
 

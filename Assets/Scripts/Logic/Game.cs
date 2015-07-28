@@ -2,6 +2,7 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Views;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 namespace Assets.Scripts.Logic
 {
@@ -116,14 +117,12 @@ namespace Assets.Scripts.Logic
         public void CompleteGame()
         {
             Debug.Log("Profile.ShowAdTime=" + Profile.ShowAdTime);
-            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
 
-            if (DateTime.UtcNow > Profile.ShowAdTime.AddSeconds(200) || Settings.Debug)
+            if (DateTime.UtcNow > Profile.ShowAdTime.AddSeconds(300) || Settings.Debug)
             {
-                if (AdBuddizBinding.IsReadyToShowAd() && !Profile.Deluxe)
+                if (Advertisement.isSupported && Advertisement.IsReady() && !Profile.Deluxe)
                 {
-                    Debug.Log("AdBuddizBinding.ShowAd()");
-                    AdBuddizBinding.ShowAd();
+                    Advertisement.Show();
                     Profile.ShowAdTime = DateTime.UtcNow;
                     TaskScheduler.CreateTask(CompleteGameNoAds, 0.2f);
                 }
@@ -135,17 +134,6 @@ namespace Assets.Scripts.Logic
             else
             {
                 CompleteGameNoAds();
-            }
-        }
-
-        public void ShowAd()
-        {
-            Debug.Log("AdBuddizBinding.IsReadyToShowAd()=" + AdBuddizBinding.IsReadyToShowAd());
-
-            if (AdBuddizBinding.IsReadyToShowAd())
-            {
-                Debug.Log("AdBuddizBinding.ShowAd()");
-                AdBuddizBinding.ShowAd();
             }
         }
 
